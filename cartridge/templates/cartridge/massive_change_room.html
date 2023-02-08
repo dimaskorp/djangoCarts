@@ -1,0 +1,95 @@
+{% extends 'cartridge/base.html' %}
+
+{% block title %}Смена местоположения картриджей с помощью сканера штрих-кодов{% endblock %}
+
+{% block submenu %}Картриджи / Смена местоположения картриджей с помощью сканера штрих-кодов{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="large-5 columns">
+            <form action="" method="post">
+                <input type="hidden" name="csrfmiddlewaretoken" value="cjObqO2ptrWtMnZi1MGOJtJx18LNK5ULrKzHZBubmdQeVzk3coS7iZEiF0ZwiZ3k">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label>Отсканированный штрихкод</label>
+                        <input class="barcode" type="text" readonly="">
+                    </div>
+                </div>
+                <div class="marginTop"></div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label>Ввести номер картриджа вручную</label>
+                        <div class="input_row">
+                            <input class="manual_number" type="text">
+                            <a title="Найти по номеру" class="button no_follow add-session-move-barcode search-zoom" href=""></a>
+                        </div>
+                        <div class="form_error_text cart_number_error">Обязательное поле</div>
+                    </div>
+                </div>
+                <div class="marginTop"></div>
+                <div class="row">
+
+                    <div class="large-12 columns">
+                        <label class="required">Помещение</label>
+                        <div class="input_row">
+                            <select name="place" class="rooms_list select2-hidden-accessible" data-select2-id="7" tabindex="-1"
+                                    aria-hidden="true"></select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8"
+                                                                      style="width: calc(100% - 38px);"><span class="selection"><span
+                                class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0"
+                                aria-labelledby="select2-place-g5-container"><span class="select2-selection__rendered" id="select2-place-g5-container"
+                                                                                   role="textbox" aria-readonly="true"></span><span
+                                class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span
+                                class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            <a class="dj_button" href="{% url 'tree_list' %}" title="Добавить название помещения"></a>
+                        </div>
+                        <div class="form_error_text cart_sklad_error">Поле должно быть выбрано</div>
+                    </div>
+                </div>
+                <div class="marginTop"></div>
+                <div class="row">
+                    <div class="large-6 columns">
+                        <label>Сформировать акт передачи</label>
+                        <div class="myswitch">
+                            <input id="cmn-toggle-1" class="cmn-toggle-1 cmn-toggle cmn-toggle-round gen-act" type="checkbox">
+                            <label for="cmn-toggle-1" class="switch-num"></label>
+                        </div>
+                    </div>
+                    <div class="large-6 columns">
+                        <label>Изменить состояние</label>
+                        <select name="cart_status" class="change-status select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                            <option value="none" selected="" data-select2-id="3">Оставить без изменений</option>
+                            <option value="stock">Заправленные</option>
+                            <option value="empty">Пустые</option>
+                        </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 299px;"><span
+                            class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true"
+                                                    aria-expanded="false" tabindex="0" aria-labelledby="select2-cart_status-ce-container"><span
+                            class="select2-selection__rendered" id="select2-cart_status-ce-container" role="textbox" aria-readonly="true"
+                            title="Оставить без изменений">Оставить без изменений</span><span class="select2-selection__arrow" role="presentation"><b
+                            role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                    </div>
+                </div>
+                <div class="marginTop55"></div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <a class="button no_follow set_focus small-focus">Сфокусировать</a>&nbsp;&nbsp;&nbsp;
+                        <a class="button no_follow action-change-room small-move" href="">Переместить</a>&nbsp;&nbsp;&nbsp;
+                        <img class="spinner" src="./static/img/loader.gif">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="large-5 columns">
+            <div class="marginTop wrapper_add_scanner_items" style="display:none">
+                <a class="button remove-move-item no_follow small-delete-row">Удалить элемент</a>
+                <a class="button clear-move-session no_follow small-clear">Очистить сессию</a>&nbsp;&nbsp;
+                <span class="count_objects_wrapper">Кол-во: <span class="count_objects">0</span></span>
+                <img class="session_spinner" src="./static/img/loader.gif">
+            </div>
+            <div class="marginTop"></div>
+            <div class="session-wrapper">
+
+            </div>
+        </div>
+        <div class="large-2 columns"></div>
+    </div>
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends 'cartridge/base.html' %}
+
+{% block title %}Добавление новых{% endblock %}
+
+{% block submenu %}Картриджи / Заправленные / Добавление новых{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="large-5 columns msg_wrapper">
+            <div class="success_msg"></div>
+            <div class="error_msg"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="large-5 columns">
+            <form action="" method="post" class="ng-dirty ng-valid-parse ng-valid ng-valid-required">
+                {% csrf_token %}
+                <div class="marginTop wrapper-manual-number">
+                    <label class="required">Штрихкод</label>
+                    {{ form.barcode }}
+
+                    <div class="form_error_text cart_number_error">Обязательное поле</div>
+                    <div class="marginTop">&nbsp;</div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label class="required" for="id_cartName">Название картриджа</label>
+                        <div class="input_row">
+                            {{ form.cartName }}
+
+                            <a class="dj_button" href="{% url 'add_name' %}" title="Добавить название картриджа"></a>
+                        </div>
+                        <div class="form_error_text cart_name_error">Обязательное поле</div>
+                    </div>
+                </div>
+                <div class="marginTop"></div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label class="required">Производитель</label>
+                        <div class="input_row">
+                            {{ form.manufacturerName }}
+                            <a class="dj_button" href="{% url 'add_manufacture' %}" title="Добавить нового производителя"></a>
+                        </div>
+                        <div class="form_error_text cart_sklad_error">Поле должно быть выбрано</div>
+                    </div>
+                </div>
+                <div class="marginTop"></div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label class="required">Помещение</label>
+                        <div class="input_row">
+                            {{ form.placeName }}
+                            <a class="dj_button" href="{% url 'tree_list' %}" title="Добавить название помещения"></a>
+                        </div>
+                        <div class="form_error_text cart_sklad_error">Поле должно быть выбрано</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="marginTop wrapper-manual-datetime">
+                        <div class="large-6 columns">
+                            <label for="id_date" class="required">Дата добавления</label>
+                            <div class="calendar">
+                                {#                                {{ form.date }}#}
+                                <input id="datetimepicker4" type="text">
+                                <script>
+                                    jQuery('#datetimepicker4').datetimepicker({
+                                        format: 'd.m.Y H:i',
+                                        lang: 'ru'
+                                    });
+                                    jQuery('#image_button').click(function () {
+                                        jQuery('#datetimepicker4').datetimepicker('show'); //support hide,show and destroy command
+                                    });
+                                </script>
+
+                                <img src="static/img/calendar.png">
+                            </div>
+                        </div>
+                        <div class="large-6 columns">
+                            <label for="id_time" class="required">Время добавления</label>
+                            <div class="clock">
+                                <input type="text" name="hour_minute" ng-model="hour_minute" required="" id="id_hour_minute"
+                                       class="ng-untouched ui-timepicker-input ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required"
+                                       autocomplete="off">
+                            </div>
+                            <div class="form_error_text time_error">Поле должно быть выбрано</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="marginTop"></div>
+                <div class="row">
+                    <div class="small-4 columns">
+                        <div class="wrapper-counter-items">
+                            <label class="required marginTop" for="id_cartCount">Количество</label>
+                            <div class="input_row">
+                                <a class="dec button">-</a>
+                                <input type="text" name="cartCount" class="pm_counter" readonly="readonly" maxlength="4" required="" id="id_cartCount">
+                                <a class="inc button">+</a>
+                            </div>
+                            <div class="form_error_text cart_count_error">Поле должно быть более нуля</div>
+                        </div>
+                    </div>
+                    <div class="small-4 columns">
+                        <label class="marginTop">Ручной ввод номера</label>
+                        <div class="myswitch">
+                            <input id="cmn-toggle-1" class="cmn-toggle-1 cmn-toggle cmn-toggle-round" type="checkbox">
+                            <label for="cmn-toggle-1" class="switch-num"></label>
+                        </div>
+                    </div>
+                    <div class="small-4 columns">
+                        <label class="marginTop">Ручная установка даты</label>
+                        <div class="myswitch">
+                            <input id="cmn-toggle-2" class="cmn-toggle-2 cmn-toggle cmn-toggle-round" type="checkbox">
+                            <label for="cmn-toggle-2" class="set_date"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="marginTop"></div>
+                <div class="marginTop">
+                    <a onclick="history.back(); return false;" class="button">Вернуться</a>
+                    <a class="button success add_items no_follow" data="full" type="submit">Добавить</a>
+                    <img class="spinner" src="/static/img/loader.gif">
+                </div>
+            </form>
+        </div>
+        <div class="large-5 columns">
+            <div class="text-right">
+                <a class="download_pdf" href="#">Скачать</a>
+                <img class="spinner_pdf" src="/static/img/loader.gif">
+                <a href="#" data="full" class="generate_pdf button no_follow">Сформировать PDF</a>
+                <a href="#" data="add_cartridges_full_manual_1" class="clear_session button no_follow">Очистить сессию</a>
+            </div>
+            <div class="session_data">
+                <p></p>
+            </div>
+        </div>
+        <div class="large-2 columns"></div>
+    </div>
+
+{% endblock %}

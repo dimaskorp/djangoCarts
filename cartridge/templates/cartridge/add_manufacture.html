@@ -1,0 +1,35 @@
+{% extends 'cartridge/base.html' %}
+
+{% block title %}Добавление нового производителя{% endblock %}
+
+{% block submenu %}Справочники / Производители / Добавление нового производителя{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="large-4 columns"  style="display: {{ display }}">
+            <ul class="messages">
+                <li class="success">Производитель "{{ name }}" успешно добавлен.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-4 columns">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="marginTop"></div>
+                <label class="required" for="id_name">Название:</label>
+                {{ form.manufacturer }}
+
+                <div class="marginTop"></div>
+                <label for="id_comment">Комментарий:</label>
+                {{ form.comments }}
+
+                <div class="marginTop input_row">
+                    <a onclick="history.back(); return false;" class="button" >Вернуться</a>
+                    <button class="button success" type="submit">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

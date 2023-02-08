@@ -1,0 +1,48 @@
+{% extends 'cartridge/base.html' %}
+
+{% block title %}Списание картриджей{% endblock %}
+
+{% block submenu %}Картриджи / Списание{% endblock %}
+
+{% block content %}
+    <div ng-controller="MainCtrl" class="ng-scope">
+        <div class="row">
+            <div class="small-12 large-7 columns">
+
+                <a class="add_items add_from_mouse button success" href="/cartridge/add_items/">Добавить с</a>
+                <a class="tr_for_use button no_follow" href="#" ng-click="tr_for_use()">Передать в пользование</a>
+                <a class="button alert no_follow" href="#" ng-click="tr_to_recycle_bin(5)">На списание</a>
+
+            </div>
+            <div class="small-12 large-5 columns">
+
+            </div>
+        </div>
+        <div class="row marginTop10">
+            <div class="small-12 large-7 columns">
+
+                <a class="add_items add_from_barcode_scanner button success" href="/cartridge/add_cartridge_from_barcode_scanner/">Добавить с</a>
+                <a class="button" href="#" ng-click="tr_to_firm('stock')">&nbsp;&nbsp;&nbsp;Передать на ремонт&nbsp;&nbsp;&nbsp;</a>
+                <img class="spinner" src="/djangoCarts/static/img/loader.gif">
+
+            </div>
+            <div class="small-12 large-5 columns text-right export_select_wrapper">
+                <a class="download_doc" href="#">Скачать файл</a>
+                <a class="export_to_xlsx button no_follow" ng-click="export_to_xlsx()" href="#">
+                    Экспорт в XLSX
+                    <img class="export_spinner_xlsx" src="/djangoCarts/static/img/loader.gif">
+                </a>
+            </div>
+        </div>
+
+
+        <div class="row marginTop">
+            <div class="large-12 columns">
+                <div ui-i18n="en" class="grid ui-grid-selectable ui-grid ng-isolate-scope grid1675142815019" id="grid1" ui-grid="gridOptions"
+                     ui-grid-selection="" ui-grid-pagination="" ui-grid-auto-resize="" ui-grid-resize-columns="" ng-style="getTableHeight()"
+                     style="height: 50px;"><!-- TODO (c0bra): add "scoped" attr here, eventually? -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

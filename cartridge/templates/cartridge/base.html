@@ -1,0 +1,312 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/foundation.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ui-grid.min.css' %}">
+    <script src="{% static 'js/detect.js' %}"></script>
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/jquery.cookie.js' %}"></script>
+
+    <!-- XDSoft DateTimePicker -->
+    <link rel="stylesheet" href="{% static 'js/datetime/jquery.datetimepicker.css' %}">
+    <script src="{% static 'js/datetime/jquery.js' %}"></script>
+    <script src="{% static 'js/datetime/jquery.datetimepicker.js' %}"></script>
+
+    <!-- select2 -->
+    <script src="{% static 'js/common.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/select2.min.css' %}">
+    <!-- select2 -->
+    <script type="text/javascript" src="{% static 'js/main_menu.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/pm_widget.css' %}">
+    <script src="{% static 'js/pm_widget.js' %}"></script>
+    <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+
+    <script src="{% static 'js/angular.js' %}"></script>
+
+    <script src="{% static 'js/add_objs.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/cart/change-room-barcode.css' %}">
+    <meta class="foundation-mq-small">
+    <meta class="foundation-mq-medium">
+    <meta class="foundation-mq-large">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+<div class="wrapper">
+    <header class="header">
+        <div class="logo"><a href="/">
+            <img alt="nlogo" src="{% static 'img/nlogo.png' %}"/></a></div>
+        <div class="submenu">
+
+            <a class="filter_room button no_follow" href="#">Фильтр помещений</a>
+
+            <strong class="user_ou" title="Org">
+                РКИБ
+            </strong>&nbsp;&nbsp;admin&nbsp;&nbsp;<a class="logout_user" href="/accounts/logout/">Выход</a>
+        </div>
+    </header>
+    <!-- .header-->
+    <div class="middle ">
+        <div class="container">
+            <main class="content">
+                <div class="row marginTop">
+                    <div class="large-10 columns">
+                        <div class="breads">
+                            <a href="/">
+                                <img alt="home_ico" src="{% static 'img/home.png' %}"/>
+                            </a> /
+                            <span>{% block submenu %}{% endblock %}</span> /
+                        </div>
+                    </div>
+                    <div class="large-2 columns marginTop text-right">
+
+                    </div>
+                </div>
+                <div class="marginTop"></div>
+
+                {% block content %}
+
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <div class="error_msg"></div>
+                            <div class="success_msg"></div>
+                        </div>
+                    </div>
+                    <div ng-controller="MainCtrl">
+                        <div class="row">
+                            <div class="small-12 large-7 columns">
+
+                                <a class="add_items add_from_mouse button success" href="/cartridge/add_items/">Добавить с</a>
+                                <a class="tr_for_use button no_follow" href="#" ng-click="tr_for_use()">Передать в пользование</a>
+                                <a class="button alert no_follow" href="#" ng-click="tr_to_recycle_bin(5)">На списание</a>
+
+                            </div>
+                            <div class="small-12 large-5 columns">
+
+                            </div>
+                        </div>
+
+                        <div class="row marginTop10">
+                            <div class="small-12 large-7 columns">
+
+                                <a class="add_items add_from_barcode_scanner button success" href="/cartridge/add_cartridge_from_barcode_scanner/">Добавить
+                                    с</a>
+                                <a class="button" href="#" ng-click="tr_to_firm('stock')">&nbsp;&nbsp;&nbsp;Передать на ремонт&nbsp;&nbsp;&nbsp;</a>
+                                <img class="spinner" src="{% static 'img/loader.gif' %}">
+
+                            </div>
+                            <div class="small-12 large-5 columns text-right export_select_wrapper">
+                                <a class="download_doc" href="#">Скачать файл</a>
+                                <a class="export_to_xlsx button no_follow" ng-click="export_to_xlsx()" href="#">
+                                    Экспорт в XLSX
+                                    <img class="export_spinner_xlsx" src="{% static 'img/loader.gif' %}"/>
+                                </a>
+                            </div>
+                        </div>
+
+
+                        <div class="row marginTop">
+                            <div class="large-12 columns">
+                                <div id="grid1" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination ui-grid-auto-resize ui-grid-resize-columns
+                                     class="grid ui-grid-selectable" ng-style="getTableHeight()"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endblock %}
+
+            </main>
+            <!-- .content -->
+        </div>
+        <!-- .container-->
+        <aside class="left-sidebar">
+            <div class="marginTop">
+                <div class="search_wrapper">
+                    <form action="/search/" method="GET">
+                        <input class="search_query" type="text" name="query" onfocus="if(this.value == 'Поиск по номеру') { this.value = ''; }"
+                               onfocusout="if(this.value == '') { this.value = 'Поиск по номеру'; }" value="Поиск по номеру">
+                        <!---->
+                        <input type="submit" class="search_button" value="">
+                    </form>
+                </div>
+                <ul class="menu">
+                    <li class="home_ico"><a href="/">Сводка</a></li>
+                    <li class="computer_ico"><a href="/ce/stock/">Компьютеры</a></li>
+                    <li class="ce_item_ico has-sub"><span>Комп. компоненты</span>
+                        <ul>
+                            <li><a href="/ce/comp_component/Processor/show/">Процессоры</a></li>
+                            <li><a href="/ce/comp_component/Memory/show/">Оперативная память</a></li>
+                            <li><a href="/ce/comp_component/HardDrive/show/">Жёсткие диски</a></li>
+                            <li><a href="/ce/comp_component/SystemBoard/show/">Материнские платы</a></li>
+                            <li><a href="/ce/comp_component/Gpu/show/">Видеокарты</a></li>
+                            <li><a href="/ce/comp_component/Battery/show/">Аккумуляторы</a></li>
+                            <li><a href="/ce/comp_component/Case/show/">Корпуса</a></li>
+                            <li><a href="/ce/comp_component/Controller/show/">Контроллеры</a></li>
+                            <li><a href="/ce/comp_component/Drive/show/">Приводы</a></li>
+                            <li><a href="/ce/comp_component/Firmware/show/">Прошивки</a></li>
+                            <li><a href="/ce/comp_component/Soundcard/show/">Звуковые карты</a></li>
+                            <li><a href="/ce/comp_component/PowerSupply/show/">Блоки питания</a></li>
+                            <li><a href="/ce/comp_component/PCIDevice/show/">PCI устройства</a></li>
+                            <li><a href="/ce/comp_component/NetworkCard/show/">Сетевые карты</a></li>
+                            <li><a href="/ce/operating_systems/">Операционные системы</a></li>
+                        </ul>
+                    </li>
+                    <li class="monitor_ico"><a href="/ce/comp_component/Monitor/show/">Мониторы</a></li>
+                    <li class="has-sub printer_ico"><span>Принтеры</span>
+                        <ul>
+                            <li><a href="/printer/stock/">Резерв</a></li>
+                            <li><a href="/printer/use/">Установленные</a></li>
+                            <li><a href="/printer/broken/">Сломанные</a></li>
+                            <li><a href="/printer/worked_firms/">Ремонтируются</a></li>
+                            <li><a href="/printer/deleted/">Списание</a></li>
+                            <li><a href="/printer/bufer/">Буфер</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-sub cartridge_ico active"><span>Картриджи</span>
+                        <ul style="display: block;">
+                            <li><a href="{% url 'stock' %}">Заправленные</a></li>
+                            <li><a href="{% url 'use' %}">Установленные</a></li>
+                            <li><a href="{% url 'empty' %}">Пустые или сломанные</a></li>
+                            <li><a href="{% url 'worked_firms' %}">Заправляются</a></li>
+                            <li><a href="{% url 'basket' %}">Списание</a></li>
+                            {#                            <li><a href="{%  url 'bufer' %}">Буфер</a></li>#}
+                            <li><a href="{% url 'massive_change_room' %}">Смена помещения сканером ШК</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-sub fix_ico"><span>Обслуживание</span>
+                        <ul>
+                            <li><a href="/events/">События</a></li>
+                            <li><a href="/service/settings_mail/">Почта</a></li>
+                            <li><a href="/service/general_settings/">Настройки</a></li>
+                            <li><a href="/service/active_settings/">Подключение к MS Active Directory</a></li>
+                            <li><a href="/monitoring/">Мониторинг</a></li>
+                            <li><a href="/service/the_system_log/">Системный журнал</a></li>
+                            <li><a href="/service/activation/">Активация</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-sub dict_ico"><span>Справочники</span>
+                        <ul>
+                            <li><a href="/accounts/">Пользователи</a></li>
+                            <li><a href="/accounts/groups/">Группы</a></li>
+                            <li><a href="/organizations/all_org/">Организации</a></li>
+                            <li><a href="/organizations/branches/">Филиалы</a></li>
+                            <li><a href="/organizations/tree_list/">Помещения</a></li>
+                            <li><a href="/firm/toner_refill/">Контрагенты</a></li>
+                            <li><a href="/docs/delivery/">Договоры</a></li>
+                            <li><a href="/docs/send_acts/">Акты передачи</a></li>
+                            <li><a href="/docs/return_acts/">Акты возврата</a></li>
+                            <li><a href="/common/numerator/">Нумераторы</a></li>
+                            <li class="has-sub"><span>Комп. комплектующие</span>
+                                <ul class="submenu">
+                                    <li><a href="/ce/ProcessorName/show/">Названия процессоров</a></li>
+                                    <li><a href="/ce/ComputerType/show/">Типы компьютеров</a></li>
+                                    <li><a href="/ce/ComputerModel/show/">Названия компьютеров</a></li>
+                                    <li><a href="/ce/MemoryName/show/">Названия памяти</a></li>
+                                    <li><a href="/ce/MemoryType/show/">Названия типов памяти</a></li>
+                                    <li><a href="/ce/Interface/show/">Названия интерфейсов</a></li>
+                                    <li><a href="/ce/HardDriveName/show/">Названия жестких дисков</a></li>
+                                    <li><a href="/ce/GpuName/show/">Названия видеокарт</a></li>
+                                    <li><a href="/ce/BatteryType/show/">Типы аккумуляторов</a></li>
+                                    <li><a href="/ce/BatteryName/show/">Названия аккумуляторов</a></li>
+                                    <li><a href="/ce/CaseType/show/">Типы корпусов</a></li>
+                                    <li><a href="/ce/CaseName/show/">Названия корпусов</a></li>
+                                    <li><a href="/ce/ControllerName/show/">Названия контроллеров</a></li>
+                                    <li><a href="/ce/DriveName/show/">Названия приводов</a></li>
+                                    <li><a href="/ce/SoundcardName/show/">Названия звуковых карт</a></li>
+                                    <li><a href="/ce/SystemBoardName/show/">Названия материнских плат</a></li>
+                                    <li><a href="/ce/PowerSupplyName/show/">Названия блоков питания</a></li>
+                                    <li><a href="/ce/PCIDevicesName/show/">Названия PCI устройств</a></li>
+                                    <li><a href="/ce/NetworkCardName/show/">Названия сетевых карт</a></li>
+                                    <li><a href="/ce/SoftName/show/">Названия программ</a></li>
+                                    <li><a href="/ce/OperatingSystemName/show/">Названия операционных систем</a></li>
+                                    <li><a href="/ce/MonitorName/show/">Названия мониторов</a></li>
+                                    <li><a href="/ce/MonitorType/show/">Тип монитора</a></li>
+                                    <li><a href="/ce/FileSystem/show/">Файловые системы</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub"><span>Принтеры</span>
+                                <ul class="submenu">
+                                    <li><a href="/printer/names_printers/">Названия принтеров</a></li>
+                                    <li><a href="/printer/types_printers/">Типы принтеров</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub"><span>Картриджи</span>
+                                <ul class="submenu">
+                                    <li><a href="/cartridge/view_names/">Имена картриджей</a></li>
+                                    <li><a href="/cartridge/view_types/">Типы картриджей</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/common/manufacturers/">Производители</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="reports_ico has-sub"><span>Отчёты</span>
+                        <ul>
+                            <li>Общие</li>
+                            <li><a href="/reports/responsible/">Материально ответственные</a></li>
+                            <li>По картриджам</li>
+                            <li><a href="/reports/">Общая выгрузка</a></li>
+                            <li><a href="/reports/users/">Пользователи</a></li>
+                            <li><a href="/reports/products/">Используемые наименования</a></li>
+                            <li><a href="/reports/firm/">Контрагенты</a></li>
+                            <li>По принтерам</li>
+                            <li><a href="/reports/print_total/">Общая выгрузка</a></li>
+                            <li><a href="/reports/print_pages/">Кол-во распечатанных страниц</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <!-- .left-sidebar -->
+    </div>
+    <!-- .middle-->
+</div>
+<footer class="footer">
+    <div class="text_in_footer">Версия: 3.2.1&nbsp;&nbsp;&nbsp;&copy;&nbsp;&nbsp;&nbsp;<a href="http://www.severcart.ru">www.severcart.ru</a>&nbsp;&nbsp;&nbsp;2023
+    </div>
+</footer>
+<!-- форма сообщения об ошибке -->
+<!-- Модальное окно фильтра помещения -->
+<div class="room-filter-modal small reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h2>Фильтр помещений</h2>
+
+    <div class="marginTop">
+        <label>Филиал</label>
+        <select name="branch" class="branch_list_filter_room">
+            <option></option>
+        </select>
+    </div>
+    <div class="marginTop">
+        <label>Поиск по названию</label>
+        <div class="input_row">
+            <input type="text" name="room_name" class="room-name"/>&nbsp;&nbsp;&nbsp;<a class="button no_follow find-by-room-name" href="#">Найти</a>
+        </div>
+    </div>
+    <div class="marginTop">
+        <label>Помещения</label>
+        <div id="jstree_rooms"></div>
+    </div>
+    <div class="marginTop25">
+        <div class="left-align">
+            <a class="button no_follow close-room-filter-modal" href="#" aria-label="Close">Закрыть</a>
+            <a class="button no_follow clear-filter-room" href="#">Отменить фильтр</a>
+            <a class="button no_follow add-filter-room" href="#">Добавить фильтр</a>
+        </div>
+    </div>
+</div>
+<!-- Модальное окно фильтра помещения -->
+<div class="add-dictionary-modal">
+    <iframe class="add-iframe-modal" src=""></iframe>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends 'cartridge/base.html' %}
+
+{% block title %}Добавление нового картриджа{% endblock %}
+
+{% block submenu %}Справочники / Названия картриджей / Добавление нового названия{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="large-4 columns" style="display: {{ display }}">
+            <ul class="messages">
+                <li class="success">Название "{{ name }}" успешно добавлено.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-4 columns">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <label class="required" for="id_cart_name">Название:</label>
+                {{ form.name }}
+
+                <div class="input_big_row">
+                </div>
+                <label class="marginTop" for="id_comment">Комментарий:</label>
+                <div class="input_big_row">
+                    {{ form.comments }}
+                </div>
+                <div class="input_big_row">
+
+                </div>
+                <div class="input_big_row marginTop">
+
+                    <a onclick="history.back(); return false;" class="button">Вернуться</a>
+
+                    <button class="button success" type="submit">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

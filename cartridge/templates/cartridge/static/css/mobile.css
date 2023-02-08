@@ -1,0 +1,239 @@
+@media only screen and (max-width: 500px) {
+    div.wrapper {
+        width:100%;
+        margin:0;
+        min-height: 100%;
+    }
+
+    div.middle {
+        width: 100%;
+        padding:0;
+    }
+
+    div.middle:after {
+        display: none;
+        clear: both;
+        content: '';
+    }
+
+    div.container {
+        width: 100%;
+        float: none;
+    }
+
+    .content {
+        padding:0;
+    }
+
+
+    aside.left-sidebar {
+        width: 100%;
+        float: none;
+        position: static;
+        margin:0;
+    }
+
+    .footer {
+        display: none;
+    }
+
+    .logo a {
+        display: none;
+    }
+
+    /* search block */
+    div.search_wrapper {
+        display: none;
+    }
+    /* end search block */
+
+    /* Vertical menu */
+    ul.menu {
+        font-size: 0.875em;
+        display:block;
+        margin:0;
+        padding:0 0 0 18px;
+    }
+
+    ul.menu li {
+        display:block;
+        list-style:none;
+        line-height:30px;
+        min-height: 30px;
+        padding: 0 0 0 12px;
+    }
+
+    ul.menu li a, ul.menu ul li a {
+        background:none;
+        text-decoration:none;
+        display:inline-block;
+        padding: 0  0  0 12px;
+        outline: 0;
+        color: #0275b8;
+    }
+
+    ul.menu > li > ul > li {
+        /*border: none; */
+    }
+
+    ul.menu li span, ul.menu ul li span {
+        padding: 0  0 0 12px;
+    }
+
+
+    ul.menu li a:hover, ul.menu li a:focus {
+        color: #2795b6;
+    }
+
+    ul.menu ul {
+        display: block;
+        padding:0 0 0 24px;
+        margin: 0;
+    }
+
+    ul.menu ul li{
+        line-height:30px;
+        min-height: 30px;
+    }
+
+    select.language_selector {
+        height: 26px;
+        font-size: 16px;
+        width: 90px;
+        border-radius: 4px;
+    }
+    /*   --------end style menu-----------   */
+
+    a.button.success {
+        display: block;
+    }
+
+    .button_wrapper {
+        display: block;
+    }
+
+    a.button,
+    input[type="submit"].button,
+    button.button,
+    a.button:focus,
+    input[type="submit"].button:focus,
+    button.button:focus {
+        font-size: 20px;
+        display: block;
+        margin: 0 0 10px 0;
+    }
+
+    a.button:active, input[type="submit"].button:active, button.button:active {
+        font-size: 20px;
+        display: block;
+    }
+
+    a.button:focus, input[type="submit"].button:focus, button.button:focus {
+        font-size: 20px;
+        display: block;
+    }
+
+    a.button.ver, a.button.hor, a.button.pal, a.button.kla, a.button.success.fastaction, a.button.back.fastaction {
+        display: block;
+        width: auto;
+        margin-bottom: 12px;
+    }
+
+    div.comment_item {
+        margin-left: 15px;
+        width: 310px;
+    }
+
+    a.button.foto {
+        margin:0;
+        padding: 0 10px;
+        height: 26px;
+        font-size: 12px;
+        line-height: 26px;
+        display: inline-block;
+        width: 65px;
+    }
+
+    #id_comment {
+        width: 300px;
+    }
+
+    div form input[type="text"].filename {
+        width: 220px;
+        display: inline-block;
+    }
+
+    a.button.qr_faulty_transmission {
+        font-size: 16px;
+    }
+
+    #id_doc, #id_storages, #id_firm, #id_org {
+        width:230px;
+    }
+
+    a.export_to_csv {
+        margin: 0;
+        padding: 0;
+        p1adding: 0 24px 0 5px;
+    }
+
+    div.table-outer {
+        margin-top: 20px;
+    }
+
+    select.export_type {
+        width: 200px;
+    }
+
+
+    div.adaptive-table {
+        overflow: scroll;
+        overflow-y:hidden;
+    }
+
+    div.adaptive-table .grid {
+        width:968px;   
+    }
+
+    .doc_contract, select {
+        width: 100%;
+    }
+
+    header.header {
+        height: auto;
+    }
+
+    div.submenu {
+        position: static;
+        width: 100%;
+        margin: 25px 0 0 0;
+    }
+
+    a.filter_room.button {
+        display: block;
+    }
+
+    div.room-filter-modal .input_row .room-name {
+        width: 100%;
+        display: block;
+    }
+
+    div.room-filter-modal .input_row a.button.find-by-room-name {
+        display: block;
+        margin: 10px 0 0 0;
+    }
+
+/*    div.doc_wrapper .select2-container span.select2-selection--single {
+        width: 40%;
+    }
+*/
+    div.doc_wrapper .select2.select2-container.select2-container--default {
+        width: 80% !important;
+        top: -12px;
+    }
+
+    div.doc_wrapper .dj_button.add {
+        float: none;
+        display: inline-block;
+    }
+}

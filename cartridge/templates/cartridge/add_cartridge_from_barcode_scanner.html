@@ -1,0 +1,116 @@
+{% extends 'cartridge/base.html' %}
+
+{% block title %}Добавление объектов на склад с сканером штрихкодов{% endblock %}
+
+{% block submenu %}Картриджи / Заправленные / Добавление объектов на склад с сканером штрихкодов{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="large-5 columns">
+            <form action="" method="post" class="ng-dirty ng-valid-parse ng-valid ng-valid-required">
+                {% csrf_token %}
+                <input type="hidden" name="csrfmiddlewaretoken" value="FOnpoOYK00u7lIIRFgGUcw0e1WyjQZGqGo9pF24TTwKwsRIcqXU9l9lqIkuomKro" autocomplete="off">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label>Отсканированный штрихкод</label>
+                        <input class="barcode" id="id_cartNumber" maxlength="256" name="cartNumber" type="text" data="full" readonly="">
+                        <div class="form_error_text cart_number_error">Обязательное поле</div>
+                    </div>
+                </div>
+                <div class="marginTop"></div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label class="required" for="id_cartName">Название картриджа</label>
+                        <div class="input_row">
+                            <select class="cart_names select2-hidden-accessible" id="id_cartName" data-select2-id="id_cartName" tabindex="-1"
+                                    aria-hidden="true">
+                                <option value="" data-select2-id="1"></option>
+                            </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2"
+                                           style="width: calc(100% - 38px);"><span class="selection"><span class="select2-selection select2-selection--single"
+                                                                                                           role="combobox" aria-haspopup="true"
+                                                                                                           aria-expanded="false" tabindex="0"
+                                                                                                           aria-labelledby="select2-id_cartName-container"><span
+                                class="select2-selection__rendered" id="select2-id_cartName-container" role="textbox" aria-readonly="true" title=""></span><span
+                                class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span
+                                class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            <a class="dj_button" href="{% url 'add_name' %}" ></a>
+                        </div>
+                        <div class="form_error_text cart_name_error">Обязательное поле</div>
+                    </div>
+                </div>
+                <div class="marginTop"></div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label class="required">Помещение</label>
+                        <div class="input_row">
+                            <select name="place" id="id_place" class="rooms_list select2-hidden-accessible" data-select2-id="id_place" tabindex="-1"
+                                    aria-hidden="true"></select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="3"
+                                                                      style="width: calc(100% - 38px);"><span class="selection"><span
+                                class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0"
+                                aria-labelledby="select2-id_place-container"><span class="select2-selection__rendered" id="select2-id_place-container"
+                                                                                   role="textbox" aria-readonly="true"></span><span
+                                class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span
+                                class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            <a class="dj_button" href="{% url 'tree_list' %}" title="Добавить название помещения"></a>
+                        </div>
+                        <div class="form_error_text cart_sklad_error">Поле должно быть выбрано</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="marginTop wrapper-manual-datetime">
+                        <div class="large-6 medium-6 columns">
+                            <label for="id_date" class="required">Дата добавления</label>
+                            <div class="calendar"><input type="text" name="set_date" value="02.02.2023" class="datepicker hasDatepicker" readonly="readonly"
+                                                         id="id_set_date"><img class="ui-datepicker-trigger" src="/static/img/calendar.png" alt="Выберите дату"
+                                                                               title="Выберите дату"></div>
+                            <div class="form_error_text date_error">Обязательное поле</div>
+                        </div>
+                        <div class="large-6 columns">
+                            <label for="id_hour_minute" class="required">Время добавления</label>
+                            <div class="clock">
+                                <input type="text" name="hour_minute" value="11:00" ng-model="hour_minute" required="" id="id_hour_minute"
+                                       class="ng-untouched ui-timepicker-input ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required"
+                                       autocomplete="off">
+                            </div>
+                            <div class="form_error_text time_error">Поле должно быть выбрано</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="marginTop"></div>
+                <div class="row">
+                    <div class="large-4 columns">
+                        <div class="marginTop55">
+                            <a class="button no_follow set_focus">Сфокусировать</a>
+                        </div>
+                    </div>
+                    <div class="large-4 columns">
+                        <div class="marginTop55">
+                            <a onclick="history.back(); return false;" class="button" >Вернуться</a>
+                            <img class="spinner" src="/static/img/loader.gif">
+                        </div>
+                    </div>
+                    <div class="large-4 columns">
+                        <label class="marginTop">Ручная установка даты</label>
+                        <div class="myswitch">
+                            <input id="cmn-toggle-2" class="cmn-toggle-2 cmn-toggle cmn-toggle-round" type="checkbox" name="tumbler">
+                            <label for="cmn-toggle-2" class="set_date"></label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="large-5 columns">
+            <div class="marginTop wrapper_add_scanner_items" style="display:none">
+                <a class="button success add_items_from_barcode no_follow" session_var="add_cartridges_full_in_stock_1">Добавить</a>
+                <a class="button remove_item no_follow" data="full" session_var="add_cartridges_full_in_stock_1" select_all="0">Удалить элемент</a>
+                <a class="button clear_session no_follow" data="add_cartridges_full_in_stock_1">Очистить сессию</a>&nbsp;&nbsp;
+                <span class="count_carts_wrapper">Кол-во: <span class="count_carts">0</span></span>
+                <img class="session_spinner" src="/static/img/loader.gif">
+            </div>
+            <div class="add_cart_from_barcode">
+                <div class="marginTop"></div>
+            </div>
+        </div>
+        <div class="large-2 columns"></div>
+    </div>
+{% endblock %}

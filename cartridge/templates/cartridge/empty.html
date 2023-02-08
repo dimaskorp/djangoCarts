@@ -1,0 +1,689 @@
+{% extends 'cartridge/base.html' %}
+
+{% block title %}Пустые или сломанные{% endblock %}
+
+{% block submenu %}Картриджи / Пустые или сломанные{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="large-6 columns">
+            <div class="error_msg"></div>
+            <div class="success_msg"></div>
+        </div>
+    </div>
+    <div ng-controller="MainCtrl" class="ng-scope">
+        <div class="row">
+            <div class="small-12 large-7 columns">
+
+                <a class="button mouse_ico" href="#" ng-click="tr_to_firm('empty')">Передать фирме</a>
+
+                <a class="add_items add_from_mouse button" href="/cartridge/add_items/empty/">Добавить с</a>
+
+                <a class="button alert no_follow" href="#" ng-click="tr_to_recycle_bin(6)">На списание</a>
+
+            </div>
+        </div>
+        <div class="row marginTop10">
+            <div class="small-12 large-7 columns">
+
+                <a class="button scanner_ico" href="/cartridge/transfer_to_firm_with_scanner/">Передать фирме</a>
+
+                <a class="add_items add_from_barcode_scanner button" href="/cartridge/add_empty_cartridge_from_barcode_scanner/">Добавить с</a>
+                <img class="spinner" src="/djangoCarts/static/img/loader.gif">
+
+            </div>
+            <div class="small-12 large-5 columns text-right export_select_wrapper">
+                <a class="download_doc" href="#">Скачать файл</a>
+                <a class="export_to_xlsx button no_follow" ng-click="export_to_xlsx()" href="#">
+                    Экспорт в XLSX
+                    <img class="export_spinner_xlsx" src="/djangoCarts/static/img/loader.gif">
+                </a>
+            </div>
+        </div>
+
+
+        <div class="row marginTop10">
+            <div class="large-12 columns">
+                <div ui-i18n="en" class="grid printer-stock checkboxes ui-grid-selectable ui-grid ng-isolate-scope grid1675145223563" id="grid1"
+                     ui-grid="gridOptions" ui-grid-selection="" ui-grid-pagination="" ui-grid-auto-resize="" ui-grid-resize-columns=""
+                     ng-style="getTableHeight()" style="height: 107px;"><!-- TODO (c0bra): add "scoped" attr here, eventually? -->
+                    <style ui-grid-style="" class="ng-binding">.grid1675145223563 {
+                        /* Styles for the grid */
+                    }
+
+                    .grid1675145223563 .ui-grid-row, .grid1675145223563 .ui-grid-cell, .grid1675145223563 .ui-grid-cell .ui-grid-vertical-bar {
+                        height: 33px;
+                    }
+
+                    .grid1675145223563 .ui-grid-row:last-child .ui-grid-cell {
+                        border-bottom-width: 1px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-0007 {
+                        min-width: 150px;
+                        max-width: 150px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-0008 {
+                        min-width: 120px;
+                        max-width: 120px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-0009 {
+                        min-width: 160px;
+                        max-width: 160px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000A {
+                        min-width: 160px;
+                        max-width: 160px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000B {
+                        min-width: 90px;
+                        max-width: 90px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000C {
+                        min-width: 150px;
+                        max-width: 150px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000D {
+                        min-width: 200px;
+                        max-width: 200px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000E {
+                        min-width: 200px;
+                        max-width: 200px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000F {
+                        min-width: 200px;
+                        max-width: 200px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000G {
+                        min-width: 140px;
+                        max-width: 140px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000H {
+                        min-width: 51px;
+                        max-width: 51px;
+                    }
+
+                    .grid1675145223563 .ui-grid-render-container-body .ui-grid-canvas {
+                        width: 1621px;
+                        height: 0px;
+                    }
+
+                    .grid1675145223563 .ui-grid-render-container-body .ui-grid-header-canvas {
+                        width: 1621px;
+                    }
+
+                    .grid1675145223563 .ui-grid-render-container-body .ui-grid-header-canvas {
+                        height: inherit;
+                    }
+
+                    .grid1675145223563 .ui-grid-render-container-body .ui-grid-viewport {
+                        width: 1621px;
+                        height: 25px;
+                    }
+
+                    .grid1675145223563 .ui-grid-render-container-body .ui-grid-header-viewport {
+                        width: 1621px;
+                    }
+
+                    .grid1675145223563 .ui-grid-render-container-body .ui-grid-footer-canvas {
+                        width: 1621px;
+                    }
+
+                    .grid1675145223563 .ui-grid-render-container-body .ui-grid-footer-viewport {
+                        width: 1621px;
+                    }
+
+                    .grid1675145223563 .ui-grid-footer-aggregates-row {
+                        height: 30px;
+                    }
+
+                    .grid1675145223563 .ui-grid-footer-info {
+                        height: 30px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-0007 {
+                        min-width: 150px;
+                        max-width: 150px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-0008 {
+                        min-width: 120px;
+                        max-width: 120px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-0009 {
+                        min-width: 160px;
+                        max-width: 160px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000A {
+                        min-width: 160px;
+                        max-width: 160px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000B {
+                        min-width: 90px;
+                        max-width: 90px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000C {
+                        min-width: 150px;
+                        max-width: 150px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000D {
+                        min-width: 200px;
+                        max-width: 200px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000E {
+                        min-width: 200px;
+                        max-width: 200px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000F {
+                        min-width: 200px;
+                        max-width: 200px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000G {
+                        min-width: 140px;
+                        max-width: 140px;
+                    }
+
+                    .grid1675145223563 .ui-grid-coluiGrid-000H {
+                        min-width: 51px;
+                        max-width: 51px;
+                    }</style>
+                    <div class="ui-grid-contents-wrapper" role="grid"><!-- ngIf: grid.options.enableGridMenu --><!-- ngIf: grid.hasLeftContainer() -->
+                        <div role="presentation" ui-grid-one-bind-id-grid="containerId + '-grid-container'"
+                             class="ui-grid-render-container ng-isolate-scope ui-grid-render-container-body"
+                             ng-style="{ 'margin-left': colContainer.getMargin('left') + 'px', 'margin-right': colContainer.getMargin('right') + 'px' }"
+                             ui-grid-render-container="" container-id="'body'" col-container-name="'body'" row-container-name="'body'"
+                             bind-scroll-horizontal="true" bind-scroll-vertical="true" enable-horizontal-scrollbar="grid.options.enableHorizontalScrollbar"
+                             enable-vertical-scrollbar="grid.options.enableVerticalScrollbar" id="1675145223563-body-grid-container"
+                             style="margin-left: 0px; margin-right: 0px;"><!-- All of these dom elements are replaced in place -->
+                            <div role="rowgroup" class="ui-grid-header ng-scope"><!-- theader -->
+                                <div class="ui-grid-top-panel">
+                                    <div class="ui-grid-header-viewport">
+                                        <div class="ui-grid-header-canvas" style="">
+                                            <div class="ui-grid-header-cell-wrapper" ng-style="colContainer.headerCellWrapperStyle()">
+                                                <div role="row" class="ui-grid-header-cell-row">
+                                                    <!-- ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                    <div class="ui-grid-header-cell ui-grid-clearfix ng-scope ng-isolate-scope ui-grid-coluiGrid-0007"
+                                                         ng-repeat="col in colContainer.renderedColumns track by col.uid" ui-grid-header-cell="" col="col"
+                                                         render-index="$index" style="">
+                                                        <div role="columnheader" ng-class="{ 'sortable': sortable, 'ui-grid-header-cell-last-col': isLastCol }"
+                                                             ui-grid-one-bind-aria-labelledby-grid="col.uid + '-header-text ' + col.uid + '-sortdir-text'"
+                                                             aria-sort="none" class="ng-scope"
+                                                             aria-labelledby="1675145223563-uiGrid-0007-header-text 1675145223563-uiGrid-0007-sortdir-text">
+                                                            <div role="button" tabindex="0" ng-keydown="handleKeyDown($event)"
+                                                                 class="ui-grid-cell-contents ui-grid-header-cell-primary-focus" col-index="renderIndex"><span
+                                                                    class="ui-grid-header-cell-label ng-binding"
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-header-text'"
+                                                                    id="1675145223563-uiGrid-0007-header-text">Штрихкод</span> <span
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-sortdir-text'" ui-grid-visible="col.sort.direction"
+                                                                    aria-label="Без сортировки" class="ui-grid-invisible"
+                                                                    id="1675145223563-uiGrid-0007-sortdir-text"><i
+                                                                    ng-class="{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }"
+                                                                    title="" aria-hidden="true" class="ui-grid-icon-blank"></i> <sub
+                                                                    ui-grid-visible="isSortPriorityVisible()"
+                                                                    class="ui-grid-sort-priority-number ng-binding ui-grid-invisible">1</sub></span></div>
+                                                            <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                                            <div ui-grid-filter=""><!-- ngRepeat: colFilter in col.filters -->
+                                                                <div class="ui-grid-filter-container ng-scope" ng-style="col.extraStyle"
+                                                                     ng-repeat="colFilter in col.filters"
+                                                                     ng-class="{'ui-grid-filter-cancel-button-hidden' : colFilter.disableCancelFilterButton === true }">
+                                                                    <!-- ngIf: colFilter.type !== 'select' -->
+                                                                    <div ng-if="colFilter.type !== 'select'" class="ng-scope"><input type="text"
+                                                                                                                                     class="ui-grid-filter-input ui-grid-filter-input-0"
+                                                                                                                                     ng-model="colFilter.term"
+                                                                                                                                     ng-attr-placeholder=""
+                                                                                                                                     aria-label="Фильтр столбца"
+                                                                                                                                     placeholder="">
+                                                                        <!-- ngIf: !colFilter.disableCancelFilterButton -->
+                                                                        <div role="button" class="ui-grid-filter-button ng-scope ng-hide"
+                                                                             ng-click="removeFilter(colFilter, $index)"
+                                                                             ng-if="!colFilter.disableCancelFilterButton"
+                                                                             ng-disabled="colFilter.term === undefined || colFilter.term === null || colFilter.term === ''"
+                                                                             ng-show="colFilter.term !== undefined &amp;&amp; colFilter.term !== null &amp;&amp; colFilter.term !== ''"
+                                                                             disabled="disabled"><i class="ui-grid-icon-cancel"
+                                                                                                    ui-grid-one-bind-aria-label="aria.removeFilter"
+                                                                                                    aria-label="Удалить фильтр">&nbsp;</i></div>
+                                                                        <!-- end ngIf: !colFilter.disableCancelFilterButton --></div>
+                                                                    <!-- end ngIf: colFilter.type !== 'select' --><!-- ngIf: colFilter.type === 'select' -->
+                                                                </div><!-- end ngRepeat: colFilter in col.filters --></div>
+                                                        </div><!-- ngIf: grid.options.enableColumnResizing -->
+                                                        <div ui-grid-column-resizer="" ng-if="grid.options.enableColumnResizing"
+                                                             class="ui-grid-column-resizer ng-scope ng-isolate-scope right" col="col" position="right"
+                                                             render-index="renderIndex" unselectable="on"></div>
+                                                        <!-- end ngIf: grid.options.enableColumnResizing --></div>
+                                                    <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                    <div class="ui-grid-header-cell ui-grid-clearfix ng-scope ng-isolate-scope ui-grid-coluiGrid-0008"
+                                                         ng-repeat="col in colContainer.renderedColumns track by col.uid" ui-grid-header-cell="" col="col"
+                                                         render-index="$index"><!-- ngIf: grid.options.enableColumnResizing -->
+                                                        <div ui-grid-column-resizer="" ng-if="grid.options.enableColumnResizing"
+                                                             class="ui-grid-column-resizer ng-scope ng-isolate-scope left" col="col" position="left"
+                                                             render-index="renderIndex" unselectable="on"></div>
+                                                        <!-- end ngIf: grid.options.enableColumnResizing -->
+                                                        <div role="columnheader" ng-class="{ 'sortable': sortable, 'ui-grid-header-cell-last-col': isLastCol }"
+                                                             ui-grid-one-bind-aria-labelledby-grid="col.uid + '-header-text ' + col.uid + '-sortdir-text'"
+                                                             aria-sort="none" class="ng-scope"
+                                                             aria-labelledby="1675145223563-uiGrid-0008-header-text 1675145223563-uiGrid-0008-sortdir-text">
+                                                            <div role="button" tabindex="0" ng-keydown="handleKeyDown($event)"
+                                                                 class="ui-grid-cell-contents ui-grid-header-cell-primary-focus" col-index="renderIndex"><span
+                                                                    class="ui-grid-header-cell-label ng-binding"
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-header-text'"
+                                                                    id="1675145223563-uiGrid-0008-header-text">Действие</span> <span
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-sortdir-text'" ui-grid-visible="col.sort.direction"
+                                                                    aria-label="Без сортировки" class="ui-grid-invisible"
+                                                                    id="1675145223563-uiGrid-0008-sortdir-text"><i
+                                                                    ng-class="{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }"
+                                                                    title="" aria-hidden="true" class="ui-grid-icon-blank"></i> <sub
+                                                                    ui-grid-visible="isSortPriorityVisible()"
+                                                                    class="ui-grid-sort-priority-number ng-binding ui-grid-invisible">1</sub></span></div>
+                                                            <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                                            <div ui-grid-filter=""></div>
+                                                        </div>
+                                                    </div><!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                    <div class="ui-grid-header-cell ui-grid-clearfix ng-scope ng-isolate-scope ui-grid-coluiGrid-0009"
+                                                         ng-repeat="col in colContainer.renderedColumns track by col.uid" ui-grid-header-cell="" col="col"
+                                                         render-index="$index">
+                                                        <div role="columnheader" ng-class="{ 'sortable': sortable, 'ui-grid-header-cell-last-col': isLastCol }"
+                                                             ui-grid-one-bind-aria-labelledby-grid="col.uid + '-header-text ' + col.uid + '-sortdir-text'"
+                                                             aria-sort="none" class="ng-scope"
+                                                             aria-labelledby="1675145223563-uiGrid-0009-header-text 1675145223563-uiGrid-0009-sortdir-text">
+                                                            <div role="button" tabindex="0" ng-keydown="handleKeyDown($event)"
+                                                                 class="ui-grid-cell-contents ui-grid-header-cell-primary-focus" col-index="renderIndex"><span
+                                                                    class="ui-grid-header-cell-label ng-binding"
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-header-text'"
+                                                                    id="1675145223563-uiGrid-0009-header-text">Производитель</span> <span
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-sortdir-text'" ui-grid-visible="col.sort.direction"
+                                                                    aria-label="Без сортировки" class="ui-grid-invisible"
+                                                                    id="1675145223563-uiGrid-0009-sortdir-text"><i
+                                                                    ng-class="{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }"
+                                                                    title="" aria-hidden="true" class="ui-grid-icon-blank"></i> <sub
+                                                                    ui-grid-visible="isSortPriorityVisible()"
+                                                                    class="ui-grid-sort-priority-number ng-binding ui-grid-invisible">1</sub></span></div>
+                                                            <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                                            <div ui-grid-filter=""><!-- ngRepeat: colFilter in col.filters -->
+                                                                <div class="ui-grid-filter-container ng-scope" ng-style="col.extraStyle"
+                                                                     ng-repeat="colFilter in col.filters"
+                                                                     ng-class="{'ui-grid-filter-cancel-button-hidden' : colFilter.disableCancelFilterButton === true }">
+                                                                    <!-- ngIf: colFilter.type !== 'select' -->
+                                                                    <div ng-if="colFilter.type !== 'select'" class="ng-scope"><input type="text"
+                                                                                                                                     class="ui-grid-filter-input ui-grid-filter-input-0"
+                                                                                                                                     ng-model="colFilter.term"
+                                                                                                                                     ng-attr-placeholder=""
+                                                                                                                                     aria-label="Фильтр столбца"
+                                                                                                                                     placeholder="">
+                                                                        <!-- ngIf: !colFilter.disableCancelFilterButton -->
+                                                                        <div role="button" class="ui-grid-filter-button ng-scope ng-hide"
+                                                                             ng-click="removeFilter(colFilter, $index)"
+                                                                             ng-if="!colFilter.disableCancelFilterButton"
+                                                                             ng-disabled="colFilter.term === undefined || colFilter.term === null || colFilter.term === ''"
+                                                                             ng-show="colFilter.term !== undefined &amp;&amp; colFilter.term !== null &amp;&amp; colFilter.term !== ''"
+                                                                             disabled="disabled"><i class="ui-grid-icon-cancel"
+                                                                                                    ui-grid-one-bind-aria-label="aria.removeFilter"
+                                                                                                    aria-label="Удалить фильтр">&nbsp;</i></div>
+                                                                        <!-- end ngIf: !colFilter.disableCancelFilterButton --></div>
+                                                                    <!-- end ngIf: colFilter.type !== 'select' --><!-- ngIf: colFilter.type === 'select' -->
+                                                                </div><!-- end ngRepeat: colFilter in col.filters --></div>
+                                                        </div>
+                                                    </div><!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                    <div class="ui-grid-header-cell ui-grid-clearfix ng-scope ng-isolate-scope ui-grid-coluiGrid-000A"
+                                                         ng-repeat="col in colContainer.renderedColumns track by col.uid" ui-grid-header-cell="" col="col"
+                                                         render-index="$index">
+                                                        <div role="columnheader" ng-class="{ 'sortable': sortable, 'ui-grid-header-cell-last-col': isLastCol }"
+                                                             ui-grid-one-bind-aria-labelledby-grid="col.uid + '-header-text ' + col.uid + '-sortdir-text'"
+                                                             aria-sort="none" class="ng-scope"
+                                                             aria-labelledby="1675145223563-uiGrid-000A-header-text 1675145223563-uiGrid-000A-sortdir-text">
+                                                            <div role="button" tabindex="0" ng-keydown="handleKeyDown($event)"
+                                                                 class="ui-grid-cell-contents ui-grid-header-cell-primary-focus" col-index="renderIndex"><span
+                                                                    class="ui-grid-header-cell-label ng-binding"
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-header-text'"
+                                                                    id="1675145223563-uiGrid-000A-header-text">Название</span> <span
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-sortdir-text'" ui-grid-visible="col.sort.direction"
+                                                                    aria-label="Без сортировки" class="ui-grid-invisible"
+                                                                    id="1675145223563-uiGrid-000A-sortdir-text"><i
+                                                                    ng-class="{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }"
+                                                                    title="" aria-hidden="true" class="ui-grid-icon-blank"></i> <sub
+                                                                    ui-grid-visible="isSortPriorityVisible()"
+                                                                    class="ui-grid-sort-priority-number ng-binding ui-grid-invisible">1</sub></span></div>
+                                                            <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                                            <div ui-grid-filter=""><!-- ngRepeat: colFilter in col.filters -->
+                                                                <div class="ui-grid-filter-container ng-scope" ng-style="col.extraStyle"
+                                                                     ng-repeat="colFilter in col.filters"
+                                                                     ng-class="{'ui-grid-filter-cancel-button-hidden' : colFilter.disableCancelFilterButton === true }">
+                                                                    <!-- ngIf: colFilter.type !== 'select' -->
+                                                                    <div ng-if="colFilter.type !== 'select'" class="ng-scope"><input type="text"
+                                                                                                                                     class="ui-grid-filter-input ui-grid-filter-input-0"
+                                                                                                                                     ng-model="colFilter.term"
+                                                                                                                                     ng-attr-placeholder=""
+                                                                                                                                     aria-label="Фильтр столбца"
+                                                                                                                                     placeholder="">
+                                                                        <!-- ngIf: !colFilter.disableCancelFilterButton -->
+                                                                        <div role="button" class="ui-grid-filter-button ng-scope ng-hide"
+                                                                             ng-click="removeFilter(colFilter, $index)"
+                                                                             ng-if="!colFilter.disableCancelFilterButton"
+                                                                             ng-disabled="colFilter.term === undefined || colFilter.term === null || colFilter.term === ''"
+                                                                             ng-show="colFilter.term !== undefined &amp;&amp; colFilter.term !== null &amp;&amp; colFilter.term !== ''"
+                                                                             disabled="disabled"><i class="ui-grid-icon-cancel"
+                                                                                                    ui-grid-one-bind-aria-label="aria.removeFilter"
+                                                                                                    aria-label="Удалить фильтр">&nbsp;</i></div>
+                                                                        <!-- end ngIf: !colFilter.disableCancelFilterButton --></div>
+                                                                    <!-- end ngIf: colFilter.type !== 'select' --><!-- ngIf: colFilter.type === 'select' -->
+                                                                </div><!-- end ngRepeat: colFilter in col.filters --></div>
+                                                        </div>
+                                                    </div><!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                    <div class="ui-grid-header-cell ui-grid-clearfix ng-scope ng-isolate-scope ui-grid-coluiGrid-000B dotted"
+                                                         ng-repeat="col in colContainer.renderedColumns track by col.uid" ui-grid-header-cell="" col="col"
+                                                         render-index="$index">
+                                                        <div role="columnheader" ng-class="{ 'sortable': sortable, 'ui-grid-header-cell-last-col': isLastCol }"
+                                                             ui-grid-one-bind-aria-labelledby-grid="col.uid + '-header-text ' + col.uid + '-sortdir-text'"
+                                                             aria-sort="none" class="ng-scope sortable"
+                                                             aria-labelledby="1675145223563-uiGrid-000B-header-text 1675145223563-uiGrid-000B-sortdir-text">
+                                                            <div role="button" tabindex="0" ng-keydown="handleKeyDown($event)"
+                                                                 class="ui-grid-cell-contents ui-grid-header-cell-primary-focus" col-index="renderIndex"><span
+                                                                    class="ui-grid-header-cell-label ng-binding"
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-header-text'"
+                                                                    id="1675145223563-uiGrid-000B-header-text">Счётчик</span> <span
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-sortdir-text'" ui-grid-visible="col.sort.direction"
+                                                                    aria-label="Без сортировки" class="ui-grid-invisible"
+                                                                    id="1675145223563-uiGrid-000B-sortdir-text"><i
+                                                                    ng-class="{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }"
+                                                                    title="" aria-hidden="true" class="ui-grid-icon-blank"></i> <sub
+                                                                    ui-grid-visible="isSortPriorityVisible()"
+                                                                    class="ui-grid-sort-priority-number ng-binding ui-grid-invisible">1</sub></span></div>
+                                                            <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                                            <div ui-grid-filter=""></div>
+                                                        </div>
+                                                    </div><!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                    <div class="ui-grid-header-cell ui-grid-clearfix ng-scope ng-isolate-scope ui-grid-coluiGrid-000C dotted"
+                                                         ng-repeat="col in colContainer.renderedColumns track by col.uid" ui-grid-header-cell="" col="col"
+                                                         render-index="$index">
+                                                        <div role="columnheader" ng-class="{ 'sortable': sortable, 'ui-grid-header-cell-last-col': isLastCol }"
+                                                             ui-grid-one-bind-aria-labelledby-grid="col.uid + '-header-text ' + col.uid + '-sortdir-text'"
+                                                             aria-sort="none" class="ng-scope sortable"
+                                                             aria-labelledby="1675145223563-uiGrid-000C-header-text 1675145223563-uiGrid-000C-sortdir-text">
+                                                            <div role="button" tabindex="0" ng-keydown="handleKeyDown($event)"
+                                                                 class="ui-grid-cell-contents ui-grid-header-cell-primary-focus" col-index="renderIndex"><span
+                                                                    class="ui-grid-header-cell-label ng-binding"
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-header-text'"
+                                                                    id="1675145223563-uiGrid-000C-header-text">Перезаправки</span> <span
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-sortdir-text'" ui-grid-visible="col.sort.direction"
+                                                                    aria-label="Без сортировки" class="ui-grid-invisible"
+                                                                    id="1675145223563-uiGrid-000C-sortdir-text"><i
+                                                                    ng-class="{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }"
+                                                                    title="" aria-hidden="true" class="ui-grid-icon-blank"></i> <sub
+                                                                    ui-grid-visible="isSortPriorityVisible()"
+                                                                    class="ui-grid-sort-priority-number ng-binding ui-grid-invisible">1</sub></span></div>
+                                                            <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                                            <div ui-grid-filter=""></div>
+                                                        </div>
+                                                    </div><!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                    <div class="ui-grid-header-cell ui-grid-clearfix ng-scope ng-isolate-scope ui-grid-coluiGrid-000D"
+                                                         ng-repeat="col in colContainer.renderedColumns track by col.uid" ui-grid-header-cell="" col="col"
+                                                         render-index="$index">
+                                                        <div role="columnheader" ng-class="{ 'sortable': sortable, 'ui-grid-header-cell-last-col': isLastCol }"
+                                                             ui-grid-one-bind-aria-labelledby-grid="col.uid + '-header-text ' + col.uid + '-sortdir-text'"
+                                                             aria-sort="none" class="ng-scope"
+                                                             aria-labelledby="1675145223563-uiGrid-000D-header-text 1675145223563-uiGrid-000D-sortdir-text">
+                                                            <div role="button" tabindex="0" ng-keydown="handleKeyDown($event)"
+                                                                 class="ui-grid-cell-contents ui-grid-header-cell-primary-focus" col-index="renderIndex"><span
+                                                                    class="ui-grid-header-cell-label ng-binding"
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-header-text'"
+                                                                    id="1675145223563-uiGrid-000D-header-text">Филиал</span> <span
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-sortdir-text'" ui-grid-visible="col.sort.direction"
+                                                                    aria-label="Без сортировки" class="ui-grid-invisible"
+                                                                    id="1675145223563-uiGrid-000D-sortdir-text"><i
+                                                                    ng-class="{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }"
+                                                                    title="" aria-hidden="true" class="ui-grid-icon-blank"></i> <sub
+                                                                    ui-grid-visible="isSortPriorityVisible()"
+                                                                    class="ui-grid-sort-priority-number ng-binding ui-grid-invisible">1</sub></span></div>
+                                                            <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                                            <div ui-grid-filter=""><!-- ngRepeat: colFilter in col.filters -->
+                                                                <div class="ui-grid-filter-container ng-scope" ng-style="col.extraStyle"
+                                                                     ng-repeat="colFilter in col.filters"
+                                                                     ng-class="{'ui-grid-filter-cancel-button-hidden' : colFilter.disableCancelFilterButton === true }">
+                                                                    <!-- ngIf: colFilter.type !== 'select' -->
+                                                                    <div ng-if="colFilter.type !== 'select'" class="ng-scope"><input type="text"
+                                                                                                                                     class="ui-grid-filter-input ui-grid-filter-input-0"
+                                                                                                                                     ng-model="colFilter.term"
+                                                                                                                                     ng-attr-placeholder=""
+                                                                                                                                     aria-label="Фильтр столбца"
+                                                                                                                                     placeholder="">
+                                                                        <!-- ngIf: !colFilter.disableCancelFilterButton -->
+                                                                        <div role="button" class="ui-grid-filter-button ng-scope ng-hide"
+                                                                             ng-click="removeFilter(colFilter, $index)"
+                                                                             ng-if="!colFilter.disableCancelFilterButton"
+                                                                             ng-disabled="colFilter.term === undefined || colFilter.term === null || colFilter.term === ''"
+                                                                             ng-show="colFilter.term !== undefined &amp;&amp; colFilter.term !== null &amp;&amp; colFilter.term !== ''"
+                                                                             disabled="disabled"><i class="ui-grid-icon-cancel"
+                                                                                                    ui-grid-one-bind-aria-label="aria.removeFilter"
+                                                                                                    aria-label="Удалить фильтр">&nbsp;</i></div>
+                                                                        <!-- end ngIf: !colFilter.disableCancelFilterButton --></div>
+                                                                    <!-- end ngIf: colFilter.type !== 'select' --><!-- ngIf: colFilter.type === 'select' -->
+                                                                </div><!-- end ngRepeat: colFilter in col.filters --></div>
+                                                        </div><!-- ngIf: grid.options.enableColumnResizing -->
+                                                        <div ui-grid-column-resizer="" ng-if="grid.options.enableColumnResizing"
+                                                             class="ui-grid-column-resizer ng-scope ng-isolate-scope right" col="col" position="right"
+                                                             render-index="renderIndex" unselectable="on"></div>
+                                                        <!-- end ngIf: grid.options.enableColumnResizing --></div>
+                                                    <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                    <div class="ui-grid-header-cell ui-grid-clearfix ng-scope ng-isolate-scope ui-grid-coluiGrid-000E"
+                                                         ng-repeat="col in colContainer.renderedColumns track by col.uid" ui-grid-header-cell="" col="col"
+                                                         render-index="$index"><!-- ngIf: grid.options.enableColumnResizing -->
+                                                        <div ui-grid-column-resizer="" ng-if="grid.options.enableColumnResizing"
+                                                             class="ui-grid-column-resizer ng-scope ng-isolate-scope left" col="col" position="left"
+                                                             render-index="renderIndex" unselectable="on"></div>
+                                                        <!-- end ngIf: grid.options.enableColumnResizing -->
+                                                        <div role="columnheader" ng-class="{ 'sortable': sortable, 'ui-grid-header-cell-last-col': isLastCol }"
+                                                             ui-grid-one-bind-aria-labelledby-grid="col.uid + '-header-text ' + col.uid + '-sortdir-text'"
+                                                             aria-sort="none" class="ng-scope"
+                                                             aria-labelledby="1675145223563-uiGrid-000E-header-text 1675145223563-uiGrid-000E-sortdir-text">
+                                                            <div role="button" tabindex="0" ng-keydown="handleKeyDown($event)"
+                                                                 class="ui-grid-cell-contents ui-grid-header-cell-primary-focus" col-index="renderIndex"><span
+                                                                    class="ui-grid-header-cell-label ng-binding"
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-header-text'"
+                                                                    id="1675145223563-uiGrid-000E-header-text">Помещение</span> <span
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-sortdir-text'" ui-grid-visible="col.sort.direction"
+                                                                    aria-label="Без сортировки" class="ui-grid-invisible"
+                                                                    id="1675145223563-uiGrid-000E-sortdir-text"><i
+                                                                    ng-class="{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }"
+                                                                    title="" aria-hidden="true" class="ui-grid-icon-blank"></i> <sub
+                                                                    ui-grid-visible="isSortPriorityVisible()"
+                                                                    class="ui-grid-sort-priority-number ng-binding ui-grid-invisible">1</sub></span></div>
+                                                            <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                                            <div ui-grid-filter=""><!-- ngRepeat: colFilter in col.filters -->
+                                                                <div class="ui-grid-filter-container ng-scope" ng-style="col.extraStyle"
+                                                                     ng-repeat="colFilter in col.filters"
+                                                                     ng-class="{'ui-grid-filter-cancel-button-hidden' : colFilter.disableCancelFilterButton === true }">
+                                                                    <!-- ngIf: colFilter.type !== 'select' -->
+                                                                    <div ng-if="colFilter.type !== 'select'" class="ng-scope"><input type="text"
+                                                                                                                                     class="ui-grid-filter-input ui-grid-filter-input-0"
+                                                                                                                                     ng-model="colFilter.term"
+                                                                                                                                     ng-attr-placeholder=""
+                                                                                                                                     aria-label="Фильтр столбца"
+                                                                                                                                     placeholder="">
+                                                                        <!-- ngIf: !colFilter.disableCancelFilterButton -->
+                                                                        <div role="button" class="ui-grid-filter-button ng-scope ng-hide"
+                                                                             ng-click="removeFilter(colFilter, $index)"
+                                                                             ng-if="!colFilter.disableCancelFilterButton"
+                                                                             ng-disabled="colFilter.term === undefined || colFilter.term === null || colFilter.term === ''"
+                                                                             ng-show="colFilter.term !== undefined &amp;&amp; colFilter.term !== null &amp;&amp; colFilter.term !== ''"
+                                                                             disabled="disabled"><i class="ui-grid-icon-cancel"
+                                                                                                    ui-grid-one-bind-aria-label="aria.removeFilter"
+                                                                                                    aria-label="Удалить фильтр">&nbsp;</i></div>
+                                                                        <!-- end ngIf: !colFilter.disableCancelFilterButton --></div>
+                                                                    <!-- end ngIf: colFilter.type !== 'select' --><!-- ngIf: colFilter.type === 'select' -->
+                                                                </div><!-- end ngRepeat: colFilter in col.filters --></div>
+                                                        </div><!-- ngIf: grid.options.enableColumnResizing -->
+                                                        <div ui-grid-column-resizer="" ng-if="grid.options.enableColumnResizing"
+                                                             class="ui-grid-column-resizer ng-scope ng-isolate-scope right" col="col" position="right"
+                                                             render-index="renderIndex" unselectable="on"></div>
+                                                        <!-- end ngIf: grid.options.enableColumnResizing --></div>
+                                                    <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                    <div class="ui-grid-header-cell ui-grid-clearfix ng-scope ng-isolate-scope ui-grid-coluiGrid-000F"
+                                                         ng-repeat="col in colContainer.renderedColumns track by col.uid" ui-grid-header-cell="" col="col"
+                                                         render-index="$index"><!-- ngIf: grid.options.enableColumnResizing -->
+                                                        <div ui-grid-column-resizer="" ng-if="grid.options.enableColumnResizing"
+                                                             class="ui-grid-column-resizer ng-scope ng-isolate-scope left" col="col" position="left"
+                                                             render-index="renderIndex" unselectable="on"></div>
+                                                        <!-- end ngIf: grid.options.enableColumnResizing -->
+                                                        <div role="columnheader" ng-class="{ 'sortable': sortable, 'ui-grid-header-cell-last-col': isLastCol }"
+                                                             ui-grid-one-bind-aria-labelledby-grid="col.uid + '-header-text ' + col.uid + '-sortdir-text'"
+                                                             aria-sort="none" class="ng-scope"
+                                                             aria-labelledby="1675145223563-uiGrid-000F-header-text 1675145223563-uiGrid-000F-sortdir-text">
+                                                            <div role="button" tabindex="0" ng-keydown="handleKeyDown($event)"
+                                                                 class="ui-grid-cell-contents ui-grid-header-cell-primary-focus" col-index="renderIndex"><span
+                                                                    class="ui-grid-header-cell-label ng-binding"
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-header-text'"
+                                                                    id="1675145223563-uiGrid-000F-header-text">Жалоба</span> <span
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-sortdir-text'" ui-grid-visible="col.sort.direction"
+                                                                    aria-label="Без сортировки" class="ui-grid-invisible"
+                                                                    id="1675145223563-uiGrid-000F-sortdir-text"><i
+                                                                    ng-class="{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }"
+                                                                    title="" aria-hidden="true" class="ui-grid-icon-blank"></i> <sub
+                                                                    ui-grid-visible="isSortPriorityVisible()"
+                                                                    class="ui-grid-sort-priority-number ng-binding ui-grid-invisible">1</sub></span></div>
+                                                            <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                                            <div ui-grid-filter=""></div>
+                                                        </div><!-- ngIf: grid.options.enableColumnResizing -->
+                                                        <div ui-grid-column-resizer="" ng-if="grid.options.enableColumnResizing"
+                                                             class="ui-grid-column-resizer ng-scope ng-isolate-scope right" col="col" position="right"
+                                                             render-index="renderIndex" unselectable="on"></div>
+                                                        <!-- end ngIf: grid.options.enableColumnResizing --></div>
+                                                    <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                    <div class="ui-grid-header-cell ui-grid-clearfix ng-scope ng-isolate-scope ui-grid-coluiGrid-000G dotted"
+                                                         ng-repeat="col in colContainer.renderedColumns track by col.uid" ui-grid-header-cell="" col="col"
+                                                         render-index="$index"><!-- ngIf: grid.options.enableColumnResizing -->
+                                                        <div ui-grid-column-resizer="" ng-if="grid.options.enableColumnResizing"
+                                                             class="ui-grid-column-resizer ng-scope ng-isolate-scope left" col="col" position="left"
+                                                             render-index="renderIndex" unselectable="on"></div>
+                                                        <!-- end ngIf: grid.options.enableColumnResizing -->
+                                                        <div role="columnheader" ng-class="{ 'sortable': sortable, 'ui-grid-header-cell-last-col': isLastCol }"
+                                                             ui-grid-one-bind-aria-labelledby-grid="col.uid + '-header-text ' + col.uid + '-sortdir-text'"
+                                                             aria-sort="none" class="ng-scope sortable"
+                                                             aria-labelledby="1675145223563-uiGrid-000G-header-text 1675145223563-uiGrid-000G-sortdir-text">
+                                                            <div role="button" tabindex="0" ng-keydown="handleKeyDown($event)"
+                                                                 class="ui-grid-cell-contents ui-grid-header-cell-primary-focus" col-index="renderIndex"><span
+                                                                    class="ui-grid-header-cell-label ng-binding"
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-header-text'"
+                                                                    id="1675145223563-uiGrid-000G-header-text">Дата изменения</span> <span
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-sortdir-text'" ui-grid-visible="col.sort.direction"
+                                                                    aria-label="Без сортировки" class="ui-grid-invisible"
+                                                                    id="1675145223563-uiGrid-000G-sortdir-text"><i
+                                                                    ng-class="{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }"
+                                                                    title="" aria-hidden="true" class="ui-grid-icon-blank"></i> <sub
+                                                                    ui-grid-visible="isSortPriorityVisible()"
+                                                                    class="ui-grid-sort-priority-number ng-binding ui-grid-invisible">1</sub></span></div>
+                                                            <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                                            <div ui-grid-filter=""></div>
+                                                        </div>
+                                                    </div><!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                    <div class="ui-grid-header-cell ui-grid-clearfix ng-scope ng-isolate-scope ui-grid-coluiGrid-000H"
+                                                         ng-repeat="col in colContainer.renderedColumns track by col.uid" ui-grid-header-cell="" col="col"
+                                                         render-index="$index">
+                                                        <div role="columnheader" ng-class="{ 'sortable': sortable, 'ui-grid-header-cell-last-col': isLastCol }"
+                                                             ui-grid-one-bind-aria-labelledby-grid="col.uid + '-header-text ' + col.uid + '-sortdir-text'"
+                                                             aria-sort="none" class="ng-scope"
+                                                             aria-labelledby="1675145223563-uiGrid-000H-header-text 1675145223563-uiGrid-000H-sortdir-text">
+                                                            <div role="button" tabindex="0" ng-keydown="handleKeyDown($event)"
+                                                                 class="ui-grid-cell-contents ui-grid-header-cell-primary-focus" col-index="renderIndex"><span
+                                                                    class="ui-grid-header-cell-label ng-binding"
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-header-text'"
+                                                                    id="1675145223563-uiGrid-000H-header-text"> </span> <span
+                                                                    ui-grid-one-bind-id-grid="col.uid + '-sortdir-text'" ui-grid-visible="col.sort.direction"
+                                                                    aria-label="Без сортировки" class="ui-grid-invisible"
+                                                                    id="1675145223563-uiGrid-000H-sortdir-text"><i
+                                                                    ng-class="{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }"
+                                                                    title="" aria-hidden="true" class="ui-grid-icon-blank"></i> <sub
+                                                                    ui-grid-visible="isSortPriorityVisible()"
+                                                                    class="ui-grid-sort-priority-number ng-binding ui-grid-invisible">1</sub></span></div>
+                                                            <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                                            <div ui-grid-filter=""></div>
+                                                        </div>
+                                                    </div><!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid --></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="rowgroup" class="ui-grid-viewport ng-isolate-scope" ng-style="colContainer.getViewportStyle()" ui-grid-viewport=""
+                                 style="overflow: auto hidden;"><!-- tbody -->
+                                <div class="ui-grid-canvas"><!-- ngRepeat: (rowRenderIndex, row) in rowContainer.renderedRows track by $index --></div>
+                            </div><!-- ngIf: colContainer.needsHScrollbarPlaceholder() --><!-- ngIf: grid.options.showColumnFooter --></div>
+                        <!-- ngIf: grid.hasRightContainer() --><!-- ngIf: grid.options.showGridFooter --><!-- ngIf: grid.options.enableColumnMenus -->
+                        <div ng-transclude=""></div>
+                    </div>
+                    <div class="ui-grid-pager-panel ng-scope" ui-grid-pager="" ng-show="grid.options.enablePaginationControls">
+                        <div role="navigation" class="ui-grid-pager-container">
+                            <div class="ui-grid-pager-control">
+                                <button type="button" class="ui-grid-pager-first" ui-grid-one-bind-title="aria.pageToFirst"
+                                        ui-grid-one-bind-aria-label="aria.pageToFirst" ng-click="pageFirstPageClick()" ng-disabled="cantPageBackward()"
+                                        title="Первая страница" aria-label="Первая страница" disabled="disabled">
+                                    <div ng-class="grid.isRTL() ? 'last-triangle' : 'first-triangle'" class="first-triangle">
+                                        <div ng-class="grid.isRTL() ? 'last-bar-rtl' : 'first-bar'" class="first-bar"></div>
+                                    </div>
+                                </button>
+                                <button type="button" class="ui-grid-pager-previous" ui-grid-one-bind-title="aria.pageBack"
+                                        ui-grid-one-bind-aria-label="aria.pageBack" ng-click="pagePreviousPageClick()" ng-disabled="cantPageBackward()"
+                                        title="Предыдущая страница" aria-label="Предыдущая страница" disabled="disabled">
+                                    <div ng-class="grid.isRTL() ? 'last-triangle prev-triangle' : 'first-triangle prev-triangle'"
+                                         class="first-triangle prev-triangle"></div>
+                                </button>
+                                <input type="number" ui-grid-one-bind-title="aria.pageSelected" ui-grid-one-bind-aria-label="aria.pageSelected"
+                                       class="ui-grid-pager-control-input ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-step ng-valid-required"
+                                       ng-model="grid.options.paginationCurrentPage" min="1" max="1" step="1" required="" title="Выбранная страница"
+                                       aria-label="Выбранная страница"> <span class="ui-grid-pager-max-pages-number ng-binding"
+                                                                              ng-show="paginationApi.getTotalPages() > 0"><abbr
+                                    ui-grid-one-bind-title="paginationOf" title="из">/ </abbr>1 </span>
+                                <button type="button" class="ui-grid-pager-next" ui-grid-one-bind-title="aria.pageForward"
+                                        ui-grid-one-bind-aria-label="aria.pageForward" ng-click="pageNextPageClick()" ng-disabled="cantPageForward()"
+                                        title="Следующая страница" aria-label="Следующая страница" disabled="disabled">
+                                    <div ng-class="grid.isRTL() ? 'first-triangle next-triangle' : 'last-triangle next-triangle'"
+                                         class="last-triangle next-triangle"></div>
+                                </button>
+                                <button type="button" class="ui-grid-pager-last" ui-grid-one-bind-title="aria.pageToLast"
+                                        ui-grid-one-bind-aria-label="aria.pageToLast" ng-click="pageLastPageClick()" ng-disabled="cantPageToLast()"
+                                        title="Последняя страница" aria-label="Последняя страница" disabled="disabled">
+                                    <div ng-class="grid.isRTL() ? 'first-triangle' : 'last-triangle'" class="last-triangle">
+                                        <div ng-class="grid.isRTL() ? 'first-bar-rtl' : 'last-bar'" class="last-bar"></div>
+                                    </div>
+                                </button>
+                            </div><!-- ngIf: grid.options.paginationPageSizes.length > 1 && !grid.options.useCustomPagination -->
+                            <div class="ui-grid-pager-row-count-picker ng-scope"
+                                 ng-if="grid.options.paginationPageSizes.length > 1 &amp;&amp; !grid.options.useCustomPagination"><select
+                                    ui-grid-one-bind-aria-labelledby-grid="'items-per-page-label'" ng-model="grid.options.paginationPageSize"
+                                    ng-options="o as o for o in grid.options.paginationPageSizes" class="ng-pristine ng-untouched ng-valid ng-not-empty"
+                                    aria-labelledby="1675145223563-items-per-page-label">
+                                <option label="12" value="number:12" selected="selected">12</option>
+                                <option label="24" value="number:24">24</option>
+                                <option label="48" value="number:48">48</option>
+                                <option label="10000" value="number:10000">10000</option>
+                            </select><span ui-grid-one-bind-id-grid="'items-per-page-label'" class="ui-grid-pager-row-count-label ng-binding"
+                                           id="1675145223563-items-per-page-label">&nbsp;строк на страницу</span></div>
+                            <!-- end ngIf: grid.options.paginationPageSizes.length > 1 && !grid.options.useCustomPagination -->
+                            <!-- ngIf: grid.options.paginationPageSizes.length <= 1 --></div>
+                        <div class="ui-grid-pager-count-container">
+                            <div class="ui-grid-pager-count"><span ng-show="grid.options.totalItems > 0" class="ng-binding ng-hide">1 <abbr
+                                    ui-grid-one-bind-title="paginationThrough" title="по">- </abbr>0 из 0 строк</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
