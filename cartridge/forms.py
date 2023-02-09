@@ -1,6 +1,6 @@
 from .models import Cartridges, Manufacturer, NameСartridge, Placements
 from django.forms import ModelForm, TextInput, Textarea, Select, NumberInput, DateTimeInput, DateField, DateTimeField
-
+import datetime
 
 class ManufacturerForm(ModelForm):  # форма Производитель
     class Meta:
@@ -31,7 +31,7 @@ class PlacementsForm(ModelForm):  # форма Помещения
                 'required': "True",
             }),
             'branch': TextInput(attrs={
-                'required': "False",
+                'name': 'branch',
             }),
             'barcode': NumberInput(attrs={
                 'name': 'number_barcode',
@@ -43,17 +43,11 @@ class PlacementsForm(ModelForm):  # форма Помещения
 class CartridgesForm(ModelForm):  # Картриджи
     class Meta:
         model = Cartridges
-        date = DateTimeField()
         fields = ['barcode', 'cartName', 'placeName', 'manufacturerName', 'date']
-        dateTimeOptions = {
-            'format': 'dd/mm/yyyy HH:ii P',
-            'autoclose': True,
-            'showMeridian': True
-        }
         widgets = {
             'barcode': NumberInput(attrs={
-                'name': 'manualNumber',
-                'id': "id_manualNumber"
+                'id': "id_manualNumber",
+                'style': "width: calc(100% - 38px);"
             }),
             'cartName': Select(attrs={
                 'id': "id_cartName",
@@ -63,25 +57,20 @@ class CartridgesForm(ModelForm):  # Картриджи
             }),
             'placeName': Select(attrs={
                 'id': 'id_place',
-                'name': 'place',
                 'required': "True",
                 'class': 'select-selection--single',
                 'style': "width: calc(100% - 38px);"
             }),
             'manufacturerName': Select(attrs={
                 'id': 'id_manufacturer',
-                'name': 'manufacturer',
                 'required': "True",
                 'class': 'select-selection--single',
                 'style': "width: calc(100% - 38px);"
             }),
-            # 'date': DateTimeField(attrs={
-            #     'id': 'id_set_dat',
-            #     'name': 'set_dat',
-            #     'required': "True",
-            #     'style': "width: calc(100% - 38px);"
-            # }, input_formats=['%d.%m.%Y %H:%M'])
-
+            'date': DateTimeInput(attrs={
+                'id': 'datetimepicker4',
+                'required': "True"
+            })
         }
 
 

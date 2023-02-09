@@ -146,6 +146,7 @@ form input[type="password"] {
     display: none;
     color: #ff6464;
     border: 2px solid #ff6464;
+    list-style-type: none;
 }
 
 .error_msg a {
@@ -174,6 +175,7 @@ form input[type="password"] {
     display: none;
     color: #7BCC9A;
     border: 2px solid #7BCC9A;
+    list-style-type: none;
 }
 
 .success_msg_set,
@@ -1419,32 +1421,15 @@ form.input_date input.button {
     display: inline-block;
 }
 
-form.input_date input, div.calendar input {
-    display: inline-block;
-    width: 150px;
-    height: 32px;
-    margin: 0;
-}
 
-div.calendar, div.clock {
-    margin: 0;
-    padding: 0;
+div.calendar {
     display: inline-block;
     height: 32px;
-    width: 182px;
+    width: 200px;
 }
-
-div.clock {
-    background: url('../img/clock.png') right no-repeat;
-    padding: 0 32px 0 0;
-    margin-bottom: -12px;
-}
-
-div.calendar .ui-datepicker-trigger, div.clock img.ui-clockpicker {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
+div.calendar input{
+    background: white url(../img/calendar.png) no-repeat right;
+    padding-left:20px;
 }
 
 input.datepicker {
@@ -1787,13 +1772,13 @@ div.wrapper {
 }
 
 .content {
-    padding: 0 0 0 250px;
+    padding: 0 0 0 270px;
 }
 
 
 .left-sidebar {
     float: left;
-    width: 250px;
+    width: 260px;
     margin-left: -100%;
     position: relative;
 }
@@ -2284,7 +2269,9 @@ span.ui-grid-pager-row-count-label {
 form input.autocomplete {
     margin-bottom: 15px;
 }
-
+.ng-scope{
+    max-width: 1483px;
+}
 div.ui-grid-cell div.ng-scope .checkbox {
     margin: 0;
 }
@@ -2692,6 +2679,9 @@ a.generate_button:hover {
     background: #d3d3d3 url(../img/gears.png) center center no-repeat;
 }
 
+a.generate_pdf{
+    margin-left: 300px;
+}
 div.dotted span.ui-grid-header-cell-label {
     border-bottom: 1px dashed #0275b8;
     display: inline-block;

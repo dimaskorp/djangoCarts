@@ -34,24 +34,43 @@ def massive_change_room(request):
 @csrf_protect
 @ensure_csrf_cookie
 def add_items(request):
+    name_cart = Cartridges.objects.order_by('-date')
+    count = Cartridges.objects.count()
     error = ''
     display = 'none'
-    name = ''
+    barcode_text = ''
+    cart_name = ''
+    manufacturer_name = ''
+    msg_display = 'none'
+    err_display = 'none'
     if request.POST:
         form = CartridgesForm(request.POST)
-        if form.is_valid():
+        if form. is_valid():
             form.save()
-            name = form['name'].data
+            barcode_text = form['barcode'].data
+            cart_name = form.instance.cartName
+            manufacturer_name = form.instance.manufacturerName
+            count = Cartridges.objects.count()
             display = 'block'
+            msg_display = 'block'
+        elif form.errors:
+            error = form.errors
+            display = 'block'
+            err_display = 'block'
         else:
-            error = 'block'
+            display = 'none'
     form = CartridgesForm()
-
     data = {
         'form': form,
         'error': error,
         'display': display,
-        'name': name,
+        'msg_display': msg_display,
+        'err_display': err_display,
+        'barcode_text': barcode_text,
+        'cart_name': cart_name,
+        'manufacturer_name': manufacturer_name,
+        'name_cart': name_cart,
+        'count': count
     }
     return render(request, 'cartridge/add_items.html', data)
 
@@ -88,19 +107,29 @@ def tree_list(request):
     error = ''
     display = 'none'
     name = ''
+    msg_display = 'none'
+    err_display = 'none'
     if request.POST:
         form = PlacementsForm(request.POST)
         if form.is_valid():
             form.save()
             name = form['name'].data
+            count = Placements.objects.count()
             display = 'block'
+            msg_display = 'block'
+        elif form.errors:
+            error = form.errors
+            display = 'block'
+            err_display = 'block'
         else:
-            error = 'block'
+            display = 'none'
     form = PlacementsForm()
     data = {
         'form': form,
         'error': error,
         'display': display,
+        'msg_display': msg_display,
+        'err_display': err_display,
         'name': name,
         'place': place,
         'count': count

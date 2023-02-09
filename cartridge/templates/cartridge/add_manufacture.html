@@ -26,7 +26,7 @@
                 {{ form.comments }}
 
                 <div class="marginTop input_row">
-                    <a onclick="history.back(); return false;" class="button" >Вернуться</a>
+                    <a href="{% url 'add_items' %}" class="button">Вернуться</a>
                     <button class="button success" type="submit">Добавить</button>
                 </div>
             </form>

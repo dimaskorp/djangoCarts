@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 
 class Manufacturer(models.Model):  # Производитель
@@ -16,7 +17,7 @@ class Manufacturer(models.Model):  # Производитель
 class Placements(models.Model):  # Помещения
     barcode = models.IntegerField('Штрихкод', unique=True, db_index=True)
     name = models.CharField("Помещение", max_length=50, unique=True, db_index=True)
-    branch = models.CharField("Корпус", max_length=50, blank=True)
+    branch = models.CharField("Корпус", max_length=50, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Помещение'
@@ -43,7 +44,7 @@ class Cartridges(models.Model):  # Картриджи
     cartName = models.ForeignKey('NameСartridge', default=None, on_delete=models.PROTECT)
     placeName = models.ForeignKey('Placements', default=1, on_delete=models.PROTECT)
     manufacturerName = models.ForeignKey('Manufacturer', default=None, on_delete=models.PROTECT)
-    date = models.DateTimeField("Дата изменения")
+    date = models.DateTimeField("Дата изменения", default=datetime.datetime.now().strftime("%d.%m.%Y %H:%M"))
 
     class Meta:
         verbose_name = 'Картридж'

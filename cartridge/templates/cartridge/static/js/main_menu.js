@@ -15,29 +15,29 @@ $(function () {
 
     function saveMenuState() {
         let state = _getState();
-        $.cookie('auroramenu', JSON.stringify(state), {expires: 7, path: '/'});
+        $('auroramenu', JSON.stringify(state), {expires: 7, path: '/'});
     }
 
     function clearMenuState() {
         let state = _getState();
-        $.cookie('auroramenu', JSON.stringify(state), {expires: 7, path: '/'});
+        $('auroramenu', JSON.stringify(state), {expires: 7, path: '/'});
     }
 
-    // function loadMenuState() {
-    //     let cookie = $.cookie('auroramenu');
-    //     if (!cookie) return;
-    //
-    //     let state = JSON.parse(cookie);
-    //     for (let i = 0; i < state.length; ++i) {
-    //         let ul = $('.menu').find('li > ul').eq(state[i]);
-    //         ul.closest('li').addClass('active');
-    //         ul.slideDown({
-    //             complete: function () {
-    //                 set_scroll();
-    //             }
-    //         });
-    //     }
-    // }
+    function loadMenuState() {
+        let cookie = $.cookie('auroramenu');
+        if (!cookie) return;
+
+        let state = JSON.parse(cookie);
+        for (let i = 0; i < state.length; ++i) {
+            let ul = $('.menu').find('li > ul').eq(state[i]);
+            ul.closest('li').addClass('active');
+            ul.slideDown({
+                complete: function () {
+                    set_scroll();
+                }
+            });
+        }
+    }
 
     // let loadAjaxMenu = $.ajax({
     //   method: 'POST',
