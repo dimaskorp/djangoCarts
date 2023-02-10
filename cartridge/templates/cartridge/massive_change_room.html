@@ -21,17 +21,17 @@
                         <label>Ввести номер картриджа вручную</label>
                         <div class="input_row">
                             {{ form.barcode }}
-                            <script type="text/javascript">
-                                document.getElementById("id_barcodeNumber").onkeyup = function() {
-                                    var input = parseInt(this.value);
-                                    if input.length = 13
-                                        alert('YOU ARE UNDER 13')
+                            <script>
+                                function lengthBarcode() {
+                                    var col = document.getElementById("id_barcodeNumber").value.length
+                                    if (col === 0)
+                                        document.getElementById('id_placeNumber').disabled = true;
+                                    if (col === 13)
                                         document.getElementById('id_placeNumber').disabled = false;
-
+                                        document.getElementById('id_placeNumber').focus();
+                                    return true;
                                 }
                             </script>
-                            <span id="result"></span>
-
                             <a title="Найти по номеру" class="button no_follow add-session-move-barcode search-zoom" href=""></a>
                         </div>
                     </div>
@@ -50,8 +50,8 @@
                 <div class="marginTop55"></div>
                 <div class="row">
                     <div class="large-12 columns">
-                        <a class="button no_follow set_focus small-focus">Сфокусировать</a>&nbsp;&nbsp;&nbsp;
-                        <a class="button no_follow action-change-room small-move" href="">Переместить</a>&nbsp;&nbsp;&nbsp;
+                        <a class="button no_follow set_focus small-focus">Сфокусировать</a>
+                        <button class="button small-move" type="submit">Добавить</button>
                         <img class="spinner" src="static/img/loader.gif">
                     </div>
                 </div>
