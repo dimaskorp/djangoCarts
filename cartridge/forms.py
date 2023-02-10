@@ -87,7 +87,8 @@ class PlaceUpdateForm(ModelForm):  # Картриджи
             'barcode_manual': NumberInput(attrs={
                 'id': "id_manualNumber",
                 'class': 'manual_number',
-                # 'style': "width: calc(100% - 38px);"
+                'autofocus': 'autofocus',
+                'onkeyup': 'return lengthBarcode()'
             }),
             'placeName': NumberInput(attrs={
                 'id': 'id_placeNumber',
