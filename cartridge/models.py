@@ -15,7 +15,7 @@ class Manufacturer(models.Model):  # Производитель
 
 
 class Placements(models.Model):  # Помещения
-    barcode = models.IntegerField('Штрихкод', unique=True, db_index=True)
+    barcode = models.IntegerField('Штрихкод', unique=True, db_index=True, max_length=13)
     name = models.CharField("Помещение", max_length=50, unique=True, db_index=True)
     branch = models.CharField("Корпус", max_length=50, blank=True, null=True)
 
@@ -40,16 +40,15 @@ class NameСartridge(models.Model):  # Названия картриджей
 
 
 class Cartridges(models.Model):  # Картриджи
-    barcode = models.IntegerField('Штрихкод', primary_key=True, unique=True, db_index=True)
+    barcode = models.IntegerField('Штрихкод', primary_key=True, unique=True, db_index=True, max_length=13)
     cartName = models.ForeignKey('NameСartridge', default=None, on_delete=models.PROTECT)
-    placeName = models.ForeignKey('Placements', default=1, on_delete=models.PROTECT)
+    placeName = models.ForeignKey('Placements', on_delete=models.PROTECT)
     manufacturerName = models.ForeignKey('Manufacturer', default=None, on_delete=models.PROTECT)
     date = models.DateTimeField("Дата изменения", default=datetime.datetime.now().strftime("%d.%m.%Y %H:%M"))
-
-    class Meta:
-        verbose_name = 'Картридж'
-        verbose_name_plural = 'Картриджи'
 
     def __str__(self):
         return str(self.barcode) + " | " + str(self.cartName)
 
+    class Meta:
+        verbose_name = 'Картридж'
+        verbose_name_plural = 'Картриджи'

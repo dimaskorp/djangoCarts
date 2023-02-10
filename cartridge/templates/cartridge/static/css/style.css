@@ -1023,6 +1023,7 @@ a.export_to_csv, a.export_to_xlsx {
     display: inline-block;
     margin: 0;
     padding: 0 24px 0 5px;
+    float: right;
     background: #60C185 url('../img/excel.png') no-repeat right center;
 }
 
@@ -2270,8 +2271,13 @@ form input.autocomplete {
     margin-bottom: 15px;
 }
 .ng-scope{
-    max-width: 1483px;
+    width: 1483px;
 }
+
+.ng-scope-stock{
+    width: 1313px;
+}
+
 div.ui-grid-cell div.ng-scope .checkbox {
     margin: 0;
 }
@@ -2680,7 +2686,7 @@ a.generate_button:hover {
 }
 
 a.generate_pdf{
-    margin-left: 300px;
+    margin-left: 226px;
 }
 div.dotted span.ui-grid-header-cell-label {
     border-bottom: 1px dashed #0275b8;

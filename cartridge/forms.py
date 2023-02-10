@@ -1,6 +1,6 @@
 from .models import Cartridges, Manufacturer, NameСartridge, Placements
-from django.forms import ModelForm, TextInput, Textarea, Select, NumberInput, DateTimeInput, DateField, DateTimeField
-import datetime
+from django.forms import ModelForm, TextInput, Textarea, Select, NumberInput, DateTimeInput
+
 
 class ManufacturerForm(ModelForm):  # форма Производитель
     class Meta:
@@ -70,6 +70,31 @@ class CartridgesForm(ModelForm):  # Картриджи
             'date': DateTimeInput(attrs={
                 'id': 'datetimepicker4',
                 'required': "True"
+            })
+        }
+
+
+class PlaceUpdateForm(ModelForm):  # Картриджи
+    class Meta:
+        model = Cartridges
+        fields = ['barcode', 'placeName']
+        widgets = {
+            'barcode': NumberInput(attrs={
+                'id': "id_barcodeNumber",
+                'class': 'manual_number',
+
+            }),
+            'barcode_manual': NumberInput(attrs={
+                'id': "id_manualNumber",
+                'class': 'manual_number',
+                # 'style': "width: calc(100% - 38px);"
+            }),
+            'placeName': NumberInput(attrs={
+                'id': 'id_placeNumber',
+                'required': "True",
+                'class': 'place_number',
+                'disabled': 'True',
+                'style': "width: calc(100% - 38px);"
             })
         }
 

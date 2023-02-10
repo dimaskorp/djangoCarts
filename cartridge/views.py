@@ -1,14 +1,33 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
-from .models import Cartridges, Manufacturer, NameСartridge, Placements
-from .forms import ManufacturerForm, NameСartridgeForm, PlacementsForm, CartridgesForm
+from .models import Cartridges, Placements
+from .forms import ManufacturerForm, NameСartridgeForm, PlacementsForm, CartridgesForm, PlaceUpdateForm
 
 
 # Create your views here.
+@csrf_protect
+@ensure_csrf_cookie
 def stock(request):
+    form = CartridgesForm()
     cart = Cartridges.objects.order_by('-date')
     count = Cartridges.objects.count()
-    return render(request, 'cartridge/stock.html', {'cart': cart, 'count': count})
+    cart_name = ''
+    manufacturer_name = ''
+    place_name = ''
+    if request.POST:
+        form = CartridgesForm(request.POST)
+        cart_name = form.instance.cartName
+        manufacturer_name = form.instance.manufacturerName
+        place_name = form.instance.placeName
+    data = {
+        'form': form,
+        'cart_name': cart_name,
+        'manufacturer_name': manufacturer_name,
+        'place_name': place_name,
+        'cart': cart,
+        'count': count
+    }
+    return render(request, 'cartridge/stock.html', data)
 
 
 def use(request):
@@ -28,7 +47,14 @@ def basket(request):
 
 
 def massive_change_room(request):
-    return render(request, 'cartridge/massive_change_room.html')
+    form = PlaceUpdateForm()
+    if request.POST:
+        form = PlaceUpdateForm(request.POST)
+    data = {
+        'form': form,
+
+    }
+    return render(request, 'cartridge/massive_change_room.html', data)
 
 
 @csrf_protect

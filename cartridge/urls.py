@@ -13,5 +13,4 @@ urlpatterns = [
     path('add_name/', views.add_name, name='add_name'),
     path('tree_list/', views.tree_list, name='tree_list'),
     path('add_manufacture/', views.add_manufacture, name='add_manufacture'),
-    path('add_cartridge_from_barcode_scanner/', views.add_cartridge_from_barcode_scanner, name='add_cartridge_from_barcode_scanner'),
 ]
