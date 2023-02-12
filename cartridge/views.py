@@ -47,15 +47,36 @@ def basket(request):
 
 
 def massive_change_room(request):
+    carts = ''
+    message = ''
+    display = 'none'
+    if request.GET:
+        search_post = request.GET.get('search')
+        if len(search_post) == 13:
+            carts = Cartridges.objects.filter(Q(barcode__icontains=search_post))
+            if not carts:
+                display = 'block'
+                message = 'Такого номера нет в базе'
+        else:
+            display = 'block'
+            message = 'Необходимо ввести 13-значный код'
+
     form = PlaceUpdateForm()
-    if request.POST:
-        form = PlaceUpdateForm(request.POST)
+    # if request.POST:
+    #     form = PlaceUpdateForm(request.POST)
+    #     barcode_form_cart = form['barcode'].data
+    #     barcode_form_place = form['barcode'].data
+    #
+    #     queryset_form_cart = Cartridges.objects.filter(barcode=barcode_form_cart).values('barcode').values()
+    #     queryset_form_place = Placements.objects.filter(barcode=barcode_form_place)
+
     data = {
         'form': form,
-
+        'message': message,
+        'carts': carts,
+        'display': display
     }
     return render(request, 'cartridge/massive_change_room.html', data)
-
 
 @csrf_protect
 @ensure_csrf_cookie
