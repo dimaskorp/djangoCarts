@@ -1,0 +1,82 @@
+{% extends 'cartridge/base.html' %}
+
+{% block title %}Добавление новых{% endblock %}
+
+{% block submenu %}Картриджи / Заправленные / Добавление новых{% endblock %}
+
+{% block content %}
+    <div ng-controller="MainCtrl" class="ng-scope">
+        <div class="row">
+            <div class="large-5 columns">
+                <form action="" method="post" class="ng-dirty ng-valid-parse ng-valid ng-valid-required">
+                    {% csrf_token %}
+                    <div class="marginTop">
+                        <label class="required">Штрихкод</label>
+                        {{ cartridge_details_view.barcode }}
+
+                        <div class="form_error_text cart_number_error">Обязательное поле</div>
+                        <div class="marginTop">&nbsp;</div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label class="required" for="id_cartName">Название картриджа</label>
+                            <div class="input_row">
+                                {{ cartridge_details_view.cartName }}
+
+                                <a class="dj_button" href="{% url 'add_name' %}" title="Добавить название картриджа"></a>
+                            </div>
+                            <div class="form_error_text cart_name_error">Обязательное поле</div>
+                        </div>
+                    </div>
+                    <div class="marginTop"></div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label class="required">Производитель</label>
+                            <div class="input_row">
+                                {{ cartridge_details_view.manufacturerName }}
+                                <a class="dj_button" href="{% url 'add_manufacture' %}" title="Добавить нового производителя"></a>
+                            </div>
+                            <div class="form_error_text cart_sklad_error">Поле должно быть выбрано</div>
+                        </div>
+                    </div>
+                    <div class="marginTop"></div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label class="required">Помещение</label>
+                            <div class="input_row">
+                                {{ cartridge_details_view.placeName }}
+                                <a class="dj_button" href="{% url 'tree_list' %}" title="Добавить название помещения"></a>
+                            </div>
+                            <div class="form_error_text cart_sklad_error">Поле должно быть выбрано</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="marginTop wrapper-manual-datetime">
+                            <div class="large-6 columns">
+                                <label for="id_date" class="required">Дата добавления</label>
+                                <div class="calendar">
+                                    {{ cartridge_details_view.date }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="marginTop"></div>
+                    <div class="row">
+                        <div class="small-4 columns">
+                            <label class="marginTop">Ручная установка даты</label>
+                            <div class="myswitch">
+                                <input id="cmn-toggle-2" class="cmn-toggle-2 cmn-toggle cmn-toggle-round" type="checkbox">
+                                <label for="cmn-toggle-2" class="set_date"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="marginTop"></div>
+                    <div class="marginTop">
+                        <a href="{% url 'stock' %}" class="button">Вернуться</a>
+                        <button class="button success" type="submit">Добавить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
