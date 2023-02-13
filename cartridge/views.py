@@ -1,33 +1,23 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from .models import Cartridges, Placements
-from .forms import ManufacturerForm, NameСartridgeForm, PlacementsForm, CartridgesForm, PlaceUpdateForm
+from .forms import ManufacturerForm, NameСartridgeForm, PlacementsForm, CartridgesForm, PlaceUpdateView
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView
+from django.db.models import Q
 
 
-# Create your views here.
-@csrf_protect
-@ensure_csrf_cookie
-def stock(request):
-    form = CartridgesForm()
-    cart = Cartridges.objects.order_by('-date')
-    count = Cartridges.objects.count()
-    cart_name = ''
-    manufacturer_name = ''
-    place_name = ''
-    if request.POST:
-        form = CartridgesForm(request.POST)
-        cart_name = form.instance.cartName
-        manufacturer_name = form.instance.manufacturerName
-        place_name = form.instance.placeName
-    data = {
-        'form': form,
-        'cart_name': cart_name,
-        'manufacturer_name': manufacturer_name,
-        'place_name': place_name,
-        'cart': cart,
-        'count': count
-    }
-    return render(request, 'cartridge/stock.html', data)
+class CartListView(ListView):
+    model = Cartridges
+    template_name = 'cartridge/stock.html'
+    context_object_name = 'cartridge_list_view'
+
+
+class CartDetailView(DetailView):
+    model = Cartridges
+    template_name = 'cartridge/details_view.html'
+    context_object_name = 'cartridge_details_view'
 
 
 def use(request):
@@ -46,37 +36,56 @@ def basket(request):
     return render(request, 'cartridge/basket.html')
 
 
+class PlaceUpdateView(UpdateView):
+    model = Cartridges
+    template_name = 'cartridge/massive_change_room.html'
+
 def massive_change_room(request):
     carts = ''
     message = ''
     display = 'none'
+    display_msg = 'none'
     if request.GET:
         search_post = request.GET.get('search')
         if len(search_post) == 13:
             carts = Cartridges.objects.filter(Q(barcode__icontains=search_post))
             if not carts:
-                display = 'block'
+                display_msg = 'block'
                 message = 'Такого номера нет в базе'
+            else:
+                display = 'block'
+        elif len(search_post) == 0:
+            display_msg = 'none'
         else:
-            display = 'block'
+            display_msg = 'block'
             message = 'Необходимо ввести 13-значный код'
+    form = PlaceUpdateView()
+    cart = CartridgesForm()
+    place = Placements.objects.all()
 
-    form = PlaceUpdateForm()
-    # if request.POST:
-    #     form = PlaceUpdateForm(request.POST)
-    #     barcode_form_cart = form['barcode'].data
-    #     barcode_form_place = form['barcode'].data
-    #
-    #     queryset_form_cart = Cartridges.objects.filter(barcode=barcode_form_cart).values('barcode').values()
-    #     queryset_form_place = Placements.objects.filter(barcode=barcode_form_place)
+    if request.POST:
+        form = PlaceUpdateView(request.POST)
+        barcode_place = form.data['place_number']
+        child_detail = Placements.objects.get(barcode=barcode_place)
+        detail = Cartridges.objects.filter(placeName=child_detail)
+        #
+        if detail.exists():
+            print("Ok")
+        else:
+            print("Такого номера нет в базе")
 
     data = {
         'form': form,
         'message': message,
         'carts': carts,
-        'display': display
+        'display_msg': display_msg,
+        'display': display,
+        'cart': cart
     }
     return render(request, 'cartridge/massive_change_room.html', data)
+
+
+
 
 @csrf_protect
 @ensure_csrf_cookie
@@ -92,7 +101,7 @@ def add_items(request):
     err_display = 'none'
     if request.POST:
         form = CartridgesForm(request.POST)
-        if form. is_valid():
+        if form.is_valid():
             form.save()
             barcode_text = form['barcode'].data
             cart_name = form.instance.cartName
@@ -207,7 +216,3 @@ def add_manufacture(request):
         'name': name
     }
     return render(request, 'cartridge/add_manufacture.html', data)
-
-
-def add_cartridge_from_barcode_scanner(request):
-    return render(request, 'cartridge/add_cartridge_from_barcode_scanner.html')

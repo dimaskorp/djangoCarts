@@ -1,5 +1,5 @@
 div.input_row input.manual_number {
-    width: calc(100% - 45px);
+    width: calc(100% - 39px);
 }
 
 div.input_row  a.add-session-move-barcode {
@@ -18,7 +18,7 @@ span.ballon {
 
 @media only screen and (max-width: 500px) {
     div.input_row input.manual_number {
-        width: 210px;
+        width: 208px;
     }
 
     div.input_row  a.add-session-move-barcode {

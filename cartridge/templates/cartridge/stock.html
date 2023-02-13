@@ -16,7 +16,7 @@
             <div class="small-12 large-12 columns">
                 <a class="button success" href="{% url 'add_items' %}">Добавить картридж</a>
                 <a class="tr_for_use button no_follow" href="#">Передать в пользование</a>
-                <a class="button" href="#">&nbsp;&nbsp;&nbsp;Передать на ремонт&nbsp;&nbsp;&nbsp;</a>
+                <a class="button" href="#">Передать на ремонт</a>
                 <a class="button alert no_follow" href="#">На списание</a>
                 <a class="export_to_xlsx button no_follow" href="#">Экспорт в XLSX
                     <img class="export_spinner_xlsx" src="static/img/loader.gif">
@@ -30,7 +30,7 @@
                     <!-- TODO (c0bra): add "scoped" attr here, eventually? -->
                     <style class="ng-binding">
                         .grid1675145443724 {
-                            height: calc(107px + ({{ count }}* 33px));
+                            height: calc(107px + ({{ cartridge_list_view.count }}* 33px));
                         }
 
                         .grid1675145443724 .ui-grid-row, .grid1675145443724 .ui-grid-cell, .grid1675145443724 .ui-grid-cell {
@@ -227,9 +227,9 @@
                         <div role="rowgroup" class="ui-grid-viewport ng-isolate-scope" style="overflow: hidden;">
                             <!-- tbody -->
                             <div class="ui-grid-canvas">
-                                {% if cart %}
+                                {% if cartridge_list_view %}
                                     <!-- ngRepeat: (rowRenderIndex, row) in rowContainer.renderedRows track by $index -->
-                                    {% for el in cart %}
+                                    {% for el in cartridge_list_view %}
                                         <div class="ui-grid-row">
                                             <div class="ng-isolate-scope">
                                                 <!-- ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
@@ -312,7 +312,7 @@
                         </div>
                         <div class="ui-grid-pager-count-container">
                             <div class="ui-grid-pager-count">
-                                <span class="ng-binding" style="">1<abbr title="по"> - </abbr>{{ count }} из {{ count }} строк</span>
+                                <span class="ng-binding" style="">1<abbr title="по"> - </abbr>{{ cartridge_list_view.count }} из {{ cartridge_list_view.count }} строк</span>
                             </div>
                         </div>
                     </div>
