@@ -1,0 +1,96 @@
+{% extends 'cartridge/base.html' %}
+
+{% block title %}Редпктирование картриджа {{ manual_update.cartName }}{% endblock %}
+
+{% block submenu %}Картриджи / Заправленные / Редактирование{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="large-4 columns" style="display: {{ display }}">
+            <ul class="success_msg" style="display: {{ msg_display }}">
+                <li class="success">Штрихкод "{{ barcode_text }}" успешно присвоен картриджу {{ cart_name }}.</li>
+            </ul>
+            <ul class="error_msg" style="display: {{ err_display }}">
+                <li class="success">{{ error }}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="marginTop"></div>
+    <div ng-controller="MainCtrl" class="ng-scope">
+        <div class="row">
+            <div class="large-5 columns">
+                <form action="" method="post" class="ng-dirty ng-valid-parse ng-valid ng-valid-required">
+                    {% csrf_token %}
+                    <div class="marginTop">
+                        <label class="required">Штрихкод</label>
+                        {{ manual_update.barcode }}
+
+                        <div class="form_error_text cart_number_error">Обязательное поле</div>
+                        <div class="marginTop">&nbsp;</div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label class="required" for="id_cartName">Название картриджа</label>
+                            <div class="input_row">
+                                {{ manual_update.cartName }}
+
+                                <a class="dj_button" href="{% url 'add_name' %}" title="Добавить название картриджа"></a>
+                            </div>
+                            <div class="form_error_text cart_name_error">Обязательное поле</div>
+                        </div>
+                    </div>
+                    <div class="marginTop"></div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label class="required">Производитель</label>
+                            <div class="input_row">
+                                {{ manual_update.manufacturerName }}
+                                <a class="dj_button" href="{% url 'add_manufacture' %}" title="Добавить нового производителя"></a>
+                            </div>
+                            <div class="form_error_text cart_sklad_error">Поле должно быть выбрано</div>
+                        </div>
+                    </div>
+                    <div class="marginTop"></div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label class="required">Помещение</label>
+                            <div class="input_row">
+
+                                {{ manual_update.placeName }}
+                                <a class="dj_button" href="{% url 'tree_list' %}" title="Добавить название помещения"></a>
+                            </div>
+                            <div class="form_error_text cart_sklad_error">Поле должно быть выбрано</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="marginTop wrapper-manual-datetime" style="display: block;">
+                            <div class="large-6 columns">
+                                <label for="id_date" class="required">Дата добавления</label>
+                                <div class="calendar">
+                                    <input type="text" name="date" value="{{ manual_update.date }}" id="datetimepicker4" required="" style="background: none;background-color: white;">
+                                    <script>
+                                        jQuery.datetimepicker.setLocale('ru');
+                                        jQuery('#datetimepicker4').datetimepicker({
+                                            format: 'd.m.Y H:i',
+                                            step: 5,
+                                            validateOnBlur: false,
+                                            defaultDate: new Date()
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="marginTop"></div>
+                    <div class="marginTop">
+                        <a href="{% url 'stock' %}" class="button">Вернуться</a>
+                        <button class="button success" type="submit">Сохранить</button>
+                        <img class="spinner" src="static/img/loader.gif">
+                        <a href="#" data="full" class="generate_pdf button">Сформировать PDF</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
