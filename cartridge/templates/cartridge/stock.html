@@ -238,7 +238,14 @@
                                                 </div>
                                                 <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
                                                 <div class="ui-grid-cell ui-grid-coluiGrid-0008" id="1675232910299-0-uiGrid-0008-cell">
-                                                    <div class="ui-grid-cell-contents">В разработке</div>
+                                                    <div class="ui-grid-cell-contents">
+                                                        <a title="Подробнее" href="{% url 'details_view' el.id %}">
+                                                            <img class="action_ico" src="static/img/events.png">
+                                                        </a>
+                                                        <a title="Подробнее" href="{% url 'edit_update_view' el.id %}">
+                                                            <img class="action_ico" src="static/img/edit.png">
+                                                        </a>
+                                                    </div>
                                                 </div>
                                                 <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
                                                 <div class="ui-grid-cell ui-grid-coluiGrid-0009" id="1675232910299-0-uiGrid-0009-cell">

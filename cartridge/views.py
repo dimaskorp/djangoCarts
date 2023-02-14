@@ -1,11 +1,31 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy, reverse
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from .models import Cartridges, Placements
-from .forms import ManufacturerForm, NameСartridgeForm, PlacementsForm, CartridgesForm, PlaceUpdateView
+from .forms import ManufacturerForm, NameСartridgeForm, PlacementsForm, CartridgesForm, PlaceUpdateForm
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.db.models import Q
+
+
+class AddCreateView(CreateView):
+    form_class = CartridgesForm
+    template_name = 'cartridge/add_items.html'
+    success_url = reverse_lazy('add_items')
+    count = Cartridges.objects.count()
+    name_cart = Cartridges.objects.order_by('-date')
+
+    def form_valid(self, form):
+        super(AddCreateView, self).form_valid(form)
+        return render(self.request, self.template_name, self.get_context_data(form=form))
+
+    def get_context_data(self, **kwargs):
+        rez = super(AddCreateView, self).get_context_data(**kwargs)
+        rez['col'] = self.count
+        rez['carts'] = self.name_cart
+        return rez
 
 
 class CartListView(ListView):
@@ -18,6 +38,22 @@ class CartDetailView(DetailView):
     model = Cartridges
     template_name = 'cartridge/details_view.html'
     context_object_name = 'cartridge_details_view'
+
+
+class ScanerUpdateView(UpdateView):
+    model = Cartridges
+    template_name = 'cartridge/massive_change_room.html'
+    context_object_name = 'scaner_update'
+    form_class = PlaceUpdateForm
+    success_url = reverse_lazy('scaner_update_view')
+
+
+class EditUpdateView(UpdateView):
+    model = Cartridges
+    form_class = CartridgesForm
+    template_name = 'cartridge/edit_cartridge_info.html'
+    context_object_name = 'manual_update'
+
 
 
 def use(request):
@@ -35,10 +71,6 @@ def worked_firms(request):
 def basket(request):
     return render(request, 'cartridge/basket.html')
 
-
-class PlaceUpdateView(UpdateView):
-    model = Cartridges
-    template_name = 'cartridge/massive_change_room.html'
 
 def massive_change_room(request):
     carts = ''
@@ -59,12 +91,12 @@ def massive_change_room(request):
         else:
             display_msg = 'block'
             message = 'Необходимо ввести 13-значный код'
-    form = PlaceUpdateView()
+    form = PlaceUpdateForm()
     cart = CartridgesForm()
     place = Placements.objects.all()
 
     if request.POST:
-        form = PlaceUpdateView(request.POST)
+        form = PlaceUpdateForm(request.POST)
         barcode_place = form.data['place_number']
         child_detail = Placements.objects.get(barcode=barcode_place)
         detail = Cartridges.objects.filter(placeName=child_detail)
@@ -85,50 +117,48 @@ def massive_change_room(request):
     return render(request, 'cartridge/massive_change_room.html', data)
 
 
-
-
-@csrf_protect
-@ensure_csrf_cookie
-def add_items(request):
-    name_cart = Cartridges.objects.order_by('-date')
-    count = Cartridges.objects.count()
-    error = ''
-    display = 'none'
-    barcode_text = ''
-    cart_name = ''
-    manufacturer_name = ''
-    msg_display = 'none'
-    err_display = 'none'
-    if request.POST:
-        form = CartridgesForm(request.POST)
-        if form.is_valid():
-            form.save()
-            barcode_text = form['barcode'].data
-            cart_name = form.instance.cartName
-            manufacturer_name = form.instance.manufacturerName
-            count = Cartridges.objects.count()
-            display = 'block'
-            msg_display = 'block'
-        elif form.errors:
-            error = form.errors
-            display = 'block'
-            err_display = 'block'
-        else:
-            display = 'none'
-    form = CartridgesForm()
-    data = {
-        'form': form,
-        'error': error,
-        'display': display,
-        'msg_display': msg_display,
-        'err_display': err_display,
-        'barcode_text': barcode_text,
-        'cart_name': cart_name,
-        'manufacturer_name': manufacturer_name,
-        'name_cart': name_cart,
-        'count': count
-    }
-    return render(request, 'cartridge/add_items.html', data)
+# @csrf_protect
+# @ensure_csrf_cookie
+# def add_items(request):
+#     name_cart = Cartridges.objects.order_by('-date')
+#     count = Cartridges.objects.count()
+#     error = ''
+#     display = 'none'
+#     barcode_text = ''
+#     cart_name = ''
+#     manufacturer_name = ''
+#     msg_display = 'none'
+#     err_display = 'none'
+#     if request.POST:
+#         form = CartridgesForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             barcode_text = form['barcode'].data
+#             cart_name = form.instance.cartName
+#             manufacturer_name = form.instance.manufacturerName
+#             count = Cartridges.objects.count()
+#             display = 'block'
+#             msg_display = 'block'
+#         elif form.errors:
+#             error = form.errors
+#             display = 'block'
+#             err_display = 'block'
+#         else:
+#             display = 'none'
+#     form = CartridgesForm()
+#     data = {
+#         'form': form,
+#         'error': error,
+#         'display': display,
+#         'msg_display': msg_display,
+#         'err_display': err_display,
+#         'barcode_text': barcode_text,
+#         'cart_name': cart_name,
+#         'manufacturer_name': manufacturer_name,
+#         'name_cart': name_cart,
+#         'count': count
+#     }
+#     return render(request, 'cartridge/add_items.html', data)
 
 
 @csrf_protect

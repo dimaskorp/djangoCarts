@@ -1,6 +1,5 @@
 from .models import Cartridges, Manufacturer, NameСartridge, Placements
 from django.forms import ModelForm, TextInput, Textarea, Select, NumberInput, DateTimeInput
-from django.views.generic.edit import UpdateView
 
 
 class ManufacturerForm(ModelForm):  # форма Производитель
@@ -75,15 +74,15 @@ class CartridgesForm(ModelForm):  # Картриджи
         }
 
 
-class PlaceUpdateView(ModelForm):  # Картриджи
+class PlaceUpdateForm(ModelForm):  # Картриджи
     class Meta:
         model = Cartridges
         fields = ['placeName']
         widgets = {
-            'placeName': NumberInput(attrs={
-                'id': 'id_placeNumber',
+             'placeName': Select(attrs={
+                'id': 'id_place',
                 'required': "True",
-                'class': 'place_number',
+                'class': 'select-selection--single',
                 'style': "width: calc(100% - 38px);"
             })
         }

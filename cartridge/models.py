@@ -40,7 +40,7 @@ class NameСartridge(models.Model):  # Названия картриджей
 
 
 class Cartridges(models.Model):  # Картриджи
-    barcode = models.IntegerField('Штрихкод', primary_key=True, unique=True, db_index=True)
+    barcode = models.IntegerField('Штрихкод', unique=True, db_index=True)
     cartName = models.ForeignKey('NameСartridge', default=None, on_delete=models.PROTECT)
     placeName = models.ForeignKey('Placements', on_delete=models.PROTECT)
     manufacturerName = models.ForeignKey('Manufacturer', default=None, on_delete=models.PROTECT)
