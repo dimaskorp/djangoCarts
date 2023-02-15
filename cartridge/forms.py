@@ -47,7 +47,7 @@ class CartridgesForm(ModelForm):  # Картриджи
         widgets = {
             'barcode': NumberInput(attrs={
                 'id': "id_manualNumber",
-                'style': "width: calc(100% - 38px);"
+                'style': "width: calc(100% - 38px);",
             }),
             'cartName': Select(attrs={
                 'id': "id_cartName",
@@ -79,10 +79,9 @@ class PlaceUpdateForm(ModelForm):  # Картриджи
         model = Cartridges
         fields = ['placeName']
         widgets = {
-             'placeName': Select(attrs={
+             'placeName': NumberInput(attrs={
                 'id': 'id_place',
                 'required': "True",
-                'class': 'select-selection--single',
                 'style': "width: calc(100% - 38px);"
             })
         }

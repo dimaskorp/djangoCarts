@@ -14,38 +14,28 @@
     </div>
     <div class="row">
         <div class="large-5 columns">
-            <form method="get">
+            <form action="{% url 'massive_change_room' %}" method="get">
                 <div class="row">
                     <div class="large-12 columns">
                         <label class="required" for="id_barcodeNumber">Отсканированный штрихкод</label>
                         <div class="input_row">
-                            {{ scaner_update.barcode }}
-{#                            <input type="search" name="search" id="id_barcodeNumber" class="manual_number" autofocus="autofocus" required>#}
-{#                            <script>#}
-{#                                function lengthBarcode() {#}
-{#                                    var col = document.getElementById("id_number").innerText;#}
-{#                                    if (col)#}
-{#                                        document.getElementById('id_placeNumber').disabled = false;#}
-{#                                    else#}
-{#                                        document.getElementById('id_placeNumber').disabled = true;#}
-{#                                    document.getElementById('id_placeNumber').focus();#}
-{#                                    return true;#}
-{#                                }#}
-{#                            </script>#}
-                            <button class="search-zoom" type="submit" onclick="return lengthBarcode()"></button>
+                            {#                            {{ cart.barcode }}#}
+                            <input type="search" name="search" id="id_barcodeNumber" class="manual_number">
+
+                            <button class="search-zoom" type="submit"></button>
                         </div>
                     </div>
                 </div>
             </form>
-            <form method="post">
+            <form action="{% url 'massive_change_room' %}" method="post">
                 {% csrf_token %}
                 <div class="marginTop"></div>
                 <div class="row">
                     <div class="large-12 columns">
                         <label>Помещение</label>
-                        {{ scaner_update.placeName }}
+                        {#                        {{ form.placeName }}#}
 
-{#                        <input name="place_number" id="id_pleace_barcode" class="manual_number">#}
+                        <input type="search" name="search_2"  id="id_pleace" class="manual_number">
                         <a class="dj_button" href="{% url 'tree_list' %}" title="Добавить название помещения"></a>
 
                         <div class="form_error_text cart_sklad_error">Поле должно быть выбрано</div>
@@ -64,7 +54,7 @@
         </div>
         <div class="large-5 columns" style="display: {{ display }}">
             <div class="marginTop wrapper_add_scanner_items">
-                <button class="button" type="submit" onclick="location.href='{% url 'scaner_update_view' scaner_update.id %}'">Очистить</button>
+                <button class="button" type="submit">Очистить</button>
                 <img class="session_spinner" src="static/img/loader.gif">
             </div>
             <div class="marginTop"></div>
@@ -81,4 +71,13 @@
         </div>
         <div class="large-2 columns"></div>
     </div>
+    <script>
+        window.onload = function () {
+            var col = document.getElementById("id_number").innerText;
+            if (col)
+                document.getElementById("id_place").onfocus;
+            else
+                document.getElementById("id_barcodeNumber").onfocus;
+        }
+    </script>
 {% endblock %}

@@ -82,28 +82,6 @@ let getUrlParameter = function getUrlParameter(sParam) {
 };
 
 
-window.addEventListener('error', (event) => {
-  $.ajax({
-    method: 'POST',
-    url: url_data['service:js_errors'],
-    data: {
-      'msg': event.message,
-      'colno': event.colno,
-      'filename': event.filename,
-      'page': window.location.href,
-    },
-    beforeSend: function (xhr, settings) {
-      let csrftoken = getCookie('csrftoken');
-      if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-        xhr.setRequestHeader('X-CSRFToken', csrftoken);
-      }
-    },
-    success: function (msg) {},
-    error: function () {},
-  });
-
-});
-
 
 $(function () {
 

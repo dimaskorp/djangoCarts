@@ -30,7 +30,7 @@
                     <!-- TODO (c0bra): add "scoped" attr here, eventually? -->
                     <style class="ng-binding">
                         .grid1675145443724 {
-                            height: calc(107px + ({{ cartridge_list_view.count }}* 33px));
+                            height: calc(107px + ({{ cartridge_list_view.count }} * 33px));
                         }
 
                         .grid1675145443724 .ui-grid-row, .grid1675145443724 .ui-grid-cell, .grid1675145443724 .ui-grid-cell {
@@ -238,13 +238,19 @@
                                                 </div>
                                                 <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
                                                 <div class="ui-grid-cell ui-grid-coluiGrid-0008" id="1675232910299-0-uiGrid-0008-cell">
-                                                    <div class="ui-grid-cell-contents">
+                                                    <div class="ui-grid-cell-contents" style="display: flex;">
                                                         <a title="Подробнее" href="{% url 'details_view' el.id %}">
                                                             <img class="action_ico" src="static/img/events.png">
                                                         </a>
-                                                        <a title="Подробнее" href="{% url 'edit_update_view' el.id %}">
+                                                        <a title="Редактирование" href="{% url 'edit_update_view' el.id %}">
                                                             <img class="action_ico" src="static/img/edit.png">
                                                         </a>
+                                                        <form action="{% url 'delete_view' el.id %}" method="post" style="width: 23px; height: 23px; padding-left: 5px;">
+                                                            {% csrf_token %}
+                                                            <button class="button" title="Удаление"
+                                                                    onclick="return confirm('Вы уверены что хотите удалить картридж {{ el.manufacturerName }} {{ el.cartName }}?');">
+                                                            </button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                                 <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->

@@ -23,7 +23,7 @@
                     {% csrf_token %}
                     <div class="marginTop">
                         <label class="required">Штрихкод</label>
-                        {{ manual_update.barcode }}
+                        {{ form.barcode }}
 
                         <div class="form_error_text cart_number_error">Обязательное поле</div>
                         <div class="marginTop">&nbsp;</div>
@@ -32,7 +32,7 @@
                         <div class="large-12 columns">
                             <label class="required" for="id_cartName">Название картриджа</label>
                             <div class="input_row">
-                                {{ manual_update.cartName }}
+                                {{ form.cartName }}
 
                                 <a class="dj_button" href="{% url 'add_name' %}" title="Добавить название картриджа"></a>
                             </div>
@@ -44,7 +44,7 @@
                         <div class="large-12 columns">
                             <label class="required">Производитель</label>
                             <div class="input_row">
-                                {{ manual_update.manufacturerName }}
+                                {{ form.manufacturerName }}
                                 <a class="dj_button" href="{% url 'add_manufacture' %}" title="Добавить нового производителя"></a>
                             </div>
                             <div class="form_error_text cart_sklad_error">Поле должно быть выбрано</div>
@@ -56,7 +56,7 @@
                             <label class="required">Помещение</label>
                             <div class="input_row">
 
-                                {{ manual_update.placeName }}
+                                {{ form.placeName }}
                                 <a class="dj_button" href="{% url 'tree_list' %}" title="Добавить название помещения"></a>
                             </div>
                             <div class="form_error_text cart_sklad_error">Поле должно быть выбрано</div>
@@ -67,7 +67,7 @@
                             <div class="large-6 columns">
                                 <label for="id_date" class="required">Дата добавления</label>
                                 <div class="calendar">
-                                    <input type="text" name="date" value="{{ manual_update.date }}" id="datetimepicker4" required="" style="background: none;background-color: white;">
+                                    {{ form.date }}
                                     <script>
                                         jQuery.datetimepicker.setLocale('ru');
                                         jQuery('#datetimepicker4').datetimepicker({
