@@ -18,6 +18,7 @@ class Placements(models.Model):  # Помещения
     barcode = models.IntegerField('Штрихкод', unique=True, db_index=True)
     name = models.CharField("Помещение", max_length=50, unique=True, db_index=True)
     branch = models.CharField("Корпус", max_length=50, blank=True, null=True)
+    choice = models.BooleanField("Выбрать", default=False)
 
     class Meta:
         verbose_name = 'Помещение'
@@ -45,6 +46,7 @@ class Cartridges(models.Model):  # Картриджи
     placeName = models.ForeignKey('Placements', on_delete=models.PROTECT)
     manufacturerName = models.ForeignKey('Manufacturer', default=None, on_delete=models.PROTECT)
     date = models.DateTimeField("Дата изменения", default=datetime.datetime.now().strftime("%d.%m.%Y %H:%M"))
+    choice = models.BooleanField("Выбрать", default=False)
 
     def __str__(self):
         return str(self.barcode) + " | " + str(self.cartName)

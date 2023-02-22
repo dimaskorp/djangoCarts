@@ -1,4 +1,5 @@
 {% extends 'cartridge/base.html' %}
+{% load widget_tweaks %}
 
 {% block title %}Смена местоположения картриджей с помощью сканера штрих-кодов{% endblock %}
 
@@ -6,10 +7,9 @@
 
 {% block content %}
     <div class="row">
-        <div class="large-4 columns" style="display: {{ display_msg }}">
-            <ul class="error_msg" style="display: {{ display_msg }}">
-                <li class="success">{{ message }}</li>
-            </ul>
+        <div class="large-4 columns">
+            <div class="error_msg" style="display: {{ display_error_msg }}">{{ message }}</div>
+            <div class="success_msg" style="display: {{ display_success_msg }}">{{ message }}</div>
         </div>
     </div>
     <div class="row">
@@ -19,65 +19,186 @@
                     <div class="large-12 columns">
                         <label class="required" for="id_barcodeNumber">Отсканированный штрихкод</label>
                         <div class="input_row">
-                            {#                            {{ cart.barcode }}#}
-                            <input type="search" name="search" id="id_barcodeNumber" class="manual_number">
+
+                            <input type="search" name="search" id="id_barcodeNumber" class="manual_number" {{ autofocus }}>
 
                             <button class="search-zoom" type="submit"></button>
                         </div>
                     </div>
                 </div>
             </form>
-            <form action="{% url 'massive_change_room' %}" method="post">
+
+
+            <form action="{% url 'massive_change_room' %}" method="post" style="display: {{ display_form }}">
                 {% csrf_token %}
                 <div class="marginTop"></div>
                 <div class="row">
                     <div class="large-12 columns">
                         <label>Помещение</label>
-                        {#                        {{ form.placeName }}#}
+                        {{ place.barcode|attr:"autofocus" }}
 
-                        <input type="search" name="search_2"  id="id_pleace" class="manual_number">
                         <a class="dj_button" href="{% url 'tree_list' %}" title="Добавить название помещения"></a>
 
-                        <div class="form_error_text cart_sklad_error">Поле должно быть выбрано</div>
                     </div>
                 </div>
-
                 <div class="marginTop55"></div>
                 <div class="row">
                     <div class="large-12 columns">
-                        <a class="button no_follow set_focus small-focus">Сфокусировать</a>
                         <button class="button small-move" type="submit">Передать</button>
-                        <img class="spinner" src="static/img/loader.gif">
                     </div>
                 </div>
             </form>
-        </div>
-        <div class="large-5 columns" style="display: {{ display }}">
-            <div class="marginTop wrapper_add_scanner_items">
-                <button class="button" type="submit">Очистить</button>
-                <img class="session_spinner" src="static/img/loader.gif">
-            </div>
-            <div class="marginTop"></div>
-            <div class="session-wrapper" id="box">
-                <div class="p_checkboxes">
-                    {% for cart in carts %}
-                        <p id="id_number">{{ cart.barcode }}</p>
-                        <p>{{ cart.cartName }}</p>
-                        <p>{{ cart.placeName }}</p>
-                    {% endfor %}
-                    <hr/>
-                </div>
-            </div>
+            {% if carts %}
+                <form action="{% url 'massive_change_room' %}" method="get">
+                    <button class="button" type="submit">Очистить</button>
+                </form>
+
+            {% endif %}
         </div>
         <div class="large-2 columns"></div>
     </div>
-    <script>
-        window.onload = function () {
-            var col = document.getElementById("id_number").innerText;
-            if (col)
-                document.getElementById("id_place").onfocus;
-            else
-                document.getElementById("id_barcodeNumber").onfocus;
-        }
-    </script>
+    <div class="marginTop">
+        <div class="large-10 columns" style="width: 82%">
+            <div class="ui-grid grid1675145443724">
+                <!-- TODO (c0bra): add "scoped" attr here, eventually? -->
+                <style class="ng-binding">
+
+
+                    .grid1675145443724 .ui-grid-row, .grid1675145443724 .ui-grid-cell, .grid1675145443724 .ui-grid-cell {
+                        height: 33px;
+                    }
+
+                    .grid1675145443724 .ui-grid-row:last-child .ui-grid-cell {
+                        border-bottom-width: 1px;
+                    }
+
+                    .grid1675145443724 .ui-grid-coluiGrid-0007 {
+                        min-width: 150px;
+                        max-width: 150px;
+                    }
+
+                    .grid1675145443724 .ui-grid-coluiGrid-0009 {
+                        min-width: 160px;
+                        max-width: 160px;
+                    }
+
+                    .grid1675145443724 .ui-grid-coluiGrid-000A {
+                        min-width: 160px;
+                        max-width: 160px;
+                    }
+
+                    .grid1675145443724 .ui-grid-coluiGrid-000C {
+                        min-width: 150px;
+                        max-width: 150px;
+                    }
+
+                    .grid1675145443724 .ui-grid-coluiGrid-000D {
+                        min-width: 200px;
+                        max-width: 200px;
+                    }
+
+                    .grid1675145443724 .ui-grid-coluiGrid-000E {
+                        min-width: 200px;
+                        max-width: 200px;
+                    }
+
+                    .grid1675145443724 .ui-grid-coluiGrid-000G {
+                        min-width: 140px;
+                        max-width: 140px;
+                    }
+
+                </style>
+
+                <!-- All of these dom elements are replaced in place -->
+                <div role="rowgroup" class="ui-grid-header">
+                    <!-- theader -->
+
+                    <div class="ui-grid-header-viewport">
+                        <div class="ui-grid-header-cell-wrapper">
+                            <div class="ui-grid-header-cell-row">
+                                <!-- ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                <div class="ui-grid-header-cell ui-grid-coluiGrid-0007">
+                                    <span class="ui-grid-header-cell-label">Штрихкод</span>
+                                </div>
+                                <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                <div class="ui-grid-header-cell ui-grid-coluiGrid-0009">
+                                    <span class="ui-grid-header-cell-label">Производитель</span>
+                                </div>
+                                <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                <div class="ui-grid-header-cell ui-grid-coluiGrid-000A">
+                                    <span class="ui-grid-header-cell-label">Название</span>
+                                    <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                </div>
+                                <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                <div class="ui-grid-header-cell ui-grid-coluiGrid-000C">
+                                    <span class="ui-grid-header-cell-label">Перезаправки</span>
+                                    <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                </div>
+                                <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                <div class="ui-grid-header-cell  ui-grid-coluiGrid-000D">
+                                    <span class="ui-grid-header-cell-label">Филиал</span>
+                                    <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                </div>
+                                <div class="ui-grid-header-cell ui-grid-coluiGrid-000E">
+                                    <span class="ui-grid-header-cell-label">Помещение</span>
+                                    <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                </div>
+                                <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                <div class="ui-grid-header-cell ui-grid-coluiGrid-000G">
+                                    <span class="ui-grid-header-cell-label">Дата изменения</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div role="rowgroup" class="ui-grid-viewport ng-isolate-scope" style="overflow: hidden;">
+                    <!-- tbody -->
+                    <div class="ui-grid-canvas">
+                        {% if carts %}
+                            <!-- ngRepeat: (rowRenderIndex, row) in rowContainer.renderedRows track by $index -->
+                            {% for el in carts %}
+                                <div class="ui-grid-row">
+                                    <div class="ng-isolate-scope">
+                                        <!-- ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                        <div class="ui-grid-cell ui-grid-coluiGrid-0007" id="1675232910299-0-uiGrid-0007-cell">
+                                            <div class="ui-grid-cell-contents">{{ el.barcode }}</div>
+                                        </div>
+                                        <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                        <div class="ui-grid-cell ui-grid-coluiGrid-0009" id="1675232910299-0-uiGrid-0009-cell">
+                                            <div class="ui-grid-cell-contents">{{ el.manufacturerName }}</div>
+                                        </div>
+                                        <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                        <div class="ui-grid-cell ui-grid-coluiGrid-000A" id="1675232910299-0-uiGrid-000A-cell">
+                                            <div class="ui-grid-cell-contents">{{ el.cartName }}</div>
+                                        </div>
+                                        <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                        <div class="ui-grid-cell ui-grid-coluiGrid-000C" id="1675232910299-0-uiGrid-000C-cell">
+                                            <div class="ui-grid-cell-contents">!!!!!</div>
+                                        </div>
+                                        <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                        <div class="ui-grid-cell ui-grid-coluiGrid-000D" id="1675232910299-0-uiGrid-000D-cell">
+                                            <div class="ui-grid-cell-contents" title="">!!!!!</div>
+                                        </div>
+                                        <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                        <div class="ui-grid-cell ui-grid-coluiGrid-000E" id="1675232910299-0-uiGrid-000E-cell">
+                                            <div class="ui-grid-header-cell-label" title="" style="text-transform: uppercase"><b>{{ el.placeName }}</b>
+                                            </div>
+                                        </div>
+                                        <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                        <div class="ui-grid-cell ui-grid-coluiGrid-000G" id="1675232910299-0-uiGrid-000G-cell">
+                                            <div class="ui-grid-cell-contents">{{ el.date|date:'d.m.Y H:i' }}</div>
+                                        </div>
+                                        <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                    </div>
+                                </div>
+                                <!-- end ngRepeat: (rowRenderIndex, row) in rowContainer.renderedRows track by $index -->
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -2,11 +2,10 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from .models import Cartridges, Placements
-from .forms import ManufacturerForm, NameСartridgeForm, PlacementsForm, CartridgesForm, PlaceUpdateForm
+from .forms import ManufacturerForm, NameСartridgeForm, PlacementsForm, CartridgesForm
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.db.models import Q
 
 
 class AddCreateView(CreateView):
@@ -32,17 +31,27 @@ class CartListView(ListView):
     template_name = 'cartridge/stock.html'
     context_object_name = 'cartridge_list_view'
 
+    # def get_context_data(self, **kwargs):
+    #     rez = super(CartListView, self).get_context_data(**kwargs)
+    #     model = Placements
+    #     rez['place'] = model.objects.all()
+    #     return rez
+
+
+
 
 class CartDetailView(DetailView):
     model = Cartridges
     template_name = 'cartridge/details_view.html'
     context_object_name = 'cartridge_details_view'
+    success_url = reverse_lazy('add_items')
 
 
 class EditUpdateView(UpdateView):
     model = Cartridges
     form_class = CartridgesForm
     template_name = 'cartridge/edit_cartridge_info.html'
+    success_url = reverse_lazy('stock')
 
 
 class CartDeleteView(DeleteView):
@@ -51,49 +60,116 @@ class CartDeleteView(DeleteView):
     success_url = reverse_lazy('stock')
 
 
+numbers = []
+
+
 def massive_change_room(request):
     carts = ''
     message = ''
+    display_error_msg = 'none'
+    display_success_msg = 'none'
     display = 'none'
-    display_msg = 'none'
+    autofocus = 'autofocus'
+    display_form = 'none'
+
     if request.GET:
         search_post = request.GET.get('search')
         if len(search_post) > 13:
-            display_msg = 'block'
-            message = 'Необходимо ввести 13-значный код'
+            display_error_msg = 'block'
+            message = 'Максимальная длина номера 13 символов'
+            autofocus = 'autofocus'
         elif len(search_post) == 0:
-            display_msg = 'none'
+            display_error_msg = 'none'
+            autofocus = 'autofocus'
         else:
-            carts = Cartridges.objects.filter(Q(barcode__icontains=search_post))
-            if not carts:
-                display_msg = 'block'
-                message = 'Такого номера нет в базе'
+            carts = Cartridges.objects.filter(barcode=search_post)
+            if carts:
+                display_form = 'block'
+                numbers.append(search_post)
+                autofocus = ''
             else:
-                display = 'block'
-    form = PlaceUpdateForm()
+                display_error_msg = 'block'
+                message = 'Такого номера нет в базе'
+                autofocus = 'autofocus'
+
     cart = CartridgesForm()
-    place = Placements.objects.all()
+    place = PlacementsForm()
 
     if request.POST:
-        form = PlaceUpdateForm(request.POST)
-        barcode_place = form.data['place_number']
-        child_detail = Placements.objects.get(barcode=barcode_place)
-        detail = Cartridges.objects.filter(placeName=child_detail)
-        #
-        if detail.exists():
-            print("Ok")
+
+        place = PlacementsForm(request.POST)
+        barcode_place = place.data['barcode']
+
+        if len(barcode_place) > 13:
+            display_error_msg = 'block'
+            message = 'Максимальная длина номера 13 символов'
+        elif len(barcode_place) == 0:
+            display_error_msg = 'none'
         else:
-            print("Такого номера нет в базе")
+            places = Placements.objects.filter(barcode=barcode_place)
+            if places:  # если номер есть в базе
+                place_id = [i.pk for i in places][0]  # получаем id помещения
+                if numbers:  # если картридж отсканирован
+                    Cartridges.objects.filter(barcode=numbers[0]).update(placeName=place_id)  # получаем id картриджа
+                    display_success_msg = 'block'
+                    message = 'Картридж передан'
+                    carts = Cartridges.objects.filter(barcode=numbers[0])
+                    numbers.clear()
+                    place = PlacementsForm(None)
+                    autofocus = 'autofocus'
+                    display_form = 'none'
+                else:
+                    display_error_msg = 'block'
+                    message = 'Не выбран картридж'
+                    place = PlacementsForm(None)
+                    autofocus = 'autofocus'
+                    display_form = 'none'
+            else:
+                if numbers:
+                    carts = Cartridges.objects.filter(barcode=numbers[0])
+                    display_error_msg = 'block'
+                    message = 'Такого помещения нет в базе'
+                    place = PlacementsForm(None)
+                    autofocus = ''
+                    display_form = 'block'
 
     data = {
-        'form': form,
         'message': message,
         'carts': carts,
-        'display_msg': display_msg,
         'display': display,
-        'cart': cart
+        'display_error_msg': display_error_msg,
+        'display_success_msg': display_success_msg,
+        'cart': cart,
+        'place': place,
+        'page': massive_change_room,
+        'autofocus': autofocus,
+        'display_form': display_form
+
     }
     return render(request, 'cartridge/massive_change_room.html', data)
+
+
+def transfer(request):
+    checks = ''
+    nam = ''
+    manuf = ''
+    carts = CartridgesForm()
+    if request.POST:
+        checks = request.POST.getlist('checks')
+        for i in checks:
+            cart = Cartridges.objects.filter(barcode=i)
+
+            print(cart)
+
+
+    data = {
+        'carts': carts,
+        'checks': checks,
+        'nam': nam,
+        'manuf': manuf
+
+    }
+    return render(request, 'cartridge/transfer_for_use.html', data)
 
 
 def use(request):

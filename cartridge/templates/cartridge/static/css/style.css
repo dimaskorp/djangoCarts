@@ -349,11 +349,6 @@ ul.menu > li {
     list-style: none;
     line-height: 30px;
     padding: 0 0 0 18px;
-    transition: transform .6s ease;
-
-}
-ul.menu > li:hover{
-    transform: scale(1.05);
 }
 
 ul.menu li span {
@@ -377,7 +372,7 @@ ul.menu li span, ul.menu ul li span {
 }
 
 ul.menu li a:hover, ul.menu li a:focus {
-    color: #2795b6;
+    color: #01bda0;
 }
 
 ul.menu ul {
@@ -637,7 +632,16 @@ form select {
 
 /*  -----buttons style---- */
 
-.dj_button{
+.button_action {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: url('../img/delete.png') no-repeat center center;
+    border: none;
+    margin-left: 5px;
+}
+
+.dj_button {
     display: inline-block;
     width: 33px;
     height: 33px;
@@ -655,172 +659,6 @@ form select {
     border: 1px solid #a8a8a8;
     border-radius: 4px;
     float: right;
-}
-
-a.button.small-append {
-    background: url('../img/button/small-add.png') no-repeat 3px 50%;
-    padding-left: 22px;
-}
-
-a.button.small-append:active, a.button.small-append:focus {
-    background: #d1d1d1 url('../img/button/small-add.png') no-repeat 3px 50%;
-    padding-left: 22px;
-    color: #FFF;
-}
-
-a.button.small-edit {
-    background: url('../img/button/small-edit.png') no-repeat 3px 50%;
-    padding-left: 22px;
-}
-
-a.button.small-edit:active, a.button.small-edit:focus {
-    background: #d1d1d1 url('../img/button/small-edit.png') no-repeat 3px 50%;
-    padding-left: 22px;
-    color: #FFF;
-}
-
-a.button.small-del {
-    background: url('../img/button/small-del.png') no-repeat 3px 50%;
-    padding-left: 22px;
-}
-
-a.button.small-del:active, a.button.small-del:focus {
-    background: #d1d1d1 url('../img/button/small-del.png') no-repeat 3px 50%;
-    padding-left: 22px;
-    color: #FFF;
-}
-
-
-a.button.small-add2 {
-    background: url('../img/button/small-add2.png') no-repeat 3px 50%;
-    padding-left: 22px;
-}
-
-a.button.small-add2:active, a.button.small-add2:focus {
-    background: #d1d1d1 url('../img/button/small-add2.png') no-repeat 3px 50%;
-    padding-left: 22px;
-    color: #fff;
-}
-
-a.button.small-cancel {
-    background: url('../img/button/small-cancel.png') no-repeat 3px 50%;
-    padding-left: 22px;
-}
-
-a.button.small-cancel:active, a.button.small-cancel:focus {
-    background: #d1d1d1 url('../img/button/small-cancel.png') no-repeat 3px 50%;
-    padding-left: 22px;
-    color: #fff;
-}
-
-a.button.small-connect {
-    background: url('../img/button/small-connect.png') no-repeat 3px 50%;
-    padding-left: 22px;
-}
-
-a.button.small-connect:active, a.button.small-connect:focus {
-    background: #d1d1d1 url('../img/button/small-connect.png') no-repeat 3px 50%;
-    padding-left: 22px;
-    color: #fff;
-}
-
-a.button.small-save {
-    background: url('../img/button/small-save.png') no-repeat 3px 50%;
-    padding-left: 22px;
-}
-
-a.button.small-save:active, a.button.small-save:focus {
-    background: #d1d1d1 url('../img/button/small-save.png') no-repeat 3px 50%;
-    padding-left: 22px;
-    color: #fff;
-}
-
-a.button.small-add-close {
-    background: url('../img/button/small-add-close.png') no-repeat 3px 50%;
-    padding-left: 38px;
-}
-
-a.button.small-add-close:active, a.button.small-add-close:focus {
-    background: #d1d1d1 url('../img/button/small-add-close.png') no-repeat 3px 50%;
-    padding-left: 38px;
-    color: #FFF;
-}
-
-a.button.small-back {
-    background: url('../img/button/small-back.png') no-repeat 3px 50%;
-    padding-left: 22px;
-}
-
-a.button.small-back:active, a.button.small-back:focus {
-    background: #d1d1d1 url('../img/button/small-back.png') no-repeat 3px 50%;
-    padding-left: 22px;
-    color: #FFF;
-}
-
-a.button.small-add-edit {
-    background: url('../img/button/small-add-edit.png') no-repeat 3px 50%;
-    padding-left: 38px;
-}
-
-a.button.small-add-edit:active, a.button.small-add-edit:focus {
-    background: #d1d1d1 url('../img/button/small-add-edit.png') no-repeat 3px 50%;
-    padding-left: 38px;
-    color: #FFF;
-}
-
-a.button.small-settings {
-    background: url('../img/button/small-settings.png') no-repeat 3px 50%;
-    padding-left: 22px;
-}
-
-a.button.small-settings:active, a.button.small-settings:focus {
-    background: #d1d1d1 url('../img/button/small-settings.png') no-repeat 3px 50%;
-    padding-left: 22px;
-    color: #fff;
-}
-
-a.button.small-xml-file {
-    background: url('../img/button/xml-file.png') no-repeat 3px 50%;
-    padding-left: 22px;
-}
-
-a.button.small-xml-file:active, a.button.small-xml-file:focus {
-    background: #d1d1d1 url('../img/button/xml-file.png') no-repeat 3px 50%;
-    padding-left: 22px;
-    color: #fff;
-}
-
-a.button.small-focus {
-    background: url('../img/button/small-focus.png') no-repeat 3px 50%;
-    padding-left: 22px;
-}
-
-a.button.small-focus:active, a.button.small-focus:focus {
-    background: #d1d1d1 url('../img/button/small-focus.png') no-repeat 3px 50%;
-    padding-left: 22px;
-    color: #fff;
-}
-
-a.button.small-move {
-    background: url('../img/button/small-move.png') no-repeat 3px 50%;
-    padding-left: 22px;
-}
-
-a.button.small-move:active, a.button.small-move:focus {
-    background: #d1d1d1 url('../img/button/small-move.png') no-repeat 3px 50%;
-    padding-left: 22px;
-    color: #fff;
-}
-
-a.button.small-delete-row {
-    background: url('../img/button/small-delete-row.png') no-repeat 3px 50%;
-    padding-left: 22px;
-}
-
-a.button.small-delete-row:active, a.button.small-delete-row:focus {
-    background: #d1d1d1 url('../img/button/small-delete-row.png') no-repeat 3px 50%;
-    padding-left: 22px;
-    color: #fff;
 }
 
 
@@ -854,43 +692,6 @@ button.button:focus {
     font-size: 12px;
 }
 
-a.button.big {
-    width: 150px;
-    height: 150px;
-    line-height: 150px;
-    font-size: 26px;
-}
-
-a.button.medium {
-    height: 50px;
-    line-height: 50px;
-    font-size: 20px;
-    margin-bottom: 30px;
-}
-
-
-a.button.block, input[type="submit"].button.block, button.button.block {
-    outline: 0;
-    padding: 0 10px;
-    color: #282828;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-    background-color: #ececec;
-    border: 1px solid #a8a8a8;
-    cursor: pointer;
-    font-weight: normal;
-    text-decoration: none;
-    text-align: center;
-    height: 26px;
-    line-height: 25px;
-    display: inline-block !important;
-    vertical-align: middle;
-    margin: 0 15px 0 0;
-    font-family: arial, sans-serif;
-    font-weight: normal;
-    font-size: 12px;
-}
 
 a.button:hover,
 input[type="submit"].button:hover,
@@ -900,109 +701,10 @@ label.button:hover {
     color: #FFF;
 }
 
-a.button.block:hover, input[type="submit"].button.block:hover {
-    background-color: #ececec;
-    text-decoration: none;
-}
-
 a.button:active, input[type="submit"].button:active {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.2);
     background: #aaa;
     border: 1px solid #a8a8a8;
-}
-
-a.button.block:active, input[type="submit"].button.block:active {
-    background: #ececec;
-    border: 1px solid #a8a8a8;
-}
-
-a.button.disabled,
-input[type="submit"].button.disabled,
-a.button.disabled:hover {
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.2);
-    background: #aaa;
-    border: 1px solid #a8a8a8;
-}
-
-button.success:link,
-.button.success:link,
-input[type="submit"].button.success:link,
-button.success:visited,
-.button.success,
-button.success,
-.button.success:visited,
-input[type="submit"].button.success:visited {
-    background-color: #7BCC9A;
-    border-color: #2D7347;
-    color: #282828;
-}
-
-button.success:hover,
-input[type="submit"].button.success:hover,
-.button.success:hover,
-button.success:focus,
-input[type="submit"].button.success:focus,
-.button.success:focus {
-    background-color: #6bb487;
-    color: #282828;
-}
-
-a.button.alert, input[type="submit"].button.alert {
-    color: #282828;
-    background-color: #ff6464;
-    border: 1px solid #821B09;
-}
-
-input[type="submit"].button.alert.disabled, a.button.alert.disabled {
-    cursor: not-allowed;
-    background-color: #ffb5b5;
-    color: #979797;
-}
-
-a.button.alert:hover, input[type="submit"].button.alert:hover {
-    background-color: #ff8787;
-    text-decoration: none;
-}
-
-a.button.alert:active, input[type="submit"].button.alert:active {
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.2);
-    background: #A7230C;
-    border: 1px solid #821B09;
-}
-
-a.button.info, input[type="submit"].button.info {
-    color: #282828;
-    background-color: #61b6d9;
-    border: 1px solid #1C5771;
-}
-
-a.button.info:hover, input[type="submit"].button.info:hover {
-    background-color: #8FCBE4;
-    text-decoration: none;
-}
-
-a.button.info:active, input[type="submit"].button.info:active {
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.2);
-    background: #277DA3;
-    border: 1px solid #1C5771;
-}
-
-a.button.warning, input[type="submit"].button.warning {
-    color: #282828;
-    background-color: #ffdb3a;
-    border: 1px solid #d9bb31;
-}
-
-a.button.warning:hover, input[type="submit"].button.warning:hover {
-    background-color: #ffd100;
-    text-decoration: none;
-    color: #FFF;
-}
-
-a.button.warning:active, input[type="submit"].button.warning:active {
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.2);
-    background: #e1c133;
-    border: 1px solid #d9bb31;
 }
 
 /* end button */
@@ -1027,56 +729,6 @@ a.export_to_csv, a.export_to_xlsx {
     background: #60C185 url('../img/excel.png') no-repeat right center;
 }
 
-a.margin-zero {
-    margin: 0;
-}
-
-div.export_select_wrapper .select2-container span.select2-selection span {
-    font-size: 12px;
-}
-
-.export_select {
-    width: 275px;
-    display: inline-block;
-}
-
-.download_doc {
-    display: none;
-}
-
-/* ---- login form ------ */
-
-input[type="submit"].button.login {
-    width: 200px !important;
-    color: #282828;
-    font-size: 16px;
-    background-color: #14de0f !important;
-    border: 1px solid #10b80c;
-}
-
-input[type="submit"].button.login:hover {
-    background-color: #0e9d0a !important;
-    text-decoration: none;
-}
-
-input[type="submit"].button.login:active {
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.2);
-    background: #0d950a !important;
-    border: 1px solid #10b80c;
-}
-
-
-/* --- end button style ---*/
-
-/* ---messages--- */
-div.ajax_messages {
-    display: none;
-}
-
-ul.messages {
-    list-style: none;
-    /*    padding:10px; */
-}
 
 ul.messages .success {
     color: #00B700;
@@ -1096,29 +748,7 @@ ul.messages .error {
     padding: 10px;
 }
 
-.change_name_ok, .change_name_error {
-    display: none;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.add_group_ok, .add_group_error, .remove_group_ok, .remove_group_error, .edit_group_error, .edit_group_ok {
-    display: none;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.change_name_ok, .add_group_ok, .remove_group_ok, .edit_group_ok {
-    color: #00B700;
-    border: 2px solid #00B700;
-}
-
-.change_name_error, .add_group_error, .remove_group_error, .edit_group_error {
-    color: #ff0000;
-    border: 2px solid #ff0000;
-}
-
-/* ---endmessages--- */
+/* ---end messages--- */
 
 /* --- bad browser --- */
 .header {
@@ -1428,9 +1058,10 @@ div.calendar {
     height: 32px;
     width: 200px;
 }
-div.calendar input{
+
+div.calendar input {
     background: white url(../img/calendar.png) no-repeat right;
-    padding-left:20px;
+    padding-left: 20px;
 }
 
 input.datepicker {
@@ -1975,7 +1606,8 @@ p.group_item {
     margin: 0;
 
 }
-.p_checkboxes{
+
+.p_checkboxes {
     display: flex;
     justify-content: space-between;
 }
@@ -2239,19 +1871,19 @@ div.ui-grid-pager-panel {
     bottom: -5px;
 }
 
-.ui-grid-contents-wrapper .ui-grid-cell {
+.ui-grid-cell {
     font-size: 14px;
     padding: 0.625em;
 }
 
 
-.ui-grid-contents-wrapper .ui-grid-cell-contents {
+.ui-grid-cell-contents {
     padding: 0;
     display: inline; /* исправляет нижний отсуп у content box mozilla*/
 }
 
 
-.ui-grid-contents-wrapper span.ui-grid-header-cell-label {
+span.ui-grid-header-cell-label {
     padding: 0.625em;
     font-size: 14px;
 }
@@ -2274,12 +1906,11 @@ span.ui-grid-pager-row-count-label {
 form input.autocomplete {
     margin-bottom: 15px;
 }
-.ng-scope{
-    width: 1483px;
-}
 
-.ng-scope-stock{
-    width: 1313px;
+
+
+.ng-scope-stock {
+    width: 1320px;
 }
 
 div.ui-grid-cell div.ng-scope .checkbox {
@@ -2332,88 +1963,11 @@ span.color {
     left: 8px;
 }
 
-span.color.black {
-    background-color: #000;
-}
-
-span.color.cyan {
-    background-color: #00FFFF;
-}
-
-span.color.magenta {
-    background-color: #FF00FF;
-}
-
-span.color.yellow {
-    background-color: #FFFF00;
-}
-
-span.color.none {
-    background: url(../img/none.png) center center no-repeat;
-}
-
-span.color.multicolor {
-    background: url(../img/multicolor.png) center center no-repeat;
-}
-
-span.color.matte_black {
-    background-color: #141414;
-}
-
-span.color.light_black {
-    background-color: #1A1110;
-}
-
-span.color.light_cyan {
-    background-color: #E0FFFF;
-}
-
-span.color.light_magenta {
-    background-color: #FF77FF;
-}
-
-span.color.blue {
-    background-color: #0000FF;
-}
-
-span.color.red {
-    background-color: #FF0000;
-}
-
-span.color.gloss {
-    background: url(../img/none.png) center center no-repeat;
-}
-
-span.color.light_light_black {
-    background-color: #808080;
-}
-
-span.color.fluorescent {
-    background: url(../img/none.png) center center no-repeat;
-}
-
-span.color.green {
-    background-color: #00FF00;
-}
-
-span.color.orange {
-    background-color: #FFA500;
-}
-
-span.color.orange {
-    background-color: #FFA500;
-}
-
-span.color.chromatic_red {
-    background-color: #FF0000;
-}
-
-select.pre-space option, select.pre-space {
-    white-space: pre;
-}
 
 img.action_ico {
     margin-left: 5px;
+    width: 22px;
+    height: 22px;
 }
 
 img.action_svg {
@@ -2689,9 +2243,10 @@ a.generate_button:hover {
     background: #d3d3d3 url(../img/gears.png) center center no-repeat;
 }
 
-a.generate_pdf{
+a.generate_pdf {
     margin-left: 226px;
 }
+
 div.dotted span.ui-grid-header-cell-label {
     border-bottom: 1px dashed #0275b8;
     display: inline-block;

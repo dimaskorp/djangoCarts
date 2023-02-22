@@ -7,13 +7,18 @@ urlpatterns = [
     path('add_items/', AddCreateView.as_view(), name='add_items'),
     path('<int:pk>', CartDetailView.as_view(), name='details_view'),
     path('<int:pk>/update', EditUpdateView.as_view(), name='edit_update_view'),
+    path('transfe_for_use', transfer, name='transfer_for_use'),
     path('<int:pk>/delete', CartDeleteView.as_view(), name='delete_view'),
+
+    # path('<int:pk>/massive_change_room', ScanUpdateView.as_view(), name='massive_change_room'),
 
     path('use/', use, name='use'),
     path('empty/', empty, name='empty'),
     path('worked_firms/', worked_firms, name='worked_firms'),
     path('basket/', basket, name='basket'),
+    # path('massive_change_room/', massive_change_room, name='massive_change_room-get'),
     path('massive_change_room/', massive_change_room, name='massive_change_room'),
+
     path('add_name/', add_name, name='add_name'),
     path('tree_list/', tree_list, name='tree_list'),
     path('add_manufacture/', add_manufacture, name='add_manufacture'),

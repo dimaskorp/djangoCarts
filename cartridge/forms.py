@@ -1,5 +1,5 @@
 from .models import Cartridges, Manufacturer, NameСartridge, Placements
-from django.forms import ModelForm, TextInput, Textarea, Select, NumberInput, DateTimeInput
+from django.forms import ModelForm, TextInput, Textarea, Select, NumberInput, DateTimeInput, CheckboxInput
 
 
 class ManufacturerForm(ModelForm):  # форма Производитель
@@ -25,17 +25,19 @@ class ManufacturerForm(ModelForm):  # форма Производитель
 class PlacementsForm(ModelForm):  # форма Помещения
     class Meta:
         model = Placements
-        fields = ['barcode', 'name', 'branch']
+        fields = ['barcode', 'name', 'branch', 'choice']
         widgets = {
             'name': TextInput(attrs={
                 'required': "True",
             }),
             'branch': TextInput(attrs={
-                'name': 'branch',
             }),
             'barcode': NumberInput(attrs={
-                'name': 'number_barcode',
-                'id': "id_barcode"
+                'id': "id_barcode",
+                'style': "width: calc(100% - 38px);"
+            }),
+            'choice': CheckboxInput(attrs={
+                'class': 'choice_place'
             })
         }
 
@@ -43,7 +45,7 @@ class PlacementsForm(ModelForm):  # форма Помещения
 class CartridgesForm(ModelForm):  # Картриджи
     class Meta:
         model = Cartridges
-        fields = ['barcode', 'cartName', 'placeName', 'manufacturerName', 'date']
+        fields = ['barcode', 'cartName', 'placeName', 'manufacturerName', 'date', 'choice']
         widgets = {
             'barcode': NumberInput(attrs={
                 'id': "id_manualNumber",
@@ -70,19 +72,9 @@ class CartridgesForm(ModelForm):  # Картриджи
             'date': DateTimeInput(attrs={
                 'id': 'datetimepicker4',
                 'required': "True"
-            })
-        }
-
-
-class PlaceUpdateForm(ModelForm):  # Картриджи
-    class Meta:
-        model = Cartridges
-        fields = ['placeName']
-        widgets = {
-             'placeName': NumberInput(attrs={
-                'id': 'id_place',
-                'required': "True",
-                'style': "width: calc(100% - 38px);"
+            }),
+            'choice': CheckboxInput(attrs={
+                 'class': 'choice_cart'
             })
         }
 
