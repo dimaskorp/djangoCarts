@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
     <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
     <link rel="stylesheet" href="{% static 'css/ui-grid.min.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
     <script src="{% static 'js/detect.js' %}"></script>
     <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
     <script src="{% static 'js/jquery.cookie.js' %}"></script>
@@ -19,7 +21,6 @@
     <link rel="stylesheet" href="{% static 'js/datetime/jquery.datetimepicker.css' %}">
     <script src="{% static 'js/datetime/jquery.js' %}"></script>
     <script src="{% static 'js/datetime/jquery.datetimepicker.full.min.js' %}"></script>
-
     <!-- select2 -->
     <script src="{% static 'js/common.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/select2.min.css' %}">
@@ -28,9 +29,6 @@
     <link rel="stylesheet" href="{% static 'css/pm_widget.css' %}">
     <script src="{% static 'js/pm_widget.js' %}"></script>
     <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
-
-    <script src="{% static 'js/angular.js' %}"></script>
-
     <script src="{% static 'js/add_objs.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/cart/change-room-barcode.css' %}">
     <meta class="foundation-mq-small">
@@ -46,7 +44,7 @@
             <img alt="nlogo" src="{% static 'img/nlogo.png' %}"/></a></div>
         <div class="submenu">
             <strong class="user_ou" title="Org">РКИБ
-            </strong>admin<a class="logout_user" href="#">Выход</a>
+            </strong>admin <a class="logout_user" href="#">Выход</a>
         </div>
     </header>
     <!-- .header-->
@@ -87,9 +85,6 @@
                     </form>
                 </div>
                 <ul class="menu">
-                    <li class="home_ico"><a href="/">Сводка</a></li>
-                    <li class="computer_ico"><a href="#">Компьютеры</a></li>
-                    <li class="monitor_ico"><a href="#">Мониторы</a></li>
                     <li class="has-sub printer_ico"><span>Принтеры</span>
                         <ul>
                             <li><a href="#">Резерв</a></li>
@@ -111,58 +106,22 @@
                             <li><a href="{% url 'massive_change_room' %}">Смена помещения сканером ШК</a></li>
                         </ul>
                     </li>
-                    <li class="has-sub fix_ico"><span>Обслуживание</span>
-                        <ul>
-                            <li><a href="#">События</a></li>
-                            <li><a href="#">Почта</a></li>
-                            <li><a href="#">Настройки</a></li>
-                            <li><a href="#">Подключение к MS Active Directory</a></li>
-                            <li><a href="#">Мониторинг</a></li>
-                            <li><a href="#">Системный журнал</a></li>
-                            <li><a href="#">Активация</a></li>
-                        </ul>
-                    </li>
                     <li class="has-sub dict_ico"><span>Справочники</span>
                         <ul>
                             <li><a href="#">Пользователи</a></li>
-                            <li><a href="#">Группы</a></li>
                             <li><a href="#">Организации</a></li>
-                            <li><a href="#">Филиалы</a></li>
                             <li><a href="{% url 'tree_list' %}">Помещения</a></li>
                             <li><a href="#">Контрагенты</a></li>
-                            <li><a href="#">Договоры</a></li>
                             <li><a href="#">Акты передачи</a></li>
                             <li><a href="#">Акты возврата</a></li>
-                            <li><a href="#">Нумераторы</a></li>
                             <li class="has-sub"><span>Принтеры</span>
                                 <ul class="submenu">
                                     <li><a href="#">Названия принтеров</a></li>
                                     <li><a href="#">Типы принтеров</a></li>
                                 </ul>
                             </li>
-                            <li class="has-sub"><span>Картриджи</span>
-                                <ul class="submenu">
-                                    <li><a href="{% url 'add_name' %}">Имена картриджей</a></li>
-                                    <li><a href="#">Типы картриджей</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="{% url 'add_items' %}">Картриджи</a></li>
                             <li><a href="{% url 'add_manufacture' %}">Производители</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="reports_ico has-sub"><span>Отчёты</span>
-                        <ul>
-                            <li>Общие</li>
-                            <li><a href="#">Материально ответственные</a></li>
-                            <li>По картриджам</li>
-                            <li><a href="#">Общая выгрузка</a></li>
-                            <li><a href="#">Пользователи</a></li>
-                            <li><a href="#">Используемые наименования</a></li>
-                            <li><a href="#">Контрагенты</a></li>
-                            <li>По принтерам</li>
-                            <li><a href="#">Общая выгрузка</a></li>
-                            <li><a href="#">Кол-во распечатанных страниц</a></li>
-
                         </ul>
                     </li>
                 </ul>
@@ -173,7 +132,7 @@
     <!-- .middle-->
 </div>
 <footer class="footer">
-    <div class="text_in_footer">Версия: 3.2.1&nbsp;&nbsp;&nbsp;&copy;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2023
+    <div class="text_in_footer">Версия: 1.0.0&nbsp;&nbsp;&nbsp;&copy;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2023
     </div>
 </footer>
 

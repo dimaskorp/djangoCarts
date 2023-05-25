@@ -7,7 +7,7 @@
 {% block content %}
     <div ng-controller="MainCtrl" class="ng-scope">
         <div class="row">
-            <div class="large-5 columns">
+            <div class="large-8 columns">
                 <form action="" method="post" class="ng-dirty ng-valid-parse ng-valid ng-valid-required">
                     {% csrf_token %}
                     <div class="marginTop"></div>
@@ -29,6 +29,16 @@
                     <div class="marginTop"></div>
                     <label for="id_date">Дата добавления: </label>
                     {{ cartridge_details_view.date }}
+
+
+                    <div class="marginTop"></div>
+                    <label for="id_date">ИСТОРИЯ </label>
+                    <div class="large-12 columns">
+                        {% for h in history %}
+                            {{ h.date_h }} - {{ h.comments_h }}<br>
+                        {% endfor %}
+                    <div class="marginTop"></div>
+                    </div>
 
                     <div class="marginTop">
                         <a href="{% url 'stock' %}" class="button">Вернуться</a>

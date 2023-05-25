@@ -53,10 +53,6 @@ img {
     -ms-interpolation-mode: bicubic
 }
 
-#map_canvas img, #map_canvas embed, #map_canvas object, .map_canvas img, .map_canvas embed, .map_canvas object {
-    max-width: none !important
-}
-
 .left {
     float: left !important
 }
@@ -87,11 +83,6 @@ img {
 
 .antialiased {
     -webkit-font-smoothing: antialiased
-}
-
-img {
-    display: inline-block;
-    vertical-align: middle
 }
 
 textarea {
@@ -1305,10 +1296,6 @@ a:hover, a:focus {
     color: #2795b6
 }
 
-a img {
-    border: none
-}
-
 p {
     font-family: inherit;
     font-weight: normal;
@@ -1577,10 +1564,6 @@ blockquote, blockquote p {
 
     tr, img {
         page-break-inside: avoid
-    }
-
-    img {
-        max-width: 100% !important
     }
 
     @page {

@@ -25,7 +25,7 @@ class ManufacturerForm(ModelForm):  # форма Производитель
 class PlacementsForm(ModelForm):  # форма Помещения
     class Meta:
         model = Placements
-        fields = ['barcode', 'name', 'branch', 'choice']
+        fields = ['barcode', 'name', 'branch']
         widgets = {
             'name': TextInput(attrs={
                 'required': "True",
@@ -35,20 +35,19 @@ class PlacementsForm(ModelForm):  # форма Помещения
             'barcode': NumberInput(attrs={
                 'id': "id_barcode",
                 'style': "width: calc(100% - 38px);"
-            }),
-            'choice': CheckboxInput(attrs={
-                'class': 'choice_place'
             })
+
         }
 
 
 class CartridgesForm(ModelForm):  # Картриджи
     class Meta:
         model = Cartridges
-        fields = ['barcode', 'cartName', 'placeName', 'manufacturerName', 'date', 'choice']
+        fields = ['barcode', 'cartName', 'placeName', 'manufacturerName', 'date', 'col']
         widgets = {
-            'barcode': NumberInput(attrs={
+            'barcode': TextInput(attrs={
                 'id': "id_manualNumber",
+                'readonly': "readonly",
                 'style': "width: calc(100% - 38px);",
             }),
             'cartName': Select(attrs={
@@ -73,9 +72,9 @@ class CartridgesForm(ModelForm):  # Картриджи
                 'id': 'datetimepicker4',
                 'required': "True"
             }),
-            'choice': CheckboxInput(attrs={
-                 'class': 'choice_cart'
-            })
+            'col': NumberInput(attrs={
+                'id': "id_col"
+            }),
         }
 
 

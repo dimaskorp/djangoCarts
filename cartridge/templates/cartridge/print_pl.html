@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTMLtoPDF</title>
+</head>
+<body>
+<table>
+    <tbody>
+    {% if barcode_img %}
+        {% for el in barcode_img %}
+            {% if forloop.counter == 1 %}
+                <tr>
+            {% endif %}
+
+            <td style="border: 1px solid">{{ el | safe }}</td>
+
+            {% if forloop.counter|divisibleby:4 %}
+            </tr>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    </tbody>
+</table>
+</body>
+</html>
+

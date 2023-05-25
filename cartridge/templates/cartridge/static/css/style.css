@@ -93,11 +93,6 @@ form input[type="password"] {
     margin-bottom: 15px;
 }
 
-.show_all_events {
-    width: 100%;
-    min-height: 64px;
-    background: #f3f3f3 url(../img/big_spinner.gif) no-repeat center center;
-}
 
 .vertical-top {
     vertical-align: baseline;
@@ -117,25 +112,6 @@ form input[type="password"] {
 
 .check_use_cartridge {
     display: none;
-}
-
-.info_ico {
-    width: 16px;
-    height: 16px;
-    display: inline-block;
-    background: url('../img/stor_info.png') no-repeat;
-}
-
-.info_ico:hover {
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-    display: inline-block;
-    background: url('../img/stor_info.png') no-repeat left bottom;
-}
-
-.info_ico:before {
-    content: "\00a0 ";
 }
 
 .error_msg,
@@ -305,13 +281,6 @@ table.checkboxes tr.red_bg_light {
     width: 1250px;
     padding: 0;
     margin: 0;
-}
-
-input.loc,
-input.loc:active,
-input.loc:focus,
-input.loc:hover {
-    background: url('../img/security.png') no-repeat right center;
 }
 
 input.barcode,
@@ -577,22 +546,6 @@ ul.tree_str_info {
     top: 55px;
 }
 
-.errorlog {
-    padding: 15px;
-    display: none;
-}
-
-.errorlog.success {
-    border: 2px solid #60C185;
-    color: #60C185;
-    display: block;
-}
-
-.errorlog.error {
-    border: 2px solid #ff6464;
-    color: #ff6464;
-    display: block;
-}
 
 /* ---- Forms decorating ----- */
 
@@ -688,7 +641,6 @@ button.button:focus {
     vertical-align: middle;
     margin: 0 15px 0 0;
     font-family: arial, sans-serif;
-    font-weight: normal;
     font-size: 12px;
 }
 
@@ -1120,19 +1072,6 @@ span.donate_link {
     font-size: 14px;
 }
 
-a.add_from_keyboard {
-    background: #7BCC9A url('../img/keyboard.png') no-repeat top right;
-    padding-right: 33px;
-    padding-bottom: 33px;
-    line-height: 34px;
-    border: 1px solid #2D7347;
-}
-
-a.add_items.add_from_keyboard:active {
-    background: #7BCCAA url('../img/keyboard.png') no-repeat top right;
-}
-
-
 a.add_from_mouse, a.mouse_move,
 a.add_from_mouse:visited, a.mouse_move:visited,
 a.add_from_mouse:focus, a.mouse_move:focus {
@@ -1291,13 +1230,6 @@ span.rating span.minus {
     font-weight: bold;
 }
 
-.spinner_star {
-    width: 100%;
-    height: 150px;
-    background-color: #f3f3f3;
-    background: url(../img/big_spinner.gif) center center no-repeat;
-}
-
 .money_wrapper {
     position: relative;
     left: -10px;
@@ -1351,33 +1283,6 @@ input.error_border {
     border: 2px solid red;
 }
 
-.money_validate .err_arrow, .work_validate .err_arrow {
-    display: inline-block;
-    width: 8px;
-    height: 34px;
-    background: url('../img/arrow.png') no-repeat;
-}
-
-.money_validate .err_content, .work_validate .err_content {
-    display: inline-block;
-    padding: 2px 0px 2px 4px;
-    line-height: 14px;
-    background: red;
-    height: 34px;
-    width: 102px;
-    overflow: hidden;
-    color: white;
-    font-size: 12px;
-}
-
-.dotted_border {
-    border-bottom: 1px dashed #0275b8;
-    outline: none;
-}
-
-.dotted_border:focus {
-    outline: none;
-}
 
 /* Улучшение дизайна */
 div.wrapper {
@@ -1446,15 +1351,6 @@ div.led, div.user_led, div.printer_led {
     position: relative;
     top: -3px;
     left: -4px;
-}
-
-
-div.led.switch_off, div.user_led.switch_off, div.printer_led.switch_off {
-    background: url(../img/led.png) 0 -21px no-repeat;
-}
-
-div.led.switch_on, div.user_led.switch_on, div.printer_led.switch_on {
-    background: url(../img/led.png) 0 0 no-repeat;
 }
 
 .show_item_number {
@@ -1650,11 +1546,6 @@ table.users-list tr.user-info-row {
     background-color: #f3f3f3;
 }
 
-table.users-list tr.user-info-row td.loader {
-    background: #f3f3f3 url(../img/big_spinner.gif) center center no-repeat;
-}
-
-
 table.users-list tr.user-info-row td {
     vertical-align: top;
     text-align: left;
@@ -1672,24 +1563,6 @@ table.users-list tr.user-info-row td ul li {
 table.users-list tr.user-info-row td.close {
     vertical-align: top;
     text-align: right;
-}
-
-.big_ques_ico {
-    width: 27px;
-    height: 27px;
-    display: inline-block;
-    background: url('../img/big_ques.png') no-repeat;
-    margin: -6px 0 0 -6px;
-    padding: 0;
-}
-
-.big_ques_ico:hover, .big_ques_ico:active {
-    width: 27px;
-    height: 27px;
-    cursor: pointer;
-    display: inline-block;
-    background: url('../img/big_ques.png') no-repeat left bottom;
-    margin: -6px 0 0 -6px;
 }
 
 table.checkboxes tbody th.ou_check {
@@ -1740,20 +1613,6 @@ input.edit_number_refills {
 
 input.edit_number_refills.error {
     border: 1px solid red;
-}
-
-span.ico_save_refills {
-    display: inline-block;
-    background: url('../img/save_20px.png') no-repeat left top;
-    height: 20px;
-    width: 20px;
-    cursor: pointer;
-    margin: 0 0 -6px 0;
-    padding: 0;
-}
-
-span.ico_save_refills:hover {
-    background: url('../img/save_20px.png') no-repeat left bottom;
 }
 
 table.checkboxes span.active_refills {
@@ -1970,6 +1829,10 @@ img.action_ico {
     height: 22px;
 }
 
+a:hover img {
+  background-color: yellow;
+}
+
 img.action_svg {
     display: inline-block;
     width: 22px;
@@ -2041,28 +1904,6 @@ a.button.ver, a.button.hor, a.button.pal, a.button.kla, a.button.success.fastact
     1px 1px 0 #FFF;
 }
 
-a.button.ver {
-    background: #fff url(../img/trb/ver.png) center center repeat-y;
-}
-
-a.button.hor {
-    background: #fff url(../img/trb/hor.png) center center repeat-x;
-}
-
-a.button.pal {
-    background: #fff url(../img/trb/ble.png) center center no-repeat;
-}
-
-a.button.kla {
-    background: #fff url(../img/trb/kla.png) center center no-repeat;
-}
-
-a.button.ver:hover, a.button.hor:hover, a.button.pal:hover, a.button.kla:hover {
-    background-color: #a3a3a3;
-    background-image: none;
-    color: #000;
-}
-
 table.qr_info {
     border: none;
     background: none;
@@ -2091,85 +1932,6 @@ div.home_site {
 div.home_site a {
     height: 40px;
     color: blue;
-}
-
-a.button.add_groups {
-    display: inline-block;
-    width: 42px;
-    height: 26px;
-    padding: 2px;
-    box-sizing: content-box;
-    background: url(../img/grp/add_groups.png?2) center center no-repeat;
-}
-
-a.button.remove_groups {
-    display: inline-block;
-    width: 42px;
-    height: 26px;
-    padding: 2px;
-    box-sizing: content-box;
-    background: url(../img/grp/remove_groups.png?2) center center no-repeat;
-}
-
-a.button.edit_groups {
-    display: inline-block;
-    width: 42px;
-    height: 26px;
-    padding: 2px;
-    box-sizing: content-box;
-    background: url(../img/grp/edit_groups.png?2) center center no-repeat;
-}
-
-a.button.import_from_active_directory {
-    display: inline-block;
-    width: 42px;
-    height: 26px;
-    padding: 2px;
-    box-sizing: content-box;
-    background: url(../img/grp/import_from_active.png?2) center center no-repeat;
-}
-
-a.button.add_perm {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    background: url(../img/grp/add_perm.png) center center no-repeat;
-}
-
-a.button.remove_perm {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    background: url(../img/grp/remove_perm.png) center center no-repeat;
-}
-
-a.button.add_user_to_grp {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    background: url(../img/grp/add_user.png) center center no-repeat;
-}
-
-a.button.remove_user_to_grp {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    background: url(../img/grp/remove_user.png) center center no-repeat;
-}
-
-p.ribbon {
-    padding-left: 30px;
-    background: url(../img/ribbon.png) left center no-repeat;
-}
-
-p.doc {
-    padding-left: 30px;
-    background: url(../img/doc.png) left center no-repeat;
-}
-
-p.lable {
-    padding-left: 30px;
-    background: url(../img/lable.png) left center no-repeat;
 }
 
 p.sitem {
@@ -2213,6 +1975,7 @@ div.members_grours ul, div.rights ul {
     color: #444;
 }
 
+
 span.select2-container--default.select2-container--disabled .select2-selection--single {
     background-color: #ddd;
 }
@@ -2227,26 +1990,6 @@ input[type="radio"], select {
     margin: 0;
 }
 
-a.generate_button,
-a.generate_button:active,
-a.generate_button:focus {
-    display: inline-block;
-    top: -5px;
-    left: -6px;
-    font-size: 15px;
-    font-weight: bold;
-    background: url(../img/gears.png) center center no-repeat;
-    width: 34px;
-}
-
-a.generate_button:hover {
-    background: #d3d3d3 url(../img/gears.png) center center no-repeat;
-}
-
-a.generate_pdf {
-    margin-left: 226px;
-}
-
 div.dotted span.ui-grid-header-cell-label {
     border-bottom: 1px dashed #0275b8;
     display: inline-block;
@@ -2257,12 +2000,6 @@ div.dotted span.ui-grid-header-cell-label {
 
 div.dotted span.ui-grid-header-cell-label:focus {
     outline: none;
-}
-
-div.info-ico {
-    background: url(../img/info_64x64.png) center center no-repeat;
-    width: 64px;
-    height: 64px;
 }
 
 div.info_from_server {
@@ -2286,11 +2023,6 @@ input.password {
 
 header.header span.select2-container span.select2-selection span {
     font-size: 16px;
-}
-
-.information_ico {
-    background: url(../img/info_32x32.png) left top no-repeat;
-    padding: 0 0 0 42px;
 }
 
 .noselect {
@@ -2423,16 +2155,4 @@ div.text_information_wrapper ul li {
 
 h3.modal-header {
     text-align: center;
-}
-
-h3 span.modal-add-component {
-    background: url('../img/button/add_new_component.png') no-repeat left -2px;
-    padding-left: 40px;
-    display: inline-block;
-}
-
-h3 span.modal-edit-component {
-    background: url('../img/button/edit_component.png') no-repeat left -2px;
-    padding-left: 40px;
-    display: inline-block;
 }

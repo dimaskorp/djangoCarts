@@ -1,48 +1,301 @@
 {% extends 'cartridge/base.html' %}
+{% load static %}
 
 {% block title %}Списание картриджей{% endblock %}
 
 {% block submenu %}Картриджи / Списание{% endblock %}
 
 {% block content %}
-    <div ng-controller="MainCtrl" class="ng-scope">
-        <div class="row">
-            <div class="small-12 large-7 columns">
+    <div class="ng-scope">
 
-                <a class="add_items add_from_mouse button success" href="/cartridge/add_items/">Добавить с</a>
-                <a class="tr_for_use button no_follow" href="#" ng-click="tr_for_use()">Передать в пользование</a>
-                <a class="button alert no_follow" href="#" ng-click="tr_to_recycle_bin(5)">На списание</a>
-
+        <form method="post" action="{% url 'basket' %}">
+            {% csrf_token %}
+            <div class="row">
+                <a class="button success" href="{% url 'massive_change_room' %}">Добавить</a>
+                <button class="button success" type="submit">Передать в пользование</button>
+                <button class="button success" type="submit">На списание</button>
+                <button class="button success" type="submit">Передать на ремонт</button>
             </div>
-            <div class="small-12 large-5 columns">
 
-            </div>
-        </div>
-        <div class="row marginTop10">
-            <div class="small-12 large-7 columns">
+            <div class="marginTop">
+                <div class="large-12 columns">
+                    <div class="ui-grid grid1675145443724" id="grid1">
+                        <!-- TODO (c0bra): add "scoped" attr here, eventually? -->
+                        <style class="ng-binding">
+                            .grid1675145443724 {
+                                height: calc(107px + (({{ basket.count }}+1) * 8px));
+                            }
 
-                <a class="add_items add_from_barcode_scanner button success" href="/cartridge/add_cartridge_from_barcode_scanner/">Добавить с</a>
-                <a class="button" href="#" ng-click="tr_to_firm('stock')">&nbsp;&nbsp;&nbsp;Передать на ремонт&nbsp;&nbsp;&nbsp;</a>
-                <img class="spinner" src="/djangoCarts/static/img/loader.gif">
+                            .grid1675145443724 .ui-grid-row, .grid1675145443724 .ui-grid-cell {
+                                height: 33px;
+                            }
 
-            </div>
-            <div class="small-12 large-5 columns text-right export_select_wrapper">
-                <a class="download_doc" href="#">Скачать файл</a>
-                <a class="export_to_xlsx button no_follow" ng-click="export_to_xlsx()" href="#">
-                    Экспорт в XLSX
-                    <img class="export_spinner_xlsx" src="/djangoCarts/static/img/loader.gif">
-                </a>
-            </div>
-        </div>
+                            .grid1675145443724 .ui-grid-row:last-child .ui-grid-cell {
+                                border-bottom-width: 1px;
+                            }
 
+                            .grid1675145443724 .ui-grid-coluiGrid-0007 {
+                                min-width: 150px;
+                                max-width: 150px;
+                            }
 
-        <div class="row marginTop">
-            <div class="large-12 columns">
-                <div ui-i18n="en" class="grid ui-grid-selectable ui-grid ng-isolate-scope grid1675142815019" id="grid1" ui-grid="gridOptions"
-                     ui-grid-selection="" ui-grid-pagination="" ui-grid-auto-resize="" ui-grid-resize-columns="" ng-style="getTableHeight()"
-                     style="height: 50px;"><!-- TODO (c0bra): add "scoped" attr here, eventually? -->
+                            .grid1675145443724 .ui-grid-coluiGrid-0008 {
+                                min-width: 120px;
+                                max-width: 120px;
+                            }
+
+                            .grid1675145443724 .ui-grid-coluiGrid-0009 {
+                                min-width: 160px;
+                                max-width: 160px;
+                            }
+
+                            .grid1675145443724 .ui-grid-coluiGrid-000A {
+                                min-width: 160px;
+                                max-width: 160px;
+                            }
+
+                            .grid1675145443724 .ui-grid-coluiGrid-000C {
+                                min-width: 150px;
+                                max-width: 150px;
+                            }
+
+                            .grid1675145443724 .ui-grid-coluiGrid-000D {
+                                min-width: 160px;
+                                max-width: 160px;
+                            }
+
+                            .grid1675145443724 .ui-grid-coluiGrid-000E {
+                                min-width: 200px;
+                                max-width: 200px;
+                            }
+
+                            .grid1675145443724 .ui-grid-coluiGrid-000G {
+                                min-width: 140px;
+                                max-width: 140px;
+                            }
+
+                            .grid1675145443724 .ui-grid-coluiGrid-000H {
+                                min-width: 40px;
+                                max-width: 40px;
+                            }
+
+                        </style>
+                        <div class="ui-grid-contents-wrapper">
+                            <!-- All of these dom elements are replaced in place -->
+                            <div class="ui-grid-header">
+                                <!-- theader -->
+                                <div class="ui-grid-top-panel">
+                                    <div class="ui-grid-header-viewport">
+                                        <div class="ui-grid-header-cell-wrapper">
+                                            <div class="ui-grid-header-cell-row">
+                                                <div class="ui-grid-header-cell ui-grid-coluiGrid-000H">
+                                                    <div class="ui-grid-cell-contents">
+                                                        <input id="select_all" type="checkbox" class="ui-grid-cell-contents-checkbox">
+                                                    </div>
+                                                </div>
+                                                <div class="ui-grid-header-cell ui-grid-coluiGrid-0007">
+                                                    <span class="ui-grid-header-cell-label">Штрихкод</span>
+                                                    <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                                    <div>
+                                                        <!-- ngRepeat: colFilter in col.filters -->
+                                                        <div class="ui-grid-filter-container">
+                                                            <!-- ngIf: colFilter.type !== 'select' -->
+                                                            <input type="text" class="ui-grid-filter-input ui-grid-filter-input-0"
+                                                                   aria-label="Фильтр столбца"
+                                                                   placeholder="">
+                                                            <!-- ngIf: !colFilter.disableCancelFilterButton -->
+                                                            <div role="button" class="ui-grid-filter-button" disabled="disabled">
+                                                                <i class="ui-grid-icon-cancel" aria-label="Удалить фильтр"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                <div class="ui-grid-header-cell ui-grid-coluiGrid-0008">
+                                                    <span class="ui-grid-header-cell-label">Действие</span>
+                                                </div>
+                                                <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                <div class="ui-grid-header-cell  ui-grid-coluiGrid-0009">
+                                                    <span class="ui-grid-header-cell-label">Производитель</span>
+                                                    <div>
+                                                        <!-- ngRepeat: colFilter in col.filters -->
+                                                        <div class="ui-grid-filter-container">
+                                                            <!-- ngIf: colFilter.type !== 'select' -->
+                                                            <input type="text" class="ui-grid-filter-input ui-grid-filter-input-0"
+                                                                   aria-label="Фильтр столбца"
+                                                                   placeholder="">
+                                                            <!-- ngIf: !colFilter.disableCancelFilterButton -->
+                                                            <div role="button" class="ui-grid-filter-button" disabled="disabled">
+                                                                <i class="ui-grid-icon-cancel" aria-label="Удалить фильтр"></i>
+                                                            </div>
+                                                            <!-- end ngIf: !colFilter.disableCancelFilterButton -->
+                                                        </div>
+                                                        <!-- end ngRepeat: colFilter in col.filters -->
+                                                    </div>
+                                                </div>
+                                                <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                <div class="ui-grid-header-cell ui-grid-coluiGrid-000A">
+                                                    <span class="ui-grid-header-cell-label">Название</span>
+                                                    <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
+                                                    <div>
+                                                        <!-- ngRepeat: colFilter in col.filters -->
+                                                        <div class="ui-grid-filter-container">
+                                                            <!-- ngIf: colFilter.type !== 'select' -->
+                                                            <input type="text" class="ui-grid-filter-input ui-grid-filter-input-0"
+                                                                   aria-label="Фильтр столбца"
+                                                                   placeholder="">
+                                                            <!-- ngIf: !colFilter.disableCancelFilterButton -->
+                                                            <div role="button" class="ui-grid-filter-button" disabled="disabled">
+                                                                <i class="ui-grid-icon-cancel" aria-label="Удалить фильтр"></i>
+                                                            </div>
+                                                            <!-- end ngIf: !colFilter.disableCancelFilterButton -->
+                                                        </div>
+                                                        <!-- end ngRepeat: colFilter in col.filters -->
+                                                    </div>
+                                                </div>
+                                                <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                <div class="ui-grid-header-cell ui-grid-coluiGrid-000C">
+                                                    <span class="ui-grid-header-cell-label">Перезаправки</span>
+                                                </div>
+                                                <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                <div class="ui-grid-header-cell ui-grid-coluiGrid-000D">
+                                                    <div role="button" tabindex="0">
+                                                        <span class="ui-grid-header-cell-label">Филиал</span>
+                                                    </div>
+                                                    <div class="ui-grid-filter-container">
+                                                        <!-- ngIf: colFilter.type !== 'select' -->
+                                                        <input type="text" class="ui-grid-filter-input ui-grid-filter-input-0"
+                                                               aria-label="Фильтр столбца" placeholder="">
+                                                        <!-- ngIf: !colFilter.disableCancelFilterButton -->
+                                                        <div role="button" class="ui-grid-filter-button" disabled="disabled">
+                                                            <i class="ui-grid-icon-cancel" aria-label="Удалить фильтр"></i>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="ui-grid-header-cell ui-grid-coluiGrid-000E">
+                                                    <div role="button" tabindex="0" class="ui-grid-cell-contents">
+                                                        <span class="ui-grid-header-cell-label">Помещение</span>
+                                                    </div>
+                                                    <div class="ui-grid-filter-container">
+                                                        <input type="text" class="ui-grid-filter-input ui-grid-filter-input-0"
+                                                               aria-label="Фильтр столбца" placeholder="">
+                                                        <!-- ngIf: !colFilter.disableCancelFilterButton -->
+                                                        <div role="button" class="ui-grid-filter-button " disabled="disabled">
+                                                            <i class="ui-grid-icon-cancel" aria-label="Удалить фильтр"></i>
+                                                        </div>
+                                                        <!-- end ngIf: !colFilter.disableCancelFilterButton -->
+                                                    </div>
+                                                </div>
+                                                <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
+                                                <div class="ui-grid-header-cell ui-grid-coluiGrid-000G">
+                                                    <span class="ui-grid-header-cell-label">Дата изменения</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-grid-viewport">
+                            <!-- tbody -->
+                            <div class="ui-grid-canvas" id="table">
+
+                                {% if basket %}
+                                    <!-- ngRepeat: (rowRenderIndex, row) in rowContainer.renderedRows track by $index -->
+                                    {% for el in basket %}
+                                        <div class="ui-grid-row" id="row_{{ el.id }}">
+                                            <div class="ui-grid-cell ui-grid-coluiGrid-000H">
+                                                <div class="ui-grid-cell-contents">
+                                                    <input name="check" class="ui-grid-cell-contents-checkbox" type="checkbox" value="{{ el.barcode }}">
+                                                </div>
+                                            </div>
+                                            <!-- ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                            <div class="ui-grid-cell ui-grid-coluiGrid-0007">
+                                                <div class="ui-grid-cell-contents">{{ el.barcode }}</div>
+                                            </div>
+                                            <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                            <div class="ui-grid-cell ui-grid-coluiGrid-0008" style="padding: 3px">
+                                                <div class="ui-grid-cell-contents" style="display: flex;">
+                                                    <a title="Подробнее" href="{% url 'details_view' el.id %}">
+                                                        <img class="action_ico" src="{% static 'img/events.png' %}" alt="">
+                                                    </a>
+                                                    <a title="Редактирование" href="{% url 'edit_update_view' el.id %}">
+                                                        <img class="action_ico" src="{% static 'img/edit.png' %}" alt="">
+                                                    </a>
+                                                    <form action="{% url 'delete_view' el.id %}" method="post">
+                                                        {% csrf_token %}
+                                                        <button class="button_action" title="Удаление"
+                                                                onclick="return confirm('Вы уверены что хотите удалить картридж {{ el.manufacturerName }} {{ el.cartName }}?');">
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                            <div class="ui-grid-cell ui-grid-coluiGrid-0009">
+                                                <div class="ui-grid-cell-contents">{{ el.manufacturerName }}</div>
+                                            </div>
+                                            <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                            <div class="ui-grid-cell ui-grid-coluiGrid-000A">
+                                                <div class="ui-grid-cell-contents">{{ el.cartName }}</div>
+                                            </div>
+                                            <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                            <div class="ui-grid-cell ui-grid-coluiGrid-000C">
+                                                <div class="ui-grid-cell-contents">{{ el.col }}</div>
+                                            </div>
+                                            <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                            <div class="ui-grid-cell ui-grid-coluiGrid-000D">
+                                                <div class="ui-grid-cell-contents" title="">!!!!!</div>
+                                            </div>
+                                            <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                            <div class="ui-grid-cell ui-grid-coluiGrid-000E">
+                                                <div class="ui-grid-cell-contents" title="">{{ el.placeName }}</div>
+                                            </div>
+                                            <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                            <div class="ui-grid-cell ui-grid-coluiGrid-000G">
+                                                <div class="ui-grid-cell-contents">{{ el.date|date:'d.m.Y H:i' }}</div>
+                                            </div>
+                                            <!-- end ngRepeat: (colRenderIndex, col) in colContainer.renderedColumns track by col.uid -->
+                                        </div>
+                                        <!-- end ngRepeat: (rowRenderIndex, row) in rowContainer.renderedRows track by $index -->
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="ui-grid-pager-panel" style="width: 100%; height: 20px; position: absolute; bottom: 166px;">
+                <div class="ui-grid-pager-count-container">
+                    <div class="ui-grid-pager-count">
+                        <span class="ng-binding">Всего {{ basket.count }} строк</span>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
+    <script>
+        var select_all = document.getElementById("select_all"); //select all checkbox
+        var checkboxes = document.getElementsByName("check");
+        //checkbox items
+
+        //select all checkboxes
+        select_all.addEventListener("change", function (e) {
+            for (i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = select_all.checked;
+            }
+        });
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].addEventListener('change', function (e) { //".checkbox" change
+                //uncheck "select all", if one of the listed checkbox item is unchecked
+                if (this.checked === false) {
+                    select_all.checked = false;
+                }
+                //check "select all" if all checkbox items are checked
+                if (document.querySelectorAll('.checkbox:checked').length === checkboxes.length) {
+                    select_all.checked = true;
+                }
+            });
+        }
+    </script>
 {% endblock %}
