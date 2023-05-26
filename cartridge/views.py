@@ -34,10 +34,14 @@ class UseListView(ListView):
 
     def post(self, request, *args, **kwargs):
         checks = request.POST.getlist('check')
-        if self.request.POST:
+        if "ended_cart" in self.request.POST:
             for num in checks:
                 Cartridges.objects.filter(barcode=num).update(placeName='0')
-            return render(request, 'cartridge/use.html')
+            return redirect('use')
+        elif "return_cart" in self.request.POST:
+            for num in checks:
+                Cartridges.objects.filter(barcode=num).update(placeName='2')
+            return redirect('use')
 
     def get_context_data(self, **kwargs):
         context = super(UseListView, self).get_context_data(**kwargs)
@@ -214,6 +218,7 @@ def transfer(request):
 
             list_checks.clear()
             return redirect('stock')
+
     data = {
         'carts': carts_all,
         'checks': checks,
@@ -435,15 +440,17 @@ def print_cart(request):
 
 def to_firm(request):
     checks = request.POST.getlist('check')
-    if request.POST:
+    if "transfer_cart" in request.POST:
         for num in checks:
             Cartridges.objects.filter(barcode=num).update(placeName='1', date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
             p = Placements.objects.get(id=1)
             ChangeLog.objects.create(placeName_h=p, date_h=datetime.datetime.now().strftime("%Y-%m-%d %H:%M"), comments_h=f'Картридж {num} передан на {p}')  # запись в журнал изменений
-
-    data = {
-    }
-    return render(request, 'cartridge/empty.html', data)
+    elif "return_cart" in request.POST:
+        for num in checks:
+            Cartridges.objects.filter(barcode=num).update(placeName='2', date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
+            p = Placements.objects.get(id=2)
+            ChangeLog.objects.create(placeName_h=p, date_h=datetime.datetime.now().strftime("%Y-%m-%d %H:%M"), comments_h=f'Картридж {num} передан на {p}')  # запись в журнал изменений
+    return redirect('empty')
 
 
 def from_firm(request):
@@ -451,19 +458,16 @@ def from_firm(request):
     if request.POST:
         for num in checks:
             Cartridges.objects.filter(barcode=num).update(placeName='2', date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
-
             p = Placements.objects.get(id=2)
             ChangeLog.objects.create(placeName_h=p, date_h=datetime.datetime.now().strftime("%Y-%m-%d %H:%M"), comments_h=f'Картридж {num} передан на {p}')  # запись в журнал изменений
-
             cl = Cartridges.objects.get(barcode=num)
             if cl.col is None:
                 cl.col = 1
             else:
                 cl.col += 1
             cl.save()
-    data = {
-    }
-    return render(request, 'cartridge/worked_firms.html', data)
+    return redirect('worked_firms')
+
 
 
 

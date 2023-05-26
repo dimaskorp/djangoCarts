@@ -16,9 +16,8 @@
             {% csrf_token %}
             <div class="row">
                 <div class="large-7 columns">
-                    <button class="button success" type="submit">Картридж закончился</button>
-                    <a class="button alert no_follow" href="#">На списание</a>
-                    <a class="warning button no_follow" href="#">Возвращение к предыдущему состоянию</a>
+                    <button class="button success" name="ended_cart" type="submit">Картридж закончился</button>
+                    <button class="button alert" name="return_cart" type="submit">Вернуть на склад</button>
                 </div>
             </div>
 
@@ -103,7 +102,7 @@
                                                     <div>
                                                         <!-- ngRepeat: colFilter in col.filters -->
                                                         <div class="ui-grid-filter-container">
-                                                            <input id="search_here" class="ui-grid-filter-input" type="text" placeholder="">
+                                                            <input id="search_code" class="ui-grid-filter-input" type="text" placeholder="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -114,39 +113,14 @@
                                                 <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
                                                 <div class="ui-grid-header-cell  ui-grid-coluiGrid-0009">
                                                     <span class="ui-grid-header-cell-label">Производитель</span>
-                                                    <div>
-                                                        <!-- ngRepeat: colFilter in col.filters -->
-                                                        <div class="ui-grid-filter-container">
-                                                            <!-- ngIf: colFilter.type !== 'select' -->
-                                                            <input type="text" class="ui-grid-filter-input ui-grid-filter-input-0" aria-label="Фильтр столбца"
-                                                                   placeholder="">
-                                                            <!-- ngIf: !colFilter.disableCancelFilterButton -->
-                                                            <div role="button" class="ui-grid-filter-button" disabled="disabled">
-                                                                <i class="ui-grid-icon-cancel" aria-label="Удалить фильтр"></i>
-                                                            </div>
-                                                            <!-- end ngIf: !colFilter.disableCancelFilterButton -->
-                                                        </div>
-                                                        <!-- end ngRepeat: colFilter in col.filters -->
-                                                    </div>
                                                 </div>
                                                 <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
                                                 <div class="ui-grid-header-cell ui-grid-coluiGrid-000A">
                                                     <span class="ui-grid-header-cell-label">Название</span>
-                                                    <!-- ngIf: grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false -->
-                                                    <div>
-                                                        <!-- ngRepeat: colFilter in col.filters -->
-                                                        <div class="ui-grid-filter-container">
-                                                            <!-- ngIf: colFilter.type !== 'select' -->
-                                                            <input type="text" class="ui-grid-filter-input ui-grid-filter-input-0" aria-label="Фильтр столбца"
-                                                                   placeholder="">
-                                                            <!-- ngIf: !colFilter.disableCancelFilterButton -->
-                                                            <div role="button" class="ui-grid-filter-button" disabled="disabled">
-                                                                <i class="ui-grid-icon-cancel" aria-label="Удалить фильтр"></i>
-                                                            </div>
-                                                            <!-- end ngIf: !colFilter.disableCancelFilterButton -->
-                                                        </div>
-                                                        <!-- end ngRepeat: colFilter in col.filters -->
+                                                    <div class="ui-grid-filter-container">
+                                                        <input id="search_model" class="ui-grid-filter-input" type="text" placeholder="">
                                                     </div>
+
                                                 </div>
                                                 <!-- end ngRepeat: col in colContainer.renderedColumns track by col.uid -->
                                                 <div class="ui-grid-header-cell ui-grid-coluiGrid-000C">
@@ -259,14 +233,26 @@
     <script>
         const data = '{{ qs_json }}'
         const rdata = JSON.parse(data.replace(/&quot;/g, '"'))
-        const input = document.getElementById('search_here')
+        const input1 = document.getElementById('search_code')
+        const input2 = document.getElementById('search_model')
         let filteredArr = []
-        input.addEventListener('keyup', (e) => {
+        input1.addEventListener('keyup', (e) => {
             var inputs = e.target.value.toLowerCase(); //do lowercase
             document.querySelectorAll('.ui-grid-row').forEach(function (el) {
                 el.style.display = 'none';
             });
-            document.querySelectorAll('.ui-grid-row .ui-grid-cell-contents').forEach(function (el) {
+            document.querySelectorAll('.ui-grid-row .ui-grid-coluiGrid-0007 .ui-grid-cell-contents').forEach(function (el) {
+                if (el.textContent.toLowerCase().indexOf(inputs) > -1) {
+                    el.closest('.ui-grid-row').style.display = "block";
+                }
+            })
+        })
+        input2.addEventListener('keyup', (e) => {
+            var inputs = e.target.value.toLowerCase(); //do lowercase
+            document.querySelectorAll('.ui-grid-row').forEach(function (el) {
+                el.style.display = 'none';
+            });
+            document.querySelectorAll('.ui-grid-row .ui-grid-coluiGrid-000A .ui-grid-cell-contents').forEach(function (el) {
                 if (el.textContent.toLowerCase().indexOf(inputs) > -1) {
                     el.closest('.ui-grid-row').style.display = "block";
                 }
